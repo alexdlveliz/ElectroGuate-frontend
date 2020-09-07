@@ -1,15 +1,15 @@
 <div class="container" [ngClass]="{'sign-up-mode' : signin == false}">
   <div class="forms-container">
     <div class="signin-signup">
-      <form action="#" class="sign-in-form">
+      <form [formGroup]="formLogin" action="#" class="sign-in-form" (ngSubmit)="login($event)">
         <h2 class="title">Inicio de sesión</h2>
         <div class="input-field">
           <i class="fas fa-user"></i>
-          <input type="text" placeholder="Usuario" />
+          <input formControlName="userLogin" matInput type="text" placeholder="Usuario" />
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Contraseña" />
+          <input formControlName="emailLogin" matInput type="password" placeholder="Contraseña" />
         </div>
         <input type="submit" value="Login" class="btn solid" />
         <p class="social-text">Visita nuestras redes sociales</p>
@@ -28,27 +28,27 @@
           </a>
         </div>
       </form>
-      <form action="#" class="sign-up-form">
+      <form action="#" class="sign-up-form" [formGroup]="formSignin" (ngSubmit)="signIn($event)">
         <h2 class="title">Regístrate</h2>
         <div class="input-field">
           <i class="fas fa-user"></i>
-          <input type="text" placeholder="Nombre" />
+          <input matInput formControlName="nameSignin" type="text" placeholder="Nombre" />
         </div>
         <div class="input-field">
           <i class="fas fa-user"></i>
-          <input type="text" placeholder="Usuario" />
+          <input matInput formControlName="userSignin" type="text" placeholder="Usuario" />
         </div>
         <div class="input-field">
           <i class="fas fa-envelope"></i>
-          <input type="email" placeholder="Correo electrónico" />
+          <input matInput formControlName="emailSignin" type="email" placeholder="Correo electrónico" />
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Contraseña" />
+          <input matInput formControlName="passwordSignin" type="password" placeholder="Contraseña" />
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Confirmar Contraseña" />
+          <input matInput formControlName="confirmationPassword" type="password" placeholder="Confirmar Contraseña" />
         </div>
         <input type="submit" class="btn" value="Sign up" />
         <p class="social-text">Visita nuestras redes sociales</p>
