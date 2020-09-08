@@ -4,24 +4,26 @@
       <form [formGroup]="formLogin" action="#" class="sign-in-form" (ngSubmit)="login($event)">
         <h2 class="title">Inicio de sesión</h2>
         <div class="input-field">
-          <i class="fas fa-user"></i>
+          <mat-icon class="icon">person icon</mat-icon>
+          <!-- <i class="fas fa-user"></i> -->
           <input formControlName="userLogin" matInput type="text" placeholder="Usuario" />
         </div>
         <div class="input-field">
-          <i class="fas fa-lock"></i>
+          <!-- <i class="fas fa-lock"></i> -->
+          <mat-icon class="icon">vpn_key </mat-icon>
           <input formControlName="emailLogin" matInput type="password" placeholder="Contraseña" />
         </div>
         <input type="submit" value="Login" class="btn solid" />
         <p class="social-text">Visita nuestras redes sociales</p>
         <div class="social-media">
           <a href="#" class="social-icon">
-            <i class="fab fa-facebook-f"></i>
+            <mat-icon>facebook</mat-icon>
           </a>
           <a href="#" class="social-icon">
-            <i class="fab fa-twitter"></i>
+            <mat-icon>twitter</mat-icon>
           </a>
           <a href="#" class="social-icon">
-            <i class="fab fa-google"></i>
+            <mat-icon>youtube</mat-icon>
           </a>
           <a href="#" class="social-icon">
             <i class="fab fa-linkedin-in"></i>
@@ -31,30 +33,39 @@
       <form action="#" class="sign-up-form" [formGroup]="formSignin" (ngSubmit)="signIn($event)">
         <h2 class="title">Regístrate</h2>
         <div class="input-field">
-          <i class="fas fa-user"></i>
-          <input matInput formControlName="nameSignin" type="text" placeholder="Nombre" />
+          <!-- <i class="fas fa-user"></i> -->
+          <mat-icon class="icon">people</mat-icon>
+          <input matInput formControlName="str_name" type="text" placeholder="Nombre" />
         </div>
         <div class="input-field">
-          <i class="fas fa-user"></i>
-          <input matInput formControlName="userSignin" type="text" placeholder="Usuario" />
+          <!-- <i class="fas fa-user"></i> -->
+          <mat-icon class="icon">people</mat-icon>
+          <input matInput formControlName="str_surname" type="text" placeholder="Usuario" />
         </div>
         <div class="input-field">
-          <i class="fas fa-envelope"></i>
-          <input matInput formControlName="emailSignin" type="email" placeholder="Correo electrónico" />
+          <!-- <i class="fas fa-envelope"></i> -->
+          <mat-icon class="icon">email</mat-icon>
+          <input matInput formControlName="str_email" type="email" placeholder="Correo electrónico" />
         </div>
         <div class="input-field">
-          <i class="fas fa-lock"></i>
-          <input matInput formControlName="passwordSignin" type="password" placeholder="Contraseña" />
+          <mat-icon class="icon">contact_phone</mat-icon>
+          <input matInput formControlName="str_phone_number" type="tel" placeholder="Número de teléfono" />
         </div>
         <div class="input-field">
-          <i class="fas fa-lock"></i>
-          <input matInput formControlName="confirmationPassword" type="password" placeholder="Confirmar Contraseña" />
+          <!-- <i class="fas fa-lock"></i> -->
+          <mat-icon class="icon">vpn_key </mat-icon>
+          <input matInput formControlName="str_role" type="password" placeholder="Contraseña" />
+        </div>
+        <div class="input-field">
+          <!-- <i class="fas fa-lock"></i> -->
+          <mat-icon class="icon">vpn_key </mat-icon>
+          <input matInput formControlName="password" type="password" placeholder="Confirmar Contraseña" />
         </div>
         <input type="submit" class="btn" value="Sign up" />
         <p class="social-text">Visita nuestras redes sociales</p>
         <div class="social-media">
           <a href="#" class="social-icon">
-            <i class="fab fa-facebook-f"></i>
+            <mat-icon>facebook</mat-icon>
           </a>
           <a href="#" class="social-icon">
             <i class="fab fa-twitter"></i>
