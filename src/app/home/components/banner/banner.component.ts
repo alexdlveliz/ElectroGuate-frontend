@@ -22,6 +22,7 @@ export class BannerComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.mySwiper = new Swiper('.swiper-container', {
+      loop: true,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'
