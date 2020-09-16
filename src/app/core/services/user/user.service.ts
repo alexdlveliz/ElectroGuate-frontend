@@ -37,4 +37,12 @@ export class UserService {
       );
   }
 
+  logOut(): void {
+    localStorage.removeItem('token');
+  }
+
+  userExists(): string {
+    return localStorage.getItem('token');
+  }
+
 }

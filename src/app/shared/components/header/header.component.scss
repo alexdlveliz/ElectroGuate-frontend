@@ -1,8 +1,10 @@
 nav > a {
   padding: 5px;
   text-decoration: none;
+  color: #000000;
 }
 
 nav > a.active {
-  background-color: red;
+  background-color: #69f0ae;
+  border-radius: 8px;
 }
