@@ -1,10 +1,14 @@
 <mat-toolbar color="primary">
-  <nav>
-    <a routerLink="/home" routerLinkActive="active">Inicio</a>
-    <a routerLink="/contact" routerLinkActive="active">Contacto</a>
-    <a routerLink="/about-us" routerLinkActive="active">Nosotros</a>
-    <a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null">Iniciar sesión</a>
-    <a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null">Cerrar Sesión</a>
-
-  </nav>
+  <div class="flex-container" fxLayout="row" fxLayoutAlign="space-around center">
+    <nav class="inside-nav" fxLayout="row" fxLayoutAlign="start center">
+      <a routerLink="/home" routerLinkActive="active">Inicio</a>
+      <a routerLink="/contact" routerLinkActive="active">Contacto</a>
+      <a routerLink="/about-us" routerLinkActive="active">Nosotros</a>
+    </nav>
+    <nav class="inside-nav" fxLayout="row" fxLayoutAlign="end center">
+      <a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null">Iniciar sesión</a>
+      <a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null">Cerrar Sesión</a>
+      <a routerLink="/admin">Administración</a>
+    </nav>
+  </div>
 </mat-toolbar>
