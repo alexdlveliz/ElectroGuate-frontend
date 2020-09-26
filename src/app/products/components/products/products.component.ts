@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
 
+  value = "";
+  brands: string[] = ['Samsung', 'LG', 'Sony'];
+  categories: string[] = ['Para la casa', 'Mantenimiento', 'Sonido'];
   constructor() { }
 
   ngOnInit(): void {

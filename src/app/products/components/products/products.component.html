@@ -1,1 +1,30 @@
-<p>products works!</p>
+<section id="catalogo">
+    <div class="sidebar">
+        <mat-form-field class="example-form-field">
+            <mat-label>Buscar productos</mat-label>
+            <input matInput type="text" [(ngModel)]="value">
+            <mat-button *ngIf="value" matSuffix mat-icon-button (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </mat-button>
+            <mat-button mat-icon-button matSuffix>
+                <mat-icon>search</mat-icon>
+            </mat-button>
+        </mat-form-field>
+        <div class="filtros">
+            <h3><strong>Filtros por marca</strong></h3>
+            <mat-selection-list>
+                <mat-list-option *ngFor="let brand of brands">
+                    {{brand}}
+                </mat-list-option>
+            </mat-selection-list>
+
+            <h3><strong>Filtros por categoría</strong></h3>
+            <mat-selection-list>
+                <mat-list-option *ngFor="let brand of brands">
+                    {{brand}}
+                </mat-list-option>
+            </mat-selection-list>
+        </div>
+
+    </div>
+</section>
