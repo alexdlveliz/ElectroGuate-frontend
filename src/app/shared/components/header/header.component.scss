@@ -1,5 +1,9 @@
+.flex-container, .inside-nav {
+  width: 100vw;
+}
+
 nav > a {
-  padding: 5px;
+  padding: 15px;
   text-decoration: none;
   color: #000000;
 }
