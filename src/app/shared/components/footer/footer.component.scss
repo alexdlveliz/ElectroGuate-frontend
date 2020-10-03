@@ -1,0 +1,35 @@
+footer {
+  width: 100%;
+  height: 20vh;
+  background-color: #00e676;
+}
+
+.contact {
+  border: 1px solid blue;
+  width: 100%;
+  height: 100%;
+
+  p {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.aligned-with-icon {
+  position: relative;
+  top: -5px;
+  margin-left: 5px;
+}
+.web {
+  border: 1px solid red;
+  width: 100%;
+  height: 100%;
+}
+
+.about {
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+}
+
+
