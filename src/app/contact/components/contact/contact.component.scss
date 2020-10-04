@@ -1,36 +1,32 @@
-.child-1 {
-  background-color: orange;
-}
-
-.child-2 {
-  background-color:yellow;
-}
-
-.child-3 {
-  background-color:green;
-}
-
-.child-4 {
+.contact {
+  width: 80%;
+  height: 80vh;
   background-color: red;
-}
+  margin: 0 auto;
 
-.child-5 {
-  background-color:black;
-}
+  .title {
+    width: 100%;
+    height: 30%;
+    h3 {
+      text-transform: uppercase;
+    }
+  }
 
-.child-6 {
-  background-color:cyan;
-}
-.flex-container {
-  height: 200px;
-}
+  .container {
+    width: 100%;
+    height: 70%;
 
-.inside-div {
-  border: 2px solid black;
-  width: 100%;
-}
-.container {
-  margin: 15px;
-  height: 200px;
-  border: 2px solid red;
+    .message {
+      width: 60%;
+      height: 100%;
+      border: 1px solid blue;
+    }
+  
+    .map {
+      width: 40%;
+      height: 100%;
+      border: 1px solid black;
+    }
+  }
+
 }
