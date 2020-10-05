@@ -4,7 +4,30 @@
     <h3>Contáctanos</h3>
   </div>
   <div class="container" fxLayout="row" fxLayoutAlign="start center">
-    <div class="message"></div>
+    <div class="message">
+      <form [formGroup]="form" (ngSubmit)="sendMessage($event)">
+        <mat-card fxLayout="column">
+          <mat-card-title class="form-title">Envíanos un mensaje</mat-card-title>
+          <mat-card-content>
+            <mat-form-field>
+              <mat-label>Nombre</mat-label>
+              <input formControlName="name" matInput type="text" placeholder="Nombre">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Correo electrónico</mat-label>
+              <input formControlName="email" matInput type="email" placeholder="Correo">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Mensaje</mat-label>
+              <textarea formControlName="message" matInput placeholder="Mensaje"></textarea>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button type="submit" [disabled]="form.invalid">Enviar</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
     <div class="map" fxLayout="column" fxLayoutAlign="start center">
       <div class="location">
         <div class="google-maps">
