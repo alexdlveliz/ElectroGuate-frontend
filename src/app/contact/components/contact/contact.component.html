@@ -1,14 +1,49 @@
-<div class="container">
-  <div class="flex-container" fxLayout="row" fxLayout.sm="column" fxLayoutAlign="space-around center">
-    <div class="inside-div" fxLayout="row" fxLayoutAlign="space-around center">
-      <mat-card class="child-1">1. One</mat-card>
-      <mat-card class="child-2">2. Two</mat-card>
-      <mat-card class="child-3">3. Three</mat-card>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="contact" fxLayout="column">
+  <div class="title">
+    <h3>Contáctanos</h3>
+  </div>
+  <div class="container" fxLayout="row" fxLayoutAlign="start center">
+    <div class="message">
+      <form [formGroup]="form" (ngSubmit)="sendMessage($event)">
+        <mat-card fxLayout="column">
+          <mat-card-title class="form-title">Envíanos un mensaje</mat-card-title>
+          <mat-card-content>
+            <mat-form-field>
+              <mat-label>Nombre</mat-label>
+              <input formControlName="name" matInput type="text" placeholder="Nombre">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Correo electrónico</mat-label>
+              <input formControlName="email" matInput type="email" placeholder="Correo">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Mensaje</mat-label>
+              <textarea formControlName="message" matInput placeholder="Mensaje"></textarea>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button type="submit" [disabled]="form.invalid">Enviar</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
     </div>
-    <div class="inside-div" fxLayout="row" fxLayoutAlign="space-around center">
-      <mat-card class="child-4">4. Three</mat-card>
-      <mat-card class="child-5">5. Three</mat-card>
-      <mat-card class="child-6">6. Three</mat-card>
+    <div class="map" fxLayout="column" fxLayoutAlign="start center">
+      <div class="location">
+        <div class="google-maps">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3856.727327968926!2d-91.52016748457903!3d14.840553789650052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x858ea2ab2c5264ed%3A0xd149e8b0a7971fdf!2sUniversidad%20Rafael%20Land%C3%ADvar!5e0!3m2!1ses-419!2sgt!4v1601928520066!5m2!1ses-419!2sgt" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+      </div>
+      <div class="map-information" fxLayout="column" fxLayoutAlign="center center">
+        <div class="phone">
+          <mat-icon>call</mat-icon><span class="aligned-with-icon">+502 78797978</span>
+        </div>
+        <div class="social" fxLayout="row" fxLayoutAlign="space-evenly">
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-instagram"></i></a>
+          <a href="#"><i class="fa fa-whatsapp"></i></a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
