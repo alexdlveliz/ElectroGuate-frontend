@@ -3,25 +3,25 @@
         <mat-form-field>
             <mat-label>Buscar productos</mat-label>
             <input matInput type="text" [(ngModel)]="value">
-            <mat-button *ngIf="value" matSuffix mat-icon-button (click)="value=''">
+            <button mat-button *ngIf="value" matSuffix mat-icon-button (click)="value=''">
                 <mat-icon>close</mat-icon>
-            </mat-button>
-            <mat-button mat-icon-button matSuffix>
+            </button>
+            <button mat-button mat-icon-button matSuffix>
                 <mat-icon>search</mat-icon>
-            </mat-button>
+            </button>
         </mat-form-field>
         <div id="filtros">
             <h3><strong>Filtros por marca</strong></h3>
             <mat-selection-list>
                 <mat-list-option *ngFor="let brand of brands">
-                    {{brand}}
+                  {{ brand.str_name }}
                 </mat-list-option>
             </mat-selection-list>
 
             <h3><strong>Filtros por categoría</strong></h3>
             <mat-selection-list>
                 <mat-list-option *ngFor="let category of categories">
-                    {{category}}
+                    {{ category.str_name }}
                 </mat-list-option>
             </mat-selection-list>
         </div>

@@ -14,10 +14,8 @@ import { Category } from './../../../core/models/category.model';
 export class ProductsComponent implements OnInit {
 
   value = '';
-  brands: string[] = ['Samsung', 'LG', 'Sony'];
-  brand: Brand[] = [];
-  categories: string[] = ['Para la casa', 'Mantenimiento', 'Sonido'];
-  category: Category[] = [];
+  brands: Brand[] = [];
+  categories: Category[] = [];
   products: Product[] = [];
 
   constructor(
@@ -43,16 +41,16 @@ export class ProductsComponent implements OnInit {
   fetchAllBrands(): void {
     this.brandService.getBrands()
     .subscribe(brands => {
-      this.brand = brands;
-      console.log(this.brand);
+      this.brands = brands;
+      console.log(this.brands);
     });
   }
 
   fetchAllCategories(): void {
     this.categoryService.getAllCategories()
     .subscribe(categories => {
-      this.category = categories;
-      console.log(this.category);
+      this.categories = categories;
+      console.log(this.categories);
     });
   }
 

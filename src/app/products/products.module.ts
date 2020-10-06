@@ -6,6 +6,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { ProductService } from './../core/services/product/product.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ProductService } from './../core/services/product/product.service';
     CommonModule,
     ProductsRoutingModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [ProductService]
 })
