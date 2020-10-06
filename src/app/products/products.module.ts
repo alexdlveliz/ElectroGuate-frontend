@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './components/products/products.component';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from "../material/material.module";
-import { ProductsService } from "../core/services/products/products.service";
+import { MaterialModule } from '../material/material.module';
+import { ProductService } from './../core/services/product/product.service';
 
 
 @NgModule({
@@ -16,6 +16,6 @@ import { ProductsService } from "../core/services/products/products.service";
     FormsModule,
     MaterialModule
   ],
-  providers: [ProductsService]
+  providers: [ProductService]
 })
 export class ProductsModule { }

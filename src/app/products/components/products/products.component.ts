@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from 'src/app/core/services/products/products.service';
+import { ProductService } from './../../../core/services/product/product.service';
+import { Product } from './../../../core/models/product.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -8,15 +10,27 @@ import { ProductsService } from 'src/app/core/services/products/products.service
 })
 export class ProductsComponent implements OnInit {
 
-  value = "";
+  value = '';
   brands: string[] = ['Samsung', 'LG', 'Sony'];
   categories: string[] = ['Para la casa', 'Mantenimiento', 'Sonido'];
-  public products = [];
-  
-  constructor(private _productsService: ProductsService) { }
+  products: Product[] = [];
+
+  constructor(
+    private productService: ProductService
+  ) {
+  }
 
   ngOnInit(): void {
-    this.products = this._productsService.getProducts();
+    this.allProducts();
   }
+
+  allProducts() {
+    this.productService.getAllProducts()
+    .subscribe(products => {
+      console.log(products);
+    });
+  }
+
+
 
 }

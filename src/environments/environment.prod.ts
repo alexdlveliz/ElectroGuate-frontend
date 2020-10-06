@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url_api: 'http://electro-guate.eastus.cloudapp.azure.com:8000/api'
+  url_api: 'http://34.227.72.9:8000/api'
 };
