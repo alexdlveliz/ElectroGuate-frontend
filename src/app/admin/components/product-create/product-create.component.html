@@ -27,14 +27,14 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Categoría</mat-label>
-          <mat-select>
+          <mat-select formControlName="brand_id">
             <mat-option>Seleccione una opción</mat-option>
             <mat-option *ngFor="let category of categories" [value]="category"> {{ category.str_name }}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Marca</mat-label>
-          <mat-select>
+          <mat-select formControlName="category_id">
             <mat-option>Seleccione una opción</mat-option>
             <mat-option *ngFor="let brand of brands" [value]="brand"> {{ brand.str_name }}</mat-option>
           </mat-select>

@@ -14,6 +14,12 @@ export class ProductService {
     private http: HttpClient
   ) { }
 
+  /**
+   * Método utilizado para obtener todos los productos
+   * Se reintentará dos veces la petición, si llegara a fallar
+   * Si no funciona, se capturará el error,
+   * Si todo sale bien, se retornará un array de Productos
+   */
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${environment.url_api}/products/products/`)
       .pipe(
@@ -23,6 +29,12 @@ export class ProductService {
       );
   }
 
+  /**
+   * Método utilizado para obtener un sólo producto
+   * Se reintentará 2 veces la petición, si llegara a fallar,
+   * Si no funciona, se capturará el error,
+   * Si todo sale bien, se retornará un Producto
+   */
   getOneProduct(id: number): Observable<Product> {
     return this.http.get<Product>(`${environment.url_api}/products/products/${id}`)
     .pipe(
@@ -34,6 +46,14 @@ export class ProductService {
 
   createProduct(newProduct: Product): Observable<any> {
     return this.http.post(`${environment.url_api}/products/products`, newProduct);
+  }
+
+  updateProduct(id: number, changes: Partial<Product>): Observable<any> {
+    return this.http.put(`${environment.url_api}/products/products/${id}/`, changes);
+  }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete(`${environment.url_api}/products/products/${id}/`);
   }
 
   private handleError(error: HttpErrorResponse): any {

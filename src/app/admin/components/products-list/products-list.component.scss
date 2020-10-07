@@ -1,3 +1,17 @@
-.full-width-table {
-  width: 100%;
+.products-table {
+  width: 96%;
+  margin: 2%;
+
+  button {
+    margin-right: 1.5rem;
+  }
+}
+
+.mat-row {
+  height: 3.3rem;
+}
+
+.actions-button {
+  margin: 1.5rem;
+  margin-bottom: 0;
 }
