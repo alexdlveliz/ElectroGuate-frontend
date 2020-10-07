@@ -23,6 +23,19 @@ export class ProductService {
       );
   }
 
+  getOneProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(`${environment.url_api}/products/products/${id}`)
+    .pipe(
+      retry(2),
+      catchError(this.handleError),
+      map((response: any) => response.results as Product)
+    );
+  }
+
+  createProduct(newProduct: Product): Observable<any> {
+    return this.http.post(`${environment.url_api}/products/products`, newProduct);
+  }
+
   private handleError(error: HttpErrorResponse): any {
     console.log(error);
     return throwError('ups, algo salió mal');
