@@ -9,10 +9,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsListComponent } from './components/products-list/products-list.component';
+import { CategoriesListComponent } from './components/categories-list/categories-list.component';
+import { BrandsListComponent } from './components/brands-list/brands-list.component';
 
 
 @NgModule({
-  declarations: [NavComponent, ProductCreateComponent, ProductsListComponent],
+  declarations: [NavComponent, ProductCreateComponent, ProductsListComponent, CategoriesListComponent, BrandsListComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
