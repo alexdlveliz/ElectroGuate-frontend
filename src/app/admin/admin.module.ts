@@ -11,10 +11,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { CategoriesListComponent } from './components/categories-list/categories-list.component';
 import { BrandsListComponent } from './components/brands-list/brands-list.component';
+import { BrandCreateComponent } from './components/brand-create/brand-create.component';
+import { CategoryCreateComponent } from './components/category-create/category-create.component';
 
 
 @NgModule({
-  declarations: [NavComponent, ProductCreateComponent, ProductsListComponent, CategoriesListComponent, BrandsListComponent],
+  declarations: [NavComponent, ProductCreateComponent, ProductsListComponent, CategoriesListComponent, BrandsListComponent, BrandCreateComponent, CategoryCreateComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
