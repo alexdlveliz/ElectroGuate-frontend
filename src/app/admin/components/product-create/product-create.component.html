@@ -11,7 +11,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Precio</mat-label>
-          <input type="number" matInput formControlName="float_price">
+          <input type="number" matInput formControlName="int_price">
         </mat-form-field>
         <mat-form-field>
           <mat-label>Código del producto</mat-label>
@@ -26,15 +26,15 @@
           <textarea formControlName="str_description" matInput></textarea>
         </mat-form-field>
         <mat-form-field appearance="fill">
-          <mat-label>Categoría</mat-label>
-          <mat-select formControlName="brand_id">
+          <mat-label>Marca</mat-label>
+          <mat-select formControlName="brand">
             <mat-option>Seleccione una opción</mat-option>
             <mat-option *ngFor="let category of categories" [value]="category"> {{ category.str_name }}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
-          <mat-label>Marca</mat-label>
-          <mat-select formControlName="category_id">
+          <mat-label>Categoría</mat-label>
+          <mat-select formControlName="category">
             <mat-option>Seleccione una opción</mat-option>
             <mat-option *ngFor="let brand of brands" [value]="brand"> {{ brand.str_name }}</mat-option>
           </mat-select>

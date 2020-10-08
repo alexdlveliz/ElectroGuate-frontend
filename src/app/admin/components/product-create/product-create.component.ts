@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { ProductService } from './../../../core/services/product/product.service';
 import { CategoryService } from './../../../core/services/category/category.service';
 import { BrandService } from './../../../core/services/brand/brand.service';
-
-import { Product } from './../../../core/models/product.model';
 import { Category } from './../../../core/models/category.model';
 import { Brand } from './../../../core/models/brand.model';
 
@@ -23,7 +23,8 @@ export class ProductCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private productService: ProductService,
     private categoryService: CategoryService,
-    private brandService: BrandService
+    private brandService: BrandService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -38,21 +39,23 @@ export class ProductCreateComponent implements OnInit {
       str_description: ['', Validators.required],
       str_product_code: ['', Validators.required],
       int_amount: ['', Validators.required],
-      float_price: ['', Validators.required],
-      brand_id: [''],
-      category_id: ['']
+      int_price: ['', Validators.required],
+      brand: ['', [Validators.required]],
+      category: ['', [Validators.required]]
     });
   }
 
   createProduct(event: Event): void {
     if (this.form.valid) {
       event.preventDefault();
-      console.log(this.form.value);
+      const newProduct = Object.assign({}, this.form.value);
+      newProduct.brand = this.form.controls.brand.value.id;
+      newProduct.category = this.form.controls.category.value.id;
+      this.productService.createProduct(newProduct)
+      .subscribe(() => {
+        this.router.navigate(['admin/products']);
+      });
     }
-    // this.productService.createProduct(newProduct)
-    // .subscribe(product => {
-    //   console.log(product);
-    // });
   }
 
   fetchAllCategories(): void {
