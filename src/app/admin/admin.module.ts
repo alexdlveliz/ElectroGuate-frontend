@@ -4,31 +4,26 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { NavComponent } from './components/nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+import { ProductCreateComponent } from './components/product-create/product-create.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from './../material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsListComponent } from './components/products-list/products-list.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
+import { CategoriesListComponent } from './components/categories-list/categories-list.component';
+import { BrandsListComponent } from './components/brands-list/brands-list.component';
+import { BrandCreateComponent } from './components/brand-create/brand-create.component';
+import { CategoryCreateComponent } from './components/category-create/category-create.component';
 
 
 @NgModule({
-  declarations: [NavComponent, ProductsListComponent],
+  declarations: [NavComponent, ProductCreateComponent, ProductsListComponent, CategoriesListComponent, BrandsListComponent, BrandCreateComponent, CategoryCreateComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule
+    FlexLayoutModule,
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

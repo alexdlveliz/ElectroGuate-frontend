@@ -52,10 +52,24 @@ export class LoginComponent implements OnInit {
     if (this.formSignin.valid) {
       event.preventDefault();
       console.log(this.formSignin.controls.password_confirmation.value);
+      /**
+       * Condición para verificar si el campo contraseña era igual
+       * al campo de confirmación de contraseña
+       */
       if (this.formSignin.controls.password.value === this.formSignin.controls.password_confirmation.value) {
+        /**
+         * Se crea una copia del array original, para quitarle el campo de
+         * verificación de contraseña, que no debe viajar al endpoint
+         */
         const copia = Object.assign({}, this.formSignin.value);
+        /**
+         * Se elimina el campo de verificación de contraseña
+         */
         const key = 'password_confirmation';
         delete copia[key];
+        /**
+         * Se envía el JSON necesario para crear una cuenta
+         */
         this.userService.signIn(copia)
           .subscribe(user => {
             console.log(user);

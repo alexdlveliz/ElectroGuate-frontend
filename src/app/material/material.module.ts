@@ -5,8 +5,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from "@angular/material/button";
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -17,7 +22,12 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    MatSidenavModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSelectModule
   ],
   exports: [
     MatToolbarModule,
@@ -26,7 +36,12 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    MatSidenavModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

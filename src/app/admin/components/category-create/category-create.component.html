@@ -1,0 +1,25 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center center">
+  <form [formGroup]="form" (ngSubmit)="createCategory($event)">
+    <mat-card fxLayout="column">
+      <mat-card-title>
+        Nueva Categoría
+      </mat-card-title>
+      <mat-card-content>
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput formControlName="str_name">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Descripción</mat-label>
+          <textarea formControlName="str_description" matInput></textarea>
+        </mat-form-field>
+        
+        <mat-card-actions>
+          <button mat-raised-button type="submit" color="primary">Crear Categoría</button>
+          <button mat-raised-button color="warn">Cancelar</button>
+        </mat-card-actions>
+
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

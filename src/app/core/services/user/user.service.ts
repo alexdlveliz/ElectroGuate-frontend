@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { User } from './../../models/user.model';
 import { environment } from './../../../../environments/environment.prod';
@@ -28,6 +28,7 @@ export class UserService {
     return this.http.post(`${environment.url_api}/users/login/`, data)
       .pipe(
         map(dataResp => {
+          console.log(dataResp);
           return dataResp;
         }),
         catchError(err => {

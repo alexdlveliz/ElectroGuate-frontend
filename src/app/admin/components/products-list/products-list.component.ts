@@ -1,30 +1,36 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { ProductsListDataSource, ProductsListItem } from './products-list-datasource';
-
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from './../../../core/services/product/product.service';
+import { Product } from './../../../core/models/product.model';
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss']
 })
-export class ProductsListComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<ProductsListItem>;
-  dataSource: ProductsListDataSource;
+export class ProductsListComponent implements OnInit {
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  products: Product[] = [];
+  displayedColumns: string[] = ['id', 'str_name', 'str_product_code', 'str_description', 'int_amount', 'int_price', 'actions'];
+  constructor(
+    private productService: ProductService
+  ) { }
 
-  ngOnInit() {
-    this.dataSource = new ProductsListDataSource();
+  ngOnInit(): void {
+    this.fetchAllProducts();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+  fetchAllProducts(): void {
+    this.productService.getAllProducts()
+    .subscribe(products => {
+      this.products = products;
+      console.log(this.products);
+    });
   }
+
+  deleteProduct(id: number): void {
+    this.productService.deleteProduct(id)
+    .subscribe(() => {
+      this.fetchAllProducts();
+    });
+  }
+
 }

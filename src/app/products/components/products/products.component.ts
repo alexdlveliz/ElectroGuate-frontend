@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from 'src/app/core/services/products/products.service';
+import { ProductService } from './../../../core/services/product/product.service';
+import { BrandService } from './../../../core/services/brand/brand.service';
+import { CategoryService } from './../../../core/services/category/category.service';
 
+import { Product } from './../../../core/models/product.model';
+import { Brand } from './../../../core/models/brand.model';
+import { Category } from './../../../core/models/category.model';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -8,15 +13,47 @@ import { ProductsService } from 'src/app/core/services/products/products.service
 })
 export class ProductsComponent implements OnInit {
 
-  value = "";
-  brands: string[] = ['Samsung', 'LG', 'Sony'];
-  categories: string[] = ['Para la casa', 'Mantenimiento', 'Sonido'];
-  public products = [];
-  
-  constructor(private _productsService: ProductsService) { }
+  value = '';
+  brands: Brand[] = [];
+  categories: Category[] = [];
+  products: Product[] = [];
+
+  constructor(
+    private productService: ProductService,
+    private brandService: BrandService,
+    private categoryService: CategoryService
+  ) {
+  }
 
   ngOnInit(): void {
-    this.products = this._productsService.getProducts();
+    this.fetchAllProducts();
+    this.fetchAllBrands();
+    this.fetchAllCategories();
   }
+
+  fetchAllProducts(): void {
+    this.productService.getAllProducts()
+    .subscribe(products => {
+      console.log(products);
+    });
+  }
+
+  fetchAllBrands(): void {
+    this.brandService.getBrands()
+    .subscribe(brands => {
+      this.brands = brands;
+      console.log(this.brands);
+    });
+  }
+
+  fetchAllCategories(): void {
+    this.categoryService.getAllCategories()
+    .subscribe(categories => {
+      this.categories = categories;
+      console.log(this.categories);
+    });
+  }
+
+
 
 }
