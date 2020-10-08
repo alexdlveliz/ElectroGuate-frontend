@@ -9,10 +9,10 @@ import { BrandService } from './../../../core/services/brand/brand.service';
 export class BrandsListComponent implements OnInit {
 
   brands: Brand[] = [];
-  displayedColumns: string[] = ['id', 'str_name', 'actions'];
+  displayedColumns: string[] = ['id', 'str_name', 'str_description', 'actions'];
 
   constructor(
-    private brandService: BrandService
+    private brandService: BrandService,
   ) { }
 
   ngOnInit(): void {
@@ -23,6 +23,13 @@ export class BrandsListComponent implements OnInit {
     this.brandService.getBrands()
     .subscribe(brands => {
       this.brands = brands;
+    });
+  }
+
+  deleteBrand(id: number): void {
+    this.brandService.deleteBrand(id)
+    .subscribe(() => {
+      this.fetchAllBrands();
     });
   }
 

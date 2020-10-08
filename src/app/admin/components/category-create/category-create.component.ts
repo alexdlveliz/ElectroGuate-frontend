@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from './../../../core/services/category/category.service';
-import { Category } from './../../../core/models/category.model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-category-create',
   templateUrl: './category-create.component.html',
@@ -12,7 +12,8 @@ export class CategoryCreateComponent implements OnInit {
   form: FormGroup;
   constructor(
     private categoryService: CategoryService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -31,8 +32,8 @@ export class CategoryCreateComponent implements OnInit {
     if (this.form.valid) {
       event.preventDefault();
       this.categoryService.createCategory(this.form.value)
-      .subscribe(category => {
-        console.log(category);
+      .subscribe(() => {
+        this.router.navigate(['/admin/categories']);
       });
     }
   }

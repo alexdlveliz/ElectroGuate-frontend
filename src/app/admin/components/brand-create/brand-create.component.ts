@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { BrandService } from './../../../core/services/brand/brand.service';
 import { CategoryService } from './../../../core/services/category/category.service';
-import { Brand } from './../../../core/models/brand.model';
 import { Category } from './../../../core/models/category.model';
 @Component({
   selector: 'app-brand-create',
@@ -17,7 +18,8 @@ export class BrandCreateComponent implements OnInit {
   constructor(
     private brandService: BrandService,
     private categoryService: CategoryService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +30,7 @@ export class BrandCreateComponent implements OnInit {
   private buildForm(): void {
     this.form = this.formBuilder.group({
       str_name: ['', Validators.required],
+      str_description: ['', Validators.required],
       category_id: ['']
     });
   }
@@ -43,7 +46,12 @@ export class BrandCreateComponent implements OnInit {
   createBrand(event: Event): void {
     if (this.form.valid) {
       event.preventDefault();
-      console.log(this.form.value);
+      const copia = Object.assign({}, this.form.value);
+      copia.category_id = this.form.controls.category_id.value.id;
+      this.brandService.createBrand(copia)
+      .subscribe(() => {
+        this.router.navigate(['/admin/brands']);
+      });
     }
   }
 }

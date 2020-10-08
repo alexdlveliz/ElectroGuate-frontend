@@ -26,4 +26,8 @@ export class CategoryService {
   createCategory(newCategory: Category): Observable<any> {
     return this.http.post(`${environment.url_api}/products/category/`, newCategory);
   }
+
+  deleteCategory(id: number): Observable<any> {
+    return this.http.delete(`${environment.url_api}/products/category/${id}/`);
+  }
 }

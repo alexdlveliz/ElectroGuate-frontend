@@ -28,6 +28,7 @@ export class UserService {
     return this.http.post(`${environment.url_api}/users/login/`, data)
       .pipe(
         map(dataResp => {
+          console.log(dataResp);
           return dataResp;
         }),
         catchError(err => {

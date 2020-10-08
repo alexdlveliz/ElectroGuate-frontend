@@ -22,4 +22,13 @@ export class BrandService {
       map((response: any) => response.results as Brand[])
     );
   }
+
+  createBrand(newBrand: Brand): Observable<any> {
+    return this.http.post(`${environment.url_api}/products/brand/`, newBrand);
+  }
+
+  deleteBrand(id: number): Observable<any> {
+    return this.http.delete(`${environment.url_api}/products/brand/${id}/`);
+  }
+
 }
