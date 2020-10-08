@@ -22,4 +22,8 @@ export class CategoryService {
       map((response: any) => response.results as Category[])
     );
   }
+
+  createCategory(newCategory: Category): Observable<any> {
+    return this.http.post(`${environment.url_api}/products/category/`, newCategory);
+  }
 }
