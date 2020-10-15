@@ -15,6 +15,7 @@ import { Brand } from './../../../core/models/brand.model';
 })
 export class ProductCreateComponent implements OnInit {
 
+  contadorForm = 0;
   form: FormGroup;
   categories: Category[] = [];
   brands: Brand[] = [];
@@ -33,6 +34,9 @@ export class ProductCreateComponent implements OnInit {
     this.fetchAllCategories();
     this.fetchAllBrands();
   }
+  /**
+   * Método para crear el formulario, con todos los elementos input deseados.
+   */
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
@@ -40,28 +44,43 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
+  /**
+   * Método para obtener el estado actual del formulario
+   */
   get products(): FormArray {
     return this.form.get('products') as FormArray;
   }
 
+  /**
+   * Método para agregar dinámicamente los nuevos inputs al formulario.
+   */
   addNewProduct(): void {
     const product = this.formBuilder.group({
-      str_name: new FormControl(''),
-      str_description: new FormControl(),
-      str_product_code: new FormControl(),
-      int_amount: new FormControl(),
-      int_price: new FormControl(),
-      brand: new FormControl(),
-      category: new FormControl()
+      str_name: new FormControl('', Validators.required),
+      str_description: new FormControl('', Validators.required),
+      str_product_code: new FormControl('', Validators.required),
+      int_amount: new FormControl('', Validators.required),
+      int_price: new FormControl('', Validators.required),
+      brand: new FormControl('', Validators.required),
+      category: new FormControl('', Validators.required)
     });
 
+    this.contadorForm += 1;
     this.products.push(product);
   }
 
+  /**
+   * Método para eliminar dinámicamente los inputs del formulario.
+   */
   deleteProduct(index: number): void {
     this.products.removeAt(index);
+    this.contadorForm -= 1;
   }
 
+  /**
+   * Método para tomar los datos que están en el formulario, trabajar con los datos,
+   * y por último llamar al servicio requerido e insertar los datos en la API.
+   */
   createProduct(event: Event): void {
     if (this.form.valid) {
       event.preventDefault();
@@ -81,6 +100,9 @@ export class ProductCreateComponent implements OnInit {
     }
   }
 
+  /**
+   * Método para traer todas las categorías creadas
+   */
   fetchAllCategories(): void {
     this.categoryService.getAllCategories()
     .subscribe(categories => {
@@ -89,6 +111,9 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
+  /**
+   * Método para traer todas las marcas creadas
+   */
   fetchAllBrands(): void {
     this.brandService.getBrands()
     .subscribe(brands => {
