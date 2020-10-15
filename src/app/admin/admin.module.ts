@@ -16,7 +16,14 @@ import { CategoryCreateComponent } from './components/category-create/category-c
 
 
 @NgModule({
-  declarations: [NavComponent, ProductCreateComponent, ProductsListComponent, CategoriesListComponent, BrandsListComponent, BrandCreateComponent, CategoryCreateComponent],
+  declarations: [NavComponent,
+    ProductCreateComponent,
+    ProductsListComponent,
+    CategoriesListComponent,
+    BrandsListComponent,
+    BrandCreateComponent,
+    CategoryCreateComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,

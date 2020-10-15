@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ProductService } from './../../../core/services/product/product.service';
@@ -29,29 +29,52 @@ export class ProductCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.addNewProduct();
     this.fetchAllCategories();
     this.fetchAllBrands();
   }
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
-      str_name: ['', Validators.required],
-      str_description: ['', Validators.required],
-      str_product_code: ['', Validators.required],
-      int_amount: ['', Validators.required],
-      int_price: ['', Validators.required],
-      brand: ['', [Validators.required]],
-      category: ['', [Validators.required]]
+      products: this.formBuilder.array([])
     });
+  }
+
+  get products(): FormArray {
+    return this.form.get('products') as FormArray;
+  }
+
+  addNewProduct(): void {
+    const product = this.formBuilder.group({
+      str_name: new FormControl(''),
+      str_description: new FormControl(),
+      str_product_code: new FormControl(),
+      int_amount: new FormControl(),
+      int_price: new FormControl(),
+      brand: new FormControl(),
+      category: new FormControl()
+    });
+
+    this.products.push(product);
+  }
+
+  deleteProduct(index: number): void {
+    this.products.removeAt(index);
   }
 
   createProduct(event: Event): void {
     if (this.form.valid) {
       event.preventDefault();
-      const newProduct = Object.assign({}, this.form.value);
-      newProduct.brand = this.form.controls.brand.value.id;
-      newProduct.category = this.form.controls.category.value.id;
-      this.productService.createProduct(newProduct)
+      const products = Object.assign({}, this.form.value);
+      const newProducts = products.products;
+      for (const newProduct of newProducts) {
+        newProduct.brand = newProduct.brand.id;
+        newProduct.category = newProduct.category.id;
+        console.log(newProduct);
+      }
+      products.products = newProducts;
+      console.log(products);
+      this.productService.createProduct(products)
       .subscribe(() => {
         this.router.navigate(['admin/products']);
       });
