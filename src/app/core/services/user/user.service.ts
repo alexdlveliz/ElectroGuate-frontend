@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { User } from './../../models/user.model';
 import { environment } from './../../../../environments/environment.prod';
-import { Observable, pipe, throwError } from 'rxjs';
+import { TokenService } from './../token/token.service';
+
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -13,7 +15,8 @@ export class UserService {
   response = '';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private tokenService: TokenService
   ) { }
 
   getUsers(): Observable<User[]> {
@@ -28,7 +31,8 @@ export class UserService {
     return this.http.post(`${environment.url_api}/users/login/`, data)
       .pipe(
         map(dataResp => {
-          console.log(dataResp);
+          // console.log(dataResp);
+          this.tokenService.setLocalStorage(dataResp);
           return dataResp;
         }),
         catchError(err => {
@@ -39,11 +43,12 @@ export class UserService {
   }
 
   logOut(): void {
-    localStorage.removeItem('token');
+    this.tokenService.deleteLocalStorage();
   }
 
   userExists(): string {
-    return localStorage.getItem('token');
+    this.tokenService.getUserRole();
+    return this.tokenService.getLocalStorage();
   }
 
 }

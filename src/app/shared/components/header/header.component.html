@@ -9,7 +9,7 @@
     <nav class="inside-nav" fxLayout="row" fxLayoutAlign="end center">
       <a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null">Iniciar sesión</a>
       <a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null">Cerrar Sesión</a>
-      <a routerLink="/admin">Administración</a>
+      <a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() !== 'usuario'">Administración</a>
     </nav>
   </div>
 </mat-toolbar>

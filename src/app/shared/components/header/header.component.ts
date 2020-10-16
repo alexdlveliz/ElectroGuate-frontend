@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { TokenService } from 'src/app/core/services/token/token.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,11 +12,12 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private tokenService: TokenService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('token'));
+    // console.log(localStorage.getItem('usuario'));
   }
 
   logOut(): void {
@@ -25,6 +27,10 @@ export class HeaderComponent implements OnInit {
 
   userExists(): string {
     return this.userService.userExists();
+  }
+
+  userRole(): string {
+    return this.tokenService.getUserRole();
   }
 
 }
