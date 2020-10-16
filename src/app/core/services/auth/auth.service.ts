@@ -33,8 +33,11 @@ export class AuthService {
   }
 
   getUserRole(): string {
-    this.values = this.getValues();
-    this.role = this.values[2][1];
-    return this.role;
+    if (this.getLocalStorage()) {
+      this.values = this.getValues();
+      this.role = this.values[2][1];
+      return this.role;
+    }
+    return null;
   }
 }
