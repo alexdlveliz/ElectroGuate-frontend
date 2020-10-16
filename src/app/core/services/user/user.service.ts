@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { User } from './../../models/user.model';
 import { environment } from './../../../../environments/environment.prod';
-import { TokenService } from './../token/token.service';
+import { AuthService } from './../auth/auth.service';
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -16,7 +16,7 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private tokenService: TokenService
+    private authService: AuthService
   ) { }
 
   getUsers(): Observable<User[]> {
@@ -32,7 +32,7 @@ export class UserService {
       .pipe(
         map(dataResp => {
           // console.log(dataResp);
-          this.tokenService.setLocalStorage(dataResp);
+          this.authService.setLocalStorage(dataResp);
           return dataResp;
         }),
         catchError(err => {
@@ -43,12 +43,6 @@ export class UserService {
   }
 
   logOut(): void {
-    this.tokenService.deleteLocalStorage();
+    this.authService.deleteLocalStorage();
   }
-
-  userExists(): string {
-    this.tokenService.getUserRole();
-    return this.tokenService.getLocalStorage();
-  }
-
 }

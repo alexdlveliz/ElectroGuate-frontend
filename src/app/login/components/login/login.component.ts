@@ -33,8 +33,7 @@ export class LoginComponent implements OnInit {
     if (this.formLogin.valid) {
       event.preventDefault();
       this.userService.logIn(this.formLogin.value)
-        .subscribe(login => {
-          localStorage.setItem('token', login.token);
+        .subscribe(() => {
           this.router.navigate(['/']);
           this.notificationSuccessToast('Sesión iniciada correctamente', 'Iniciar Sesión');
         },
