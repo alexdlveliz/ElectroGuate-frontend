@@ -27,10 +27,11 @@ export class BrandsListComponent implements OnInit {
   }
 
   deleteBrand(id: number): void {
-    this.brandService.deleteBrand(id)
-    .subscribe(() => {
-      this.fetchAllBrands();
-    });
+    if (confirm('¿Estás seguro?')) {
+      this.brandService.deleteBrand(id)
+      .subscribe(() => {
+        this.fetchAllBrands();
+      });
+    }
   }
-
 }

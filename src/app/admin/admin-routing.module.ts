@@ -15,6 +15,9 @@ const routes: Routes = [
     path: '',
     component: NavComponent,
     children: [
+      /**
+       * Routing para los productos
+       */
       {
         path: 'products',
         component: ProductsListComponent
@@ -27,6 +30,9 @@ const routes: Routes = [
         path: 'products/edit/:id',
         component: ProductEditComponent
       },
+      /**
+       * Routing para las categorías
+       */
       {
         path: 'categories',
         component: CategoriesListComponent
@@ -35,6 +41,13 @@ const routes: Routes = [
         path: 'categories/create',
         component: CategoryCreateComponent
       },
+      {
+        path: 'categories/edit/:id',
+        component: CategoryCreateComponent
+      },
+      /**
+       * Routing para las marcas
+       */
       {
         path: 'brands',
         component: BrandsListComponent
