@@ -36,11 +36,11 @@ export class ProductService {
    * Si todo sale bien, se retornará un Producto
    */
   getOneProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${environment.url_api}/products/products/${id}`)
+    return this.http.get<Product>(`${environment.url_api}/products/products/${id}/`)
     .pipe(
       retry(2),
       catchError(this.handleError),
-      map((response: any) => response.results as Product)
+      map((response: any) => response as Product)
     );
   }
 

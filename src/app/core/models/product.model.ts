@@ -4,7 +4,7 @@ export interface Product {
   str_description: string;
   str_product_code: string;
   int_amount: number;
-  float_price: number;
-  brand_id: number;
-  category_id: number;
+  int_price: number;
+  brand: number;
+  category: number;
 }

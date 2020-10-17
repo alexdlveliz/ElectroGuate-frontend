@@ -6,6 +6,7 @@ import { CategoriesListComponent } from './components/categories-list/categories
 import { CategoryCreateComponent } from './components/category-create/category-create.component';
 import { NavComponent } from './components/nav/nav.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
+import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'products/create',
         component: ProductCreateComponent
+      },
+      {
+        path: 'products/edit/:id',
+        component: ProductEditComponent
       },
       {
         path: 'categories',
