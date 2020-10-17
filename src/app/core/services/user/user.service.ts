@@ -6,7 +6,7 @@ import { environment } from './../../../../environments/environment.prod';
 import { AuthService } from './../auth/auth.service';
 
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,11 @@ export class UserService {
   ) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.url_api}/users/users/`);
+    return this.http.get<User[]>(`${environment.url_api}/users/users/`)
+    .pipe(
+      retry(2),
+      map((response: any) => response.results as User[])
+    );
   }
 
   signIn(user: User): Observable<any> {

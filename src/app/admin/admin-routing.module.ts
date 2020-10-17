@@ -7,6 +7,7 @@ import { CategoryCreateComponent } from './components/category-create/category-c
 import { NavComponent } from './components/nav/nav.component';
 import { ProductCreateComponent } from './components/product-create/product-create.component';
 import { ProductsListComponent } from './components/products-list/products-list.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'brands/create',
         component: BrandCreateComponent
+      },
+      {
+        path: 'users',
+        component: UserListComponent
       }
     ]
   }

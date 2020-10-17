@@ -13,6 +13,7 @@ import { CategoriesListComponent } from './components/categories-list/categories
 import { BrandsListComponent } from './components/brands-list/brands-list.component';
 import { BrandCreateComponent } from './components/brand-create/brand-create.component';
 import { CategoryCreateComponent } from './components/category-create/category-create.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CategoryCreateComponent } from './components/category-create/category-c
     CategoriesListComponent,
     BrandsListComponent,
     BrandCreateComponent,
-    CategoryCreateComponent
+    CategoryCreateComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,
