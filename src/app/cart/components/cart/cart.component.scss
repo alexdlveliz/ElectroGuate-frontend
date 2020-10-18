@@ -1,19 +1,43 @@
-.container{
-    width: 100vw;
-    height: 350px;
-    padding: 35px;
-    .row{
-        width: 95%;
-        height: 90%;
-        padding: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .card{
-            margin: auto;
-            width: 28%;
-            height: 80%;
-            background-color: aqua;
+// .container{
+//     width: 100vw;
+//     height: 350px;
+//     padding: 35px;
+//     .row{
+//         width: 95%;
+//         height: 90%;
+//         padding: 15px;
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         .card{
+//             margin: auto;
+//             width: 28%;
+//             height: 80%;
+//             background-color: aqua;
+//         }
+//     }
+// }
+.cart-view {
+    height: auto;
+}
+
+.cart {
+    padding: 2%;
+    background-color: red;
+
+    mat-card {
+        margin: 1% 0;
+        height: 300px;
+        filter: drop-shadow(0 0 0.75rem black);
+
+        img {
+            width: 40%;
+            margin: 0 1%;
         }
     }
+}
+
+.payment {
+    padding: 5%;
+    background-color: blue;
 }

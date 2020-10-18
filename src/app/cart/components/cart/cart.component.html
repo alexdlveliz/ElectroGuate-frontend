@@ -1,14 +1,23 @@
-<p>cart works!</p>
-<div class="container">
-    <div class="row">
-        <div class="card">
-            <h1>Hola</h1>
-        </div>
-        <div class="card">
-            <h1>2</h1>
-        </div>
-        <div class="card">
-            <h1>coso</h1>
-        </div>
+<div fxLayout="row" fxLayout.xs="column" class="cart-view">
+    <div class="cart" fxFlex="50">
+        <mat-card fxLayout="row" fxLayoutAlign=" center">
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu">
+            <mat-card-header>
+                <mat-card-title>Nombre del producto</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>
+                    Televisión samsung QLED 8K/4K TV
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="payment" fxFlex="50">
+        <h1>Formulario de pago</h1>
     </div>
 </div>
