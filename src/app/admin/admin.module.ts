@@ -15,6 +15,7 @@ import { BrandCreateComponent } from './components/brand-create/brand-create.com
 import { CategoryCreateComponent } from './components/category-create/category-create.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ProductEditComponent } from './components/product-edit/product-edit.com
     BrandCreateComponent,
     CategoryCreateComponent,
     UserListComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    UserEditComponent
   ],
   imports: [
     CommonModule,

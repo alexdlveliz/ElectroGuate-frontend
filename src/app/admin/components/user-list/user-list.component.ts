@@ -10,7 +10,7 @@ import { User } from './../../../core/models/user.model';
 export class UserListComponent implements OnInit {
 
   users: User[] = [];
-  displayedColumns: string[] = ['id', 'str_name', 'str_surname', 'str_email', 'str_phone_number', 'is_staff', 'actions'];
+  displayedColumns: string[] = ['id', 'str_name', 'str_surname', 'str_email', 'str_phone_number', 'str_role', 'actions'];
 
   constructor(
     private userService: UserService

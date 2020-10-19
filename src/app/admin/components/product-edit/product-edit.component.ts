@@ -15,7 +15,6 @@ import { Brand } from './../../../core/models/brand.model';
 })
 export class ProductEditComponent implements OnInit {
 
-  contadorForm = 0;
   form: FormGroup;
   categories: Category[] = [];
   brands: Brand[] = [];
