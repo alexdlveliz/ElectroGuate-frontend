@@ -90,7 +90,7 @@ export class UserEditComponent implements OnInit {
       event.preventDefault();
       console.log(this.form.value);
       const newUser = Object.assign({}, this.form.value);
-      newUser.str_role = newUser.str_role.value;
+      newUser.str_role = newUser.str_role.viewValue;
       console.log(newUser);
       this.userService.updateUser(this.id, newUser)
       .subscribe(() => {
