@@ -26,7 +26,6 @@ export class BrandCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-    this.fetchAllCategories();
     this.editForm();
   }
 
@@ -38,7 +37,7 @@ export class BrandCreateComponent implements OnInit {
     this.form = this.formBuilder.group({
       str_name: ['', Validators.required],
       str_description: ['', Validators.required],
-      category_id: ['', Validators.required]
+      category: ['', Validators.required]
     });
   }
 
@@ -62,12 +61,21 @@ export class BrandCreateComponent implements OnInit {
   saveBrand(event: Event): void {
     if (this.form.valid) {
       event.preventDefault();
-      const copia = Object.assign({}, this.form.value);
-      copia.category_id = this.form.controls.category_id.value.id;
-      this.brandService.createBrand(copia)
-      .subscribe(() => {
-        this.router.navigate(['/admin/brands']);
-      });
+      if (this.id === undefined) {
+        const copia = Object.assign({}, this.form.value);
+        copia.category = this.form.controls.category.value.id;
+        this.brandService.createBrand(copia)
+        .subscribe(() => {
+          this.router.navigate(['/admin/brands']);
+        });
+      } else {
+        const copia = Object.assign({}, this.form.value);
+        copia.category = this.form.controls.category.value.id;
+        this.brandService.updateBrand(this.id, copia)
+        .subscribe(() => {
+          this.router.navigate(['/admin/brands']);
+        });
+      }
     }
   }
 
@@ -78,14 +86,18 @@ export class BrandCreateComponent implements OnInit {
    *  Colocar la información deseada si lo que se está haciendo
    *  es la edición de una categoría en el formulario
    */
-  editForm(): void {
-    this.activatedRoute.params.subscribe((params: Params) => {
+  async editForm(): Promise<void> {
+    await this.fetchAllCategories();
+    await this.activatedRoute.params.subscribe((params: Params) => {
       this.id = params.id;
       if (this.id !== undefined) {
         this.brandService.getOneBrand(this.id)
         .subscribe(brand => {
-          console.log(brand);
-          this.form.patchValue(brand);
+          this.form.patchValue({
+            str_name: brand.str_name,
+            str_description: brand.str_description,
+            category: this.categories[(brand.category) - 1]
+          });
         });
       }
     });

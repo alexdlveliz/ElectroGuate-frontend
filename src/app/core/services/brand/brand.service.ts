@@ -43,7 +43,7 @@ export class BrandService {
    * la actualización en sí
    */
   updateBrand(id: number, changes: Partial<Brand>): Observable<any> {
-    return this.http.put(`${environment.url_api}/products/brand/${id}`, changes);
+    return this.http.put(`${environment.url_api}/products/brand/${id}/`, changes);
   }
 
   /**

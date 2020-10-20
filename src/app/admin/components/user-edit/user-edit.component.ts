@@ -41,6 +41,10 @@ export class UserEditComponent implements OnInit {
     this.editForm();
   }
 
+  /**
+   * Método para formar el formulario, de la edición
+   * del usuario
+   */
   buildForm(): void {
     this.form = this.formBuilder.group({
       str_name: ['', [Validators.required]],
@@ -57,6 +61,10 @@ export class UserEditComponent implements OnInit {
   }
 
 
+  /**
+   * Método para poner en el formulario la información
+   * del usuario a editar
+   */
   editForm(): void {
     this.activatedRouter.params.subscribe((params: Params) => {
       this.id = params.id;
@@ -85,13 +93,15 @@ export class UserEditComponent implements OnInit {
     });
   }
 
+  /**
+   * Método para guardar la información editada
+   * del usuario
+   */
   saveUser(event: Event): void {
     if (this.form.valid) {
       event.preventDefault();
-      console.log(this.form.value);
       const newUser = Object.assign({}, this.form.value);
       newUser.str_role = newUser.str_role.viewValue;
-      console.log(newUser);
       this.userService.updateUser(this.id, newUser)
       .subscribe(() => {
         this.router.navigate(['admin/users']);
