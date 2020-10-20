@@ -30,9 +30,29 @@
         <form action="#">
             <mat-form-field appearance="outline">
                 <mat-label>Número de tarjeta</mat-label>
-                <input matInput placeholder="Número de tarjeta">
+                <input matInput placeholder="**** **** **** ****">
                 <mat-hint>Los 16 números del frente</mat-hint>
             </mat-form-field>
+
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Fecha de expiración</mat-label>
+                        <input matInput placeholder="MM/AA">
+                        <mat-hint>Ejemplo: 01/21</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>CVV</mat-label>
+                        <input matInput placeholder="***">
+                        <mat-hint>Los 3 números del dorso</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-flat-button color="primary">Procesar Pago</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>
