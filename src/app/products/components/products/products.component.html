@@ -1,89 +1,76 @@
 <section id="catalogo">
-    <div id="sidebar">
-        <mat-form-field>
-            <mat-label>Buscar productos</mat-label>
-            <input matInput type="text" [(ngModel)]="value">
-            <button mat-button *ngIf="value" matSuffix mat-icon-button (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
-            <button mat-button mat-icon-button matSuffix>
-                <mat-icon>search</mat-icon>
-            </button>
-        </mat-form-field>
-        <div id="filtros">
-            <h3><strong>Filtros por marca</strong></h3>
-            <mat-selection-list>
-                <mat-list-option *ngFor="let brand of brands">
-                  {{ brand.str_name }}
-                </mat-list-option>
-            </mat-selection-list>
+  <div id="sidebar">
+    <mat-form-field>
+      <mat-label>Buscar productos</mat-label>
+      <input matInput type="text" [(ngModel)]="value">
+      <button mat-button *ngIf="value" matSuffix mat-icon-button (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+      <button mat-button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+    <div id="filtros">
+      <h3><strong>Filtros por marca</strong></h3>
+      <mat-selection-list>
+        <mat-list-option *ngFor="let brand of brands">
+        {{ brand.str_name }}
+        </mat-list-option>
+      </mat-selection-list>
 
-            <h3><strong>Filtros por categoría</strong></h3>
-            <mat-selection-list>
-                <mat-list-option *ngFor="let category of categories">
-                    {{ category.str_name }}
-                </mat-list-option>
-            </mat-selection-list>
-        </div>
+      <h3><strong>Filtros por categoría</strong></h3>
+      <mat-selection-list>
+        <mat-list-option *ngFor="let category of categories">
+            {{ category.str_name }}
+        </mat-list-option>
+      </mat-selection-list>
     </div>
+  </div>
 
-    <main id="productos">
-        <mat-card class="card">
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                alt="Photo of a Shiba Inu">
-            <div id="info">
-                <mat-card-header>
-                    <mat-card-title>Shiba Inu</mat-card-title>
-                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-actions>
-                    <button mat-button>LIKE</button>
-                    <button mat-button>SHARE</button>
-                </mat-card-actions>
-            </div>
-        </mat-card>
+  <main id="productos">
+    <mat-card class="card">
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+        alt="Photo of a Shiba Inu">
+      <div id="info">
+        <mat-card-header>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </div>
+    </mat-card>
 
-        <mat-card class="card">
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                alt="Photo of a Shiba Inu">
-            <div id="info">
-                <mat-card-header>
-                    <mat-card-title>Shiba Inu</mat-card-title>
-                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-actions>
-                    <button mat-button>LIKE</button>
-                    <button mat-button>SHARE</button>
-                </mat-card-actions>
-            </div>
-        </mat-card>
-        <mat-card class="card">
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                alt="Photo of a Shiba Inu">
-            <div id="info">
-                <mat-card-header>
-                    <mat-card-title>Shiba Inu</mat-card-title>
-                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-actions>
-                    <button mat-button>LIKE</button>
-                    <button mat-button>SHARE</button>
-                </mat-card-actions>
-            </div>
-        </mat-card>
-        <mat-card class="card">
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                alt="Photo of a Shiba Inu">
-            <div id="info">
-                <mat-card-header>
-                    <mat-card-title>Shiba Inu</mat-card-title>
-                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-actions>
-                    <button mat-button>LIKE</button>
-                    <button mat-button>SHARE</button>
-                </mat-card-actions>
-            </div>
-        </mat-card>
-    </main>
+    <mat-card class="card">
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          alt="Photo of a Shiba Inu">
+      <div id="info">
+        <mat-card-header>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </div>
+    </mat-card>
+
+    <mat-card class="card">
+      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+        alt="Photo of a Shiba Inu">
+      <div id="info">
+        <mat-card-header>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </div>
+    </mat-card>
+  </main>
 </section>
