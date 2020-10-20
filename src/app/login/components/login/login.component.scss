@@ -7,13 +7,12 @@
 header {
   width: 100vw;
   height: 7vh;
-  background-color: #24FB7B;
+  background-color: #24fb7b;
 }
 
 header nav ul li {
   display: inline;
 }
-
 
 body,
 input {
@@ -23,7 +22,7 @@ input {
 .container {
   position: relative;
   width: 100%;
-  background-color: #333;
+  background-color: white;
   min-height: 100vh;
   overflow: hidden;
 }
@@ -71,14 +70,15 @@ form.sign-in-form {
 
 .title {
   font-size: 2.2rem;
-  color: #24FB7B;
+  color: #24fb7b;
   margin-bottom: 10px;
 }
 
 .input-field {
   max-width: 380px;
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: #e9fef1;
+  border: solid 2px #24fb7b;
   margin: 10px 0;
   height: 55px;
   border-radius: 55px;
@@ -116,7 +116,7 @@ form.sign-in-form {
   font-size: 1rem;
 }
 .social-text {
-  color: #24FB7B;
+  color: #24fb7b;
 }
 
 .social-media {
@@ -135,22 +135,22 @@ form.sign-in-form {
   justify-content: center;
   align-items: center;
   margin: 0 0.45rem;
-  color: #24FB7B;
+  color: #24fb7b;
   border-radius: 50%;
-  border: 1px solid #24FB7B;
+  border: 1px solid #24fb7b;
   text-decoration: none;
   font-size: 1.1rem;
   transition: 0.3s;
 }
 
 .social-icon:hover {
-  color: #24FB7B;
+  color: #24fb7b;
   border-color: #448;
 }
 
 .btn {
   width: 150px;
-  background-color: #24FB7B;
+  background-color: #24fb7b;
   border: none;
   outline: none;
   height: 49px;
@@ -164,7 +164,7 @@ form.sign-in-form {
 }
 
 .btn:hover {
-  background-color: #24FB7B;
+  background-color: #24fb7b;
 }
 .panels-container {
   position: absolute;
@@ -184,7 +184,12 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #24FB7B 80%, #24fb5a 100%, #06ff6a 75%);
+  background-image: linear-gradient(
+    -45deg,
+    #24fb7b 80%,
+    #24fb5a 100%,
+    #06ff6a 75%
+  );
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;

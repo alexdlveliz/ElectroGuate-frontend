@@ -1,0 +1,108 @@
+#nosotros {
+  height: auto;
+  .container {
+    height: auto;
+    padding: 15px;
+    .row {
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      .imgBox {
+        width: 600px;
+        height: 410px;
+        background: url(/assets/img/undraw_unboxing_pbmf.svg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .txtBox {
+        width: 600px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        h1 {
+          color: var(--colors);
+          font-size: 35px;
+          font-family: var(--fontt2);
+        }
+        p {
+          color: var(--fontcnosotros);
+          text-align: justify;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  #nosotros .container .row .imgBox {
+    width: 320px;
+    height: 280px;
+  }
+  #nosotros .container .row .txtBox {
+    width: 320px;
+    height: 280px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #nosotros .container .row .imgBox {
+    width: 250px;
+    height: 210px;
+  }
+  #nosotros .container .row .txtBox {
+    width: 270px;
+    height: 210px;
+  }
+  #nosotros .container .row .txtBox h1 {
+    font-size: 20px;
+  }
+  #nosotros .container .row .txtBox p {
+    font-size: 15px;
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 550px) {
+  #nosotros .container .row .imgBox {
+    width: 320px;
+    height: 210px;
+  }
+  #nosotros .container .row .txtBox {
+    width: 320px;
+    height: 210px;
+    margin-top: 7px;
+  }
+  #nosotros .container .row .txtBox h1 {
+    font-size: 25px;
+  }
+  #nosotros .container .row .txtBox p {
+    font-size: 18px;
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 460px) {
+  #nosotros .container .row .imgBox {
+    width: 280px;
+    height: 210px;
+  }
+  #nosotros .container .row .txtBox {
+    width: 280px;
+    height: 210px;
+  }
+  #nosotros .container .row .txtBox h1 {
+    margin-top: 5px;
+    font-size: 20px;
+  }
+  #nosotros .container .row .txtBox p {
+    font-size: 15px;
+    margin: 0;
+  }
+}

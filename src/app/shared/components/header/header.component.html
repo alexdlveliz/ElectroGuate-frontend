@@ -1,4 +1,43 @@
-<mat-toolbar color="primary">
+<section id="Logo" class="text-center">
+  <div class="container">
+    <div class="row">
+      <div class="logo-card">
+        <img src="/assets/img/logo3.jpg" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu" class="text-center">
+  <div class="container">
+    <div class="row">
+      <div class="item">
+        <a routerLink="/contact" routerLinkActive="active">Contacto</a>
+      </div>
+      <div class="item">
+        <a routerLink="/about-us" routerLinkActive="active">Nosotros</a>
+      </div>
+      <div class="item">
+        <a routerLink="/products" routerLinkActive="active">Productos</a>
+      </div>
+      <div class="item">
+        <a href="#"><img src="/assets/img/logo.jpg" alt=""></a>
+      </div>
+      <div class="item">
+        <a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null">Iniciar sesión</a>
+      </div>
+      <div class="item">
+        <a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null">Cerrar Sesión</a>
+      </div>
+      <div class="item">
+        <a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'">Administración</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--<mat-toolbar color="primary">
   <div class="flex-container" fxLayout="row" fxLayoutAlign="space-around center">
     <nav class="inside-nav" fxLayout="row" fxLayoutAlign="start center">
       <a routerLink="/home" routerLinkActive="active">Inicio</a>
@@ -12,4 +51,4 @@
       <a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'">Administración</a>
     </nav>
   </div>
-</mat-toolbar>
+</mat-toolbar>-->
