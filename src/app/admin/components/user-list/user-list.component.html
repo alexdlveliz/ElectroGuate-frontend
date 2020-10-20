@@ -1,0 +1,40 @@
+<table mat-table [dataSource]="users" class="mat-elevation-z8 users-table" >
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id. </th>
+    <td mat-cell *matCellDef="let user"> {{ user.id }} </td>
+  </ng-container>
+  <ng-container matColumnDef="str_name">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let user"> {{ user.str_name }} </td>
+  </ng-container>
+  <ng-container matColumnDef="str_surname">
+    <th mat-header-cell *matHeaderCellDef> Username. </th>
+    <td mat-cell *matCellDef="let user"> {{ user.str_surname }} </td>
+  </ng-container>
+  <ng-container matColumnDef="str_email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let user"> {{ user.str_email }} </td>
+  </ng-container>
+  <ng-container matColumnDef="str_phone_number">
+    <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+    <td mat-cell *matCellDef="let user"> {{ user.str_phone_number }} </td>
+  </ng-container>
+  <ng-container matColumnDef="str_role">
+    <th mat-header-cell *matHeaderCellDef> Rol </th>
+    <td mat-cell *matCellDef="let user" style="text-transform: capitalize;"> {{ user.str_role }} </td>
+  </ng-container>
+  <!-- <ng-container matColumnDef="is_staff">
+    <th mat-header-cell *matHeaderCellDef> Staff </th>
+    <td mat-cell *matCellDef="let user">{{ user.is_staff === 'false' ? 'Sí' : 'No' }}</td>
+  </ng-container> -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let user">
+      <button mat-raised-button [routerLink]="['edit', user.id]">Editar</button>
+      <button mat-raised-button>Detalles</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

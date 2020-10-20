@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ProductService } from './../../../core/services/product/product.service';
@@ -15,6 +15,7 @@ import { Brand } from './../../../core/models/brand.model';
 })
 export class ProductCreateComponent implements OnInit {
 
+  contadorForm = 0;
   form: FormGroup;
   categories: Category[] = [];
   brands: Brand[] = [];
@@ -29,35 +30,79 @@ export class ProductCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.addNewProduct();
     this.fetchAllCategories();
     this.fetchAllBrands();
   }
+  /**
+   * Método para crear el formulario, con todos los elementos input deseados.
+   */
 
   private buildForm(): void {
     this.form = this.formBuilder.group({
-      str_name: ['', Validators.required],
-      str_description: ['', Validators.required],
-      str_product_code: ['', Validators.required],
-      int_amount: ['', Validators.required],
-      int_price: ['', Validators.required],
-      brand: ['', [Validators.required]],
-      category: ['', [Validators.required]]
+      products: this.formBuilder.array([])
     });
   }
 
+  /**
+   * Método para obtener el estado actual del formulario
+   */
+  get products(): FormArray {
+    return this.form.get('products') as FormArray;
+  }
+
+  /**
+   * Método para agregar dinámicamente los nuevos inputs al formulario.
+   */
+  addNewProduct(): void {
+    const product = this.formBuilder.group({
+      str_name: new FormControl('', Validators.required),
+      str_description: new FormControl('', Validators.required),
+      str_product_code: new FormControl('', Validators.required),
+      int_amount: new FormControl('', Validators.required),
+      int_price: new FormControl('', Validators.required),
+      brand: new FormControl('', Validators.required),
+      category: new FormControl('', Validators.required)
+    });
+
+    this.contadorForm += 1;
+    this.products.push(product);
+  }
+
+  /**
+   * Método para eliminar dinámicamente los inputs del formulario.
+   */
+  deleteProduct(index: number): void {
+    this.products.removeAt(index);
+    this.contadorForm -= 1;
+  }
+
+  /**
+   * Método para tomar los datos que están en el formulario, trabajar con los datos,
+   * y por último llamar al servicio requerido e insertar los datos en la API.
+   */
   createProduct(event: Event): void {
     if (this.form.valid) {
       event.preventDefault();
-      const newProduct = Object.assign({}, this.form.value);
-      newProduct.brand = this.form.controls.brand.value.id;
-      newProduct.category = this.form.controls.category.value.id;
-      this.productService.createProduct(newProduct)
+      const products = Object.assign({}, this.form.value);
+      const newProducts = products.products;
+      for (const newProduct of newProducts) {
+        newProduct.brand = newProduct.brand.id;
+        newProduct.category = newProduct.category.id;
+        console.log(newProduct);
+      }
+      products.products = newProducts;
+      console.log(products);
+      this.productService.createProduct(products)
       .subscribe(() => {
         this.router.navigate(['admin/products']);
       });
     }
   }
 
+  /**
+   * Método para traer todas las categorías creadas
+   */
   fetchAllCategories(): void {
     this.categoryService.getAllCategories()
     .subscribe(categories => {
@@ -66,6 +111,9 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
+  /**
+   * Método para traer todas las marcas creadas
+   */
   fetchAllBrands(): void {
     this.brandService.getBrands()
     .subscribe(brands => {

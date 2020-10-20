@@ -36,26 +36,43 @@ export class ProductService {
    * Si todo sale bien, se retornará un Producto
    */
   getOneProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${environment.url_api}/products/products/${id}`)
+    return this.http.get<Product>(`${environment.url_api}/products/products/${id}/`)
     .pipe(
       retry(2),
       catchError(this.handleError),
-      map((response: any) => response.results as Product)
+      map((response: any) => response as Product)
     );
   }
 
+  /**
+   * Método para crear un producto
+   */
   createProduct(newProduct: Product): Observable<any> {
     return this.http.post(`${environment.url_api}/products/products/`, newProduct);
   }
+
+  /**
+   * Método para actualizar un producto, recibiendo dos parámetros:
+   *  El id del producto a actualizar, y
+   * los cambios en sí
+   */
 
   updateProduct(id: number, changes: Partial<Product>): Observable<any> {
     return this.http.put(`${environment.url_api}/products/products/${id}/`, changes);
   }
 
+  /**
+   * Método para eliminar un producto, recibiendo
+   * como parámetro únicamente el id del producto a borrar
+   */
   deleteProduct(id: number): Observable<any> {
     return this.http.delete(`${environment.url_api}/products/products/${id}/`);
   }
 
+  /**
+   * Método para manejar los diferentes errores que puedan existir
+   * en la petición
+   */
   private handleError(error: HttpErrorResponse): any {
     console.log(error);
     return throwError('ups, algo salió mal');
