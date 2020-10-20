@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@1,300&display=swap");
+#categorias {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  .container {
+    margin: 35px 0px;
+    min-width: 95%;
+    height: auto;
+    .row {
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      .cat {
+        height: 80px;
+        width: 200px;
+        position: relative;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, #24ff72, #2196f3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.35s all;
+        h4 {
+          padding: 10px 35px;
+          margin: 0;
+          color: black;
+          border: solid 3px white;
+          background-color: rgba(255, 255, 255, 0.7);
+          backdrop-filter: blur(10px);
+          font-family: "Source Sans Pro", sans-serif;
+          font-size: 22px;
+          font-weight: bolder;
+        }
+      }
+      .cat::before {
+        content: "";
+        position: absolute;
+        background: linear-gradient(135deg, #24ff72, #2196f3);
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        left: 0;
+        filter: blur(25px);
+        transform: translateY(19px) scale(0.9);
+      }
+      .cat:hover {
+        transform: scale(1.2);
+        box-shadow: 0 0 40px -10px rgba(42, 70, 91, 0.6);
+        background-color: rgba(36, 251, 123, 0.6);
+        color: white;
+        backdrop-filter: blur(10px);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  #categorias .container .row .cat {
+    height: 60px;
+    width: 200px;
+  }
+  #categorias .container .row .cat h4 {
+    padding: 5px 45px;
+    font-size: 17px;
+  }
+}
