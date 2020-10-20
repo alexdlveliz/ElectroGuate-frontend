@@ -1,5 +1,5 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center center">
-  <form [formGroup]="form" (ngSubmit)="createCategory($event)">
+  <form [formGroup]="form" (ngSubmit)="saveCategory($event)">
     <mat-card fxLayout="column">
       <mat-card-title>
         Nueva Categoría
@@ -15,8 +15,8 @@
         </mat-form-field>
         
         <mat-card-actions>
-          <button mat-raised-button type="submit" color="primary">Crear Categoría</button>
-          <button mat-raised-button color="warn">Cancelar</button>
+          <button mat-raised-button type="submit" color="primary">Guardar</button>
+          <button mat-raised-button type="button" color="warn">Cancelar</button>
         </mat-card-actions>
 
       </mat-card-content>

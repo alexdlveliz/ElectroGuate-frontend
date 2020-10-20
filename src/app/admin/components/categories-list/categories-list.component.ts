@@ -28,9 +28,11 @@ export class CategoriesListComponent implements OnInit {
   }
 
   deleteProduct(id: number): void {
-    this.categoryService.deleteCategory(id)
-    .subscribe(() => {
-      this.fetchAllCategories();
-    });
+    if (confirm('¿Estás seguro?')) {
+      this.categoryService.deleteCategory(id)
+      .subscribe(() => {
+        this.fetchAllCategories();
+      });
+    }
   }
 }

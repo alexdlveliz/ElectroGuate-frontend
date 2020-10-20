@@ -27,10 +27,11 @@ export class ProductsListComponent implements OnInit {
   }
 
   deleteProduct(id: number): void {
-    this.productService.deleteProduct(id)
-    .subscribe(() => {
-      this.fetchAllProducts();
-    });
+    if (confirm('¿Estás seguro?')) {
+      this.productService.deleteProduct(id)
+      .subscribe(() => {
+        this.fetchAllProducts();
+      });
+    }
   }
-
 }
