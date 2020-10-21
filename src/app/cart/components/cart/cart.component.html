@@ -1,58 +1,68 @@
-<div fxLayout="row" fxLayout.xs="column" class="cart-view">
-    <div class="cart" fxFlex="50">
-        <mat-card fxLayout="row" fxLayoutAlign="space-between center" *ngFor=" let product of products">
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                alt="Photo of a Shiba Inu">
-            <mat-card-header>
-                <h2>{{ product.name }}</h2>
-            </mat-card-header>
+<mat-horizontal-stepper>
+  <mat-step>
+    <ng-template matStepLabel>Revise su orden</ng-template>
+    <div class="cart" fxFlex="50" *ngIf="(products$ | async) as products">
+      <p *ngIf="products.length === 0">No hay productos en el carrito</p>
+      <mat-card fxLayout="row" fxLayoutAlign="space-between center" *ngFor=" let product of products">
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          alt="Photo of a Shiba Inu">
+        <mat-card-header>
+          <h2>{{ product.str_name }}</h2>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            {{ product.str_description }}
+          </p>
+        </mat-card-content>
+          <div fxLayout="column">
             <mat-card-content>
-                <p>
-                    {{ product.desc }}
-                </p>
+              <p>
+                Q.{{ product.int_price }}
+              </p>
             </mat-card-content>
-            <div fxLayout="column">
-                <mat-card-content>
-                    <p>
-                        Q.{{ product.price }}
-                    </p>
-                </mat-card-content>
-                <mat-card-actions>
-                    <button mat-button>
-                        <mat-icon aria-hidden="false">delete</mat-icon>
-                    </button>
-                </mat-card-actions>
-            </div>
-        </mat-card>
+            <mat-card-actions>
+              <button mat-button>
+                <mat-icon aria-hidden="false">delete</mat-icon>
+              </button>
+            </mat-card-actions>
+          </div>
+      </mat-card>
     </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Información de envío</ng-template>
     <div class="payment" fxFlex="50" fxLayout="column">
-        <h1>Formulario de pago</h1>
-        <form action="#">
+      <h1>Formulario de pago</h1>
+      <form action="#">
+        <mat-form-field appearance="outline">
+          <mat-label>Número de tarjeta</mat-label>
+          <input matInput placeholder="**** **** **** ****">
+          <mat-hint>Los 16 números del frente</mat-hint>
+        </mat-form-field>
+  
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div>
             <mat-form-field appearance="outline">
-                <mat-label>Número de tarjeta</mat-label>
-                <input matInput placeholder="**** **** **** ****">
-                <mat-hint>Los 16 números del frente</mat-hint>
+              <mat-label>Fecha de expiración</mat-label>
+              <input matInput placeholder="MM/AA">
+              <mat-hint>Ejemplo: 01/21</mat-hint>
             </mat-form-field>
-
-            <div fxLayout="row" fxLayoutAlign="space-between center">
-                <div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Fecha de expiración</mat-label>
-                        <input matInput placeholder="MM/AA">
-                        <mat-hint>Ejemplo: 01/21</mat-hint>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>CVV</mat-label>
-                        <input matInput placeholder="***">
-                        <mat-hint>Los 3 números del dorso</mat-hint>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <button mat-flat-button color="primary">Procesar Pago</button>
-                </div>
-            </div>
-        </form>
+          </div>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>CVV</mat-label>
+              <input matInput placeholder="***">
+              <mat-hint>Los 3 números del dorso</mat-hint>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-flat-button color="primary">Procesar Pago</button>
+          </div>
+        </div>
+      </form>
     </div>
-</div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Información de pago</ng-template>
+  </mat-step>
+</mat-horizontal-stepper>

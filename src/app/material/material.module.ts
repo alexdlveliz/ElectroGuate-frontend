@@ -14,6 +14,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [],
@@ -31,7 +32,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatSortModule,
     MatSelectModule,
     MatExpansionModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatStepperModule
   ],
   exports: [
     MatToolbarModule,
@@ -47,7 +49,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatSortModule,
     MatSelectModule,
     MatExpansionModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatStepperModule
   ]
 })
 export class MaterialModule { }

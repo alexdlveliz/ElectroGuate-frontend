@@ -32,7 +32,7 @@
       <div class="item">
         <a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'">Administración</a>
       </div>
-      <button [matBadge]="total$ | async" class="floating-btn">
+      <button routerLink="/cart" [matBadge]="total$ | async" class="floating-btn">
         <mat-icon>add_shopping_cart</mat-icon>
       </button>
     </div>
