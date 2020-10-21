@@ -21,7 +21,7 @@
         <a routerLink="/about-us" routerLinkActive="active">Nosotros</a>
       </div>
       <div class="item">
-        <a href="#"><img src="/assets/img/logo.jpg" alt=""></a>
+        <a routerLink="/"><img src="/assets/img/logo.jpg" alt=""></a>
       </div>
       <div class="item">
         <a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null">Iniciar sesión</a>
@@ -32,6 +32,9 @@
       <div class="item">
         <a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'">Administración</a>
       </div>
+      <button [matBadge]="total" class="floating-btn">
+        <mat-icon>add_shopping_cart</mat-icon>
+      </button>
     </div>
   </div>
 </section>

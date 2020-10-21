@@ -7,7 +7,7 @@
       <strong>Q. {{ product.int_price }}</strong>
     </mat-card-header>
     <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-      <button mat-raised-button color="accent">
+      <button mat-raised-button color="accent" (click)="addToCart()">
         <mat-icon>add_shopping_cart</mat-icon>
         Agregar al carrito
       </button>
