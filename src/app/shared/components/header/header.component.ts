@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { CartService } from './../../../core/services/cart/cart.service';
+import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,32 +13,42 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  total = 0;
+  total$: Observable<number>;
   constructor(
     private userService: UserService,
     private authService: AuthService,
     private cartService: CartService,
     private router: Router
   ) {
-    this.cartService.cart$.subscribe(products => {
-      console.log(products);
-      this.total = products.length;
-    });
+    this.total$ = this.cartService.cart$
+    .pipe(
+      map(products => products.length)
+    );
   }
 
   ngOnInit(): void {
-    // console.log(localStorage.getItem('usuario'));
   }
 
+  /**
+   * Método para cerrar sesión
+   */
   logOut(): void {
     this.userService.logOut();
     this.router.navigate(['/login']);
   }
 
+  /**
+   * Método para verificar si la persona ha iniciado sesión,
+   * llamando al servicio correspondiente
+   */
   userExists(): string {
     return this.authService.getLocalStorage();
   }
 
+  /**
+   * Método para conocer el rol de quien haya iniciado sesión,
+   * llamando al servicio correspondiente
+   */
   userRole(): string {
     return this.authService.getUserRole();
   }
