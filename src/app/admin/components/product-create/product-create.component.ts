@@ -19,6 +19,7 @@ export class ProductCreateComponent implements OnInit {
   form: FormGroup;
   categories: Category[] = [];
   brands: Brand[] = [];
+  cover: File;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +34,10 @@ export class ProductCreateComponent implements OnInit {
     this.addNewProduct();
     this.fetchAllCategories();
     this.fetchAllBrands();
+  }
+
+  OnImageChanged(event): void {
+    this.cover = event.target.files[0];
   }
   /**
    * Método para crear el formulario, con todos los elementos input deseados.
@@ -62,7 +67,8 @@ export class ProductCreateComponent implements OnInit {
       int_amount: new FormControl('', Validators.required),
       int_price: new FormControl('', Validators.required),
       brand: new FormControl('', Validators.required),
-      category: new FormControl('', Validators.required)
+      category: new FormControl('', Validators.required),
+      str_image_link: new FormControl(''),
     });
 
     this.contadorForm += 1;
@@ -93,10 +99,10 @@ export class ProductCreateComponent implements OnInit {
       }
       products.products = newProducts;
       console.log(products);
-      this.productService.createProduct(products)
-      .subscribe(() => {
-        this.router.navigate(['admin/products']);
-      });
+      // this.productService.createProduct(products)
+      // .subscribe(() => {
+      //   this.router.navigate(['admin/products']);
+      // });
     }
   }
 

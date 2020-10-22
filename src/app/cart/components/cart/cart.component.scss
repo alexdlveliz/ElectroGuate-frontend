@@ -5,32 +5,20 @@
 .cart {
   padding: 2%;
 
-  mat-card {
-    margin: 23px auto;
-    filter: drop-shadow(0 0 0.75rem black);
-    transition: 0.3s all;
-    border-radius: 0px;
+  .cart-table {
+    width: 90%;
+    
+    th, td {
+      text-align: center;
+    }
 
-    img {
+    td img {
       width: 35%;
-      margin: 0 1%;
+      margin: 16px auto;
     }
 
-    mat-card-header {
-      margin: 0px;
-    }
-
-    mat-card-content {
-      margin: 0px;
-    }
-
-    button {
-      width: auto;
-    }
-
-    &:hover {
-      box-shadow: none;
-      transform: scale(1.02);
+    .td-size {
+      width: 35%;
     }
   }
 }
