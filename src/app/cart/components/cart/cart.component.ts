@@ -20,4 +20,10 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteCart(product: Product): void {
+    if (confirm('¿Seguro que desea eliminarlo?')) {
+      this.cartService.deleteFromCart(product);
+    }
+  }
+
 }

@@ -18,4 +18,11 @@ export class CartService {
     this.products = [...this.products, product];
     this.cart.next(this.products);
   }
+
+  deleteFromCart(product: Product): void {
+    this.products = this.products.filter(productElement => {
+      return productElement !== product;
+    });
+    this.cart.next(this.products);
+  }
 }
