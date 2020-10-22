@@ -27,14 +27,14 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAllProducts();
-    this.fetchAllBrands();
-    this.fetchAllCategories();
   }
 
-  fetchAllProducts(): void {
-    this.productService.getAllProducts()
+  async fetchAllProducts(): Promise<void> {
+    await this.fetchAllBrands();
+    await this.fetchAllCategories();
+    await this.productService.getAllProducts()
     .subscribe(products => {
-      console.log(products);
+      this.products = products;
     });
   }
 

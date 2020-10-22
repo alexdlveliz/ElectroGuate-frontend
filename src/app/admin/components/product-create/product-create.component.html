@@ -40,6 +40,7 @@
               <mat-option *ngFor="let brand of brands" [value]="brand"> {{ brand.str_name }}</mat-option>
             </mat-select>
           </mat-form-field>
+          <input formControlName="str_image_link" type="file" (change)="OnImageChanged($event)">
           <mat-card-actions>
             <button mat-raised-button color="warn" (click)="deleteProduct(i)">Eliminar producto</button>
           </mat-card-actions>
