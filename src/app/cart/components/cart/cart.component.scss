@@ -13,7 +13,7 @@
     }
 
     td img {
-      width: 35%;
+      width: 70%;
       margin: 16px auto;
     }
 
@@ -30,5 +30,21 @@
     mat-form-field {
       width: 100%;
     }
+  }
+}
+
+// STEPPERS
+
+mat-vertical-stepper {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  mat-horizontal-stepper {
+    display: none;
+  }
+  
+  mat-vertical-stepper {
+    display: block;
   }
 }
