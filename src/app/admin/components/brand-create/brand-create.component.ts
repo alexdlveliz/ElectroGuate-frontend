@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { BrandService } from './../../../core/services/brand/brand.service';
-import { CategoryService } from './../../../core/services/category/category.service';
-import { Category } from './../../../core/models/category.model';
+import { BrandService } from '@core/services/brand/brand.service';
+import { CategoryService } from '@core/services/category/category.service';
+import { Category } from '@core/models/category.model';
 @Component({
   selector: 'app-brand-create',
   templateUrl: './brand-create.component.html',
