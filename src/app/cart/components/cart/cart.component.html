@@ -49,6 +49,40 @@
   <mat-step>
     <ng-template matStepLabel>Información de envío</ng-template>
     <!-- Información de envío -->
+    <div class="shipping" fxFlex="50" fxLayout="column">
+      <h1>Información de envío</h1>
+      <form action="#">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput>
+          <mat-hint>Nombre completo</mat-hint>
+        </mat-form-field>
+
+        <div fxLayout="row" fxLayoutAlign="space-between start">
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección 1</mat-label>
+              <input matInput>
+              <mat-hint>Dirección 1</mat-hint>
+            </mat-form-field>
+          </div>
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección 2</mat-label>
+              <input matInput>
+              <mat-hint>Dirección 2</mat-hint>
+            </mat-form-field>
+          </div>
+          <!-- div necesario para posicionar bien las dos direcciones-->
+          <div fxFlex="33"></div>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Código postal</mat-label>
+          <input matInput placeholder="****">
+        </mat-form-field>
+      </form>
+    </div>
     <div fxLayout="row" fxLayoutAlign="space-between">
       <button mat-fab matStepperPrevious color="primary">
         <mat-icon>
@@ -73,7 +107,7 @@
           <input matInput placeholder="**** **** **** ****">
           <mat-hint>Los 16 números del frente</mat-hint>
         </mat-form-field>
-  
+
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <div>
             <mat-form-field appearance="outline">
@@ -112,7 +146,6 @@
       <p *ngIf="products.length === 0">No hay productos en el carrito</p>
       <table *ngIf="products.length !== 0" mat-table [dataSource]="products" class="mat-elevation-z8 cart-table">
         <ng-container matColumnDef="image">
-        <!-- <ng-container> -->
           <th mat-header-cell *matHeaderCellDef>Producto</th>
           <td mat-cell *matCellDef="let product" class="td-size">
             <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
@@ -120,20 +153,12 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="str_name">
-        <!-- <ng-container> -->
-          <th mat-header-cell *matHeaderCellDef>Nombre</th>
-          <td mat-cell *matCellDef="let product" class="td-size"> {{ product.str_name }}</td>
-        </ng-container>
-
         <ng-container matColumnDef="int_price">
-          <!-- <ng-container> -->
           <th mat-header-cell *matHeaderCellDef>Precio</th>
           <td mat-cell *matCellDef="let product"> Q. {{ product.int_price }}</td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
-        <!-- <ng-container> -->
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell *matCellDef="let product">
             <button mat-button (click)="deleteCart(product)">
@@ -142,9 +167,8 @@
           </td>
         </ng-container>
 
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsV"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsV;"></tr>
       </table>
     </div>
     <div fxLayout="row" fxLayoutAlign="end">
@@ -159,6 +183,39 @@
   <mat-step>
     <ng-template matStepLabel>Información de envío</ng-template>
     <!-- Información de envío -->
+    <div class="shipping" fxFlex="fill" fxLayout="column">
+      <h1>Información de envío</h1>
+      <form action="#">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput>
+          <mat-hint>Nombre completo</mat-hint>
+        </mat-form-field>
+
+        <div fxLayout="column" fxLayoutAlign="start space-between">
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección 1</mat-label>
+              <input matInput>
+              <mat-hint>Dirección 1</mat-hint>
+            </mat-form-field>
+          </div>
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección 2</mat-label>
+              <input matInput>
+              <mat-hint>Dirección 2</mat-hint>
+            </mat-form-field>
+          </div>
+          <!-- div necesario para posicionar bien las dos direcciones-->
+          <div fxFlex="33"></div>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Código postal</mat-label>
+          <input matInput placeholder="****">
+        </mat-form-field>
+      </form>
+    </div>
     <div fxLayout="row" fxLayoutAlign="space-between">
       <button mat-fab matStepperPrevious color="primary">
         <mat-icon>
@@ -175,7 +232,7 @@
   <mat-step>
     <ng-template matStepLabel>Información de pago</ng-template>
     <!-- Formulario de pago -->
-    <div class="payment" fxFlex="50" fxLayout="column">
+    <div class="payment" fxFlex="fill" fxLayout="column">
       <h1>Formulario de pago</h1>
       <form action="#">
         <mat-form-field appearance="outline">
@@ -183,7 +240,7 @@
           <input matInput placeholder="**** **** **** ****">
           <mat-hint>Los 16 números del frente</mat-hint>
         </mat-form-field>
-  
+
         <div fxLayout="column" fxLayoutAlign="center space-between">
           <div>
             <mat-form-field appearance="outline">
