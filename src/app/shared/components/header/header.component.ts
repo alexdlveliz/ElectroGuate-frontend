@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/core/services/user/user.service';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { CartService } from './../../../core/services/cart/cart.service';
+import { UserService } from '@core/services/user/user.service';
+import { AuthService } from '@core/services/auth/auth.service';
+import { CartService } from '@core/services/cart/cart.service';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from './../../../core/services/product/product.service';
-import { BrandService } from './../../../core/services/brand/brand.service';
-import { CategoryService } from './../../../core/services/category/category.service';
+import { ProductService } from '@core/services/product/product.service';
+import { BrandService } from '@core/services/brand/brand.service';
+import { CategoryService } from '@core/services/category/category.service';
 
-import { Product } from './../../../core/models/product.model';
-import { Brand } from './../../../core/models/brand.model';
-import { Category } from './../../../core/models/category.model';
+import { Product } from '@core/models/product.model';
+import { Brand } from '@core/models/brand.model';
+import { Category } from '@core/models/category.model';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',

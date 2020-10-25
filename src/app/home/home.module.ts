@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { SharedModule } from './../shared/shared.module';
-import { MaterialModule } from "./../material/material.module";
+import { SharedModule } from '@shared/shared.module';
+import { MaterialModule } from '@material/material.module';
 import { BannerComponent } from './components/banner/banner.component';
 import { Wave1Component } from './components/wave1/wave1.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';

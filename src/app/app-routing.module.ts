@@ -3,8 +3,6 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { AdminGuard } from './admin.guard';
 
-const homeModuleRoute = () => import('./home/home.module').then(m => m.HomeModule);
-
 const routes: Routes = [
   {
     path: '',
@@ -17,7 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        loadChildren: homeModuleRoute
+        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
       },
       {
         path: 'contact',
@@ -48,7 +46,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    loadChildren: homeModuleRoute
+    loadChildren: () => import('./not-found/not-found.module').then(m => m.NotFoundModule)
   }
 ];
 
