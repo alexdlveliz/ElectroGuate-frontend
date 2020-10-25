@@ -8,9 +8,24 @@
 
 // PRODUCTS
 
+mat-horizontal-stepper {
+  .order {
+    width: 70%;
+    padding: 5px 0;
+  }
+}
+
+mat-vertical-stepper {
+  .order {
+    width: 100%;
+    padding: 5px 0;
+  }
+}
+
 .order {
-  width: 70%;
-  padding: 5px 0;
+  button {
+    margin: 5px 0;
+  }
 }
 
 // FORMS

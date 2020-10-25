@@ -4,6 +4,23 @@
     <!-- Tabla de productos -->
     <div class="cart" *ngIf="(items$ | async) as products" fxLayout="column" fxLayoutAlign="start center">
       <p *ngIf="products.size === 0">No hay productos en el carrito</p>
+      <div class="order"  fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div>
+          <h3>Nombre</h3>
+        </div>
+        <div>
+          <h3>Precio</h3>
+        </div>
+        <div>
+          <h3>Cantidad</h3>
+        </div>
+        <div>
+          <h3>Total</h3>
+        </div>
+        <div>
+          <h3>Acciones</h3>
+        </div>
+      </div>
       <div class="order" *ngFor="let product of products | keyvalue" fxLayout="row" fxLayoutAlign="space-evenly center">
         <div style="width: 70px; white-space: pre-wrap;">
           {{ product.key.str_name }}
@@ -17,11 +34,11 @@
         <div>
           {{ product.key.int_price * product.value | currency: 'Q' }}
         </div>
-        <div>
+        <div fxLayout="column">
           <button mat-raised-button (click)="addItem(product.key)">
             <mat-icon>add</mat-icon>
           </button>
-  
+
           <button mat-raised-button (click)="deleteItem(product.key)">
             <mat-icon>remove</mat-icon>
           </button>
@@ -135,22 +152,45 @@
     <!-- Tabla de productos -->
     <div class="cart" *ngIf="(items$ | async) as products" fxLayout="column" fxLayoutAlign="start center">
       <p *ngIf="products.size === 0">No hay productos en el carrito</p>
-      <div class="order" *ngFor="let product of products | keyvalue">
-        {{ product.key.str_name }}
-        
-        {{ product.key.int_price | currency: 'Q' }}
+      <div class="order"  fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div>
+          <h3>Nombre</h3>
+        </div>
+        <div>
+          <h3>Precio</h3>
+        </div>
+        <div>
+          <h3>Cantidad</h3>
+        </div>
+        <div>
+          <h3>Total</h3>
+        </div>
+        <div>
+          <h3>Acciones</h3>
+        </div>
+      </div>
+      <div class="order" *ngFor="let product of products | keyvalue" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div style="width: 70px; white-space: pre-wrap;">
+          {{ product.key.str_name }}
+        </div>
+        <div>
+          {{ product.key.int_price | currency: 'Q' }}
+        </div>
+        <div>
+          {{ product.value }}
+        </div>
+        <div>
+          {{ product.key.int_price * product.value | currency: 'Q' }}
+        </div>
+        <div fxLayout="column">
+          <button mat-raised-button (click)="addItem(product.key)">
+            <mat-icon>add</mat-icon>
+          </button>
 
-        {{ product.value }}
-
-        {{ product.key.int_price * product.value | currency: 'Q' }}
-
-        <button mat-raised-button (click)="addItem(product.key)">
-          <mat-icon>add</mat-icon>
-        </button>
-
-        <button mat-raised-button (click)="deleteItem(product.key)">
-          <mat-icon>remove</mat-icon>
-        </button>
+          <button mat-raised-button (click)="deleteItem(product.key)">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="end">
