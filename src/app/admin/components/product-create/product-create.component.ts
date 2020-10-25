@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { ProductService } from './../../../core/services/product/product.service';
-import { CategoryService } from './../../../core/services/category/category.service';
-import { BrandService } from './../../../core/services/brand/brand.service';
-import { Category } from './../../../core/models/category.model';
-import { Brand } from './../../../core/models/brand.model';
+import { ProductService } from '@core/services/product/product.service';
+import { CategoryService } from '@core/services/category/category.service';
+import { BrandService } from '@core/services/brand/brand.service';
+import { Category } from '@core/models/category.model';
+import { Brand } from '@core/models/brand.model';
 
 @Component({
   selector: 'app-product-create',

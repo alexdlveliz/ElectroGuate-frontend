@@ -6,6 +6,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CartRoutingModule,
     FormsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SharedModule
   ]
 })
 export class CartModule { }

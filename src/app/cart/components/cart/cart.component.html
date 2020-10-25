@@ -1,40 +1,25 @@
 <mat-horizontal-stepper>
   <mat-step>
     <ng-template matStepLabel>Revise su orden</ng-template>
-    <div class="cart" *ngIf="(products$ | async) as products" fxLayout="column" fxLayoutAlign="start center">
-      <p *ngIf="products.length === 0">No hay productos en el carrito</p>
-      <table *ngIf="products.length !== 0" mat-table [dataSource]="products" class="mat-elevation-z8 cart-table">
-        <ng-container matColumnDef="image">
-          <th mat-header-cell *matHeaderCellDef>Imagen</th>
-          <td mat-cell *matCellDef="let product" class="td-size">
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-              alt="Photo of a Shiba Inu">
-          </td>
-        </ng-container>
+    <div class="cart" *ngIf="(items$ | async) as products" fxLayout="column" fxLayoutAlign="start center">
+      <p *ngIf="products.size === 0">No hay productos en el carrito</p>
+      <div class="order" *ngFor="let product of products | keyvalue">
+        {{ product.key.str_name }}
+        
+        {{ product.key.int_price | currency: 'Q' }}
 
-        <ng-container matColumnDef="str_name">
-          <th mat-header-cell *matHeaderCellDef>Nombre</th>
-          <td mat-cell *matCellDef="let product" class="td-size"> {{ product.str_name }}</td>
-        </ng-container>
+        {{ product.value }}
 
-        <ng-container matColumnDef="int_price">
-          <th mat-header-cell *matHeaderCellDef>Precio</th>
-          <td mat-cell *matCellDef="let product"> Q. {{ product.int_price }}</td>
-        </ng-container>
+        {{ product.key.int_price * product.value | currency: 'Q' }}
 
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef>Acciones</th>
-          <td mat-cell *matCellDef="let product">
-            <button mat-button (click)="deleteCart(product)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
+        <button mat-raised-button (click)="addItem(product.key)">
+          <mat-icon>add</mat-icon>
+        </button>
 
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+        <button mat-raised-button (click)="deleteItem(product.key)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
     </div>
   </mat-step>
 
