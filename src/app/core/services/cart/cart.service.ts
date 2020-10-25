@@ -9,6 +9,7 @@ import { Product } from './../../models/product.model';
 export class CartService {
   private products: Product[] = [];
   private cart = new BehaviorSubject<Product[]>([]);
+  private element: number;
 
   cart$ = this.cart.asObservable();
 
@@ -19,12 +20,21 @@ export class CartService {
     this.cart.next(this.products);
   }
 
+  deleteItem(deleteProduct: Product): void {
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].id === deleteProduct.id) {
+        this.element = i;
+        break;
+      }
+    }
+    this.products.splice(this.element, 1);
+    this.cart.next(this.products);
+  }
+
   deleteFromCart(product: Product): void {
-    console.log(this.products);
     this.products = this.products.filter(productElement => {
       return productElement !== product;
     });
-    console.log(this.products);
     this.cart.next(this.products);
   }
 }

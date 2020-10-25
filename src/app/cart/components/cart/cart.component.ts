@@ -44,6 +44,7 @@ export class CartComponent implements OnInit {
   addItem(product: Product): void {
     const value = this.listItems.get(product);
     this.listItems.set(product, value + 1);
+    this.cartService.addCart(product);
     this.setItems();
   }
 
@@ -53,6 +54,8 @@ export class CartComponent implements OnInit {
     if (value - 1 === 0) {
       this.cartService.deleteFromCart(product);
       this.setItems();
+    } else {
+      this.cartService.deleteItem(product);
     }
   }
 
