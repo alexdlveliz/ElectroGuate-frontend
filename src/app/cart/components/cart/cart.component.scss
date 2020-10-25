@@ -4,23 +4,13 @@
 
 .cart {
   padding: 2%;
+}
 
-  .cart-table {
-    width: 90%;
-    
-    th, td {
-      text-align: center;
-    }
+// PRODUCTS
 
-    td img {
-      width: 70%;
-      margin: 16px auto;
-    }
-
-    .td-size {
-      width: 35%;
-    }
-  }
+.order {
+  width: 70%;
+  padding: 5px 0;
 }
 
 // FORMS
