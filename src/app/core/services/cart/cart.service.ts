@@ -20,9 +20,11 @@ export class CartService {
   }
 
   deleteFromCart(product: Product): void {
+    console.log(this.products);
     this.products = this.products.filter(productElement => {
       return productElement !== product;
     });
+    console.log(this.products);
     this.cart.next(this.products);
   }
 }

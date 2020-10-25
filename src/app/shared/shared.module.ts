@@ -6,15 +6,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from '@material/material.module';
+import { CountProductsPipe } from './pipes/count-products.pipe';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CountProductsPipe
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CountProductsPipe
   ],
   imports: [
     CommonModule,
