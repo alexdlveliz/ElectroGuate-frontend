@@ -4,44 +4,38 @@
     <!-- Tabla de productos -->
     <div class="cart" *ngIf="(items$ | async) as products" fxLayout="column" fxLayoutAlign="start center">
       <p *ngIf="products.size === 0">No hay productos en el carrito</p>
-      <div class="order"  fxLayout="row" fxLayoutAlign="space-evenly center">
-        <div>
-          <h3>Nombre</h3>
+      <div class="order" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div fxFlex="60">
+          <h2>Productos</h2>
         </div>
-        <div>
-          <h3>Precio</h3>
+        <div fxFlex="10">
+          <h2>Precio</h2>
         </div>
-        <div>
-          <h3>Cantidad</h3>
+        <div fxFlex="20">
+          <h2>Cantidad</h2>
         </div>
-        <div>
-          <h3>Total</h3>
-        </div>
-        <div>
-          <h3>Acciones</h3>
+        <div fxFlex="10">
+          <h2>Subtotal</h2>
         </div>
       </div>
       <div class="order" *ngFor="let product of products | keyvalue" fxLayout="row" fxLayoutAlign="space-evenly center">
-        <div style="width: 70px; white-space: pre-wrap;">
+        <div style="white-space: pre-wrap;" fxFlex="60">
           {{ product.key.str_name }}
         </div>
-        <div>
+        <div fxFlex="10">
           {{ product.key.int_price | currency: 'Q' }}
         </div>
-        <div>
-          {{ product.value }}
-        </div>
-        <div>
-          {{ product.key.int_price * product.value | currency: 'Q' }}
-        </div>
-        <div fxLayout="column">
-          <button mat-raised-button (click)="addItem(product.key)">
+        <div fxLayout="row" fxLayoutAlign=" center" fxFlex="20">
+          <button mat-button (click)="addItem(product.key)">
             <mat-icon>add</mat-icon>
           </button>
-
-          <button mat-raised-button (click)="deleteItem(product.key)">
+          <!-- {{ product.value }} -->
+          <button mat-button (click)="deleteItem(product.key)">
             <mat-icon>remove</mat-icon>
           </button>
+        </div>
+        <div fxFlex="10">
+          {{ product.key.int_price * product.value | currency: 'Q' }}
         </div>
       </div>
     </div>
@@ -152,44 +146,36 @@
     <!-- Tabla de productos -->
     <div class="cart" *ngIf="(items$ | async) as products" fxLayout="column" fxLayoutAlign="start center">
       <p *ngIf="products.size === 0">No hay productos en el carrito</p>
-      <div class="order"  fxLayout="row" fxLayoutAlign="space-evenly center">
-        <div>
-          <h3>Nombre</h3>
-        </div>
-        <div>
-          <h3>Precio</h3>
-        </div>
-        <div>
-          <h3>Cantidad</h3>
-        </div>
-        <div>
-          <h3>Total</h3>
-        </div>
-        <div>
-          <h3>Acciones</h3>
-        </div>
-      </div>
-      <div class="order" *ngFor="let product of products | keyvalue" fxLayout="row" fxLayoutAlign="space-evenly center">
-        <div style="width: 70px; white-space: pre-wrap;">
-          {{ product.key.str_name }}
-        </div>
-        <div>
-          {{ product.key.int_price | currency: 'Q' }}
-        </div>
-        <div>
-          {{ product.value }}
-        </div>
-        <div>
-          {{ product.key.int_price * product.value | currency: 'Q' }}
-        </div>
-        <div fxLayout="column">
-          <button mat-raised-button (click)="addItem(product.key)">
-            <mat-icon>add</mat-icon>
-          </button>
-
-          <button mat-raised-button (click)="deleteItem(product.key)">
-            <mat-icon>remove</mat-icon>
-          </button>
+      <div class="order" *ngFor="let product of products | keyvalue" fxLayout="row" fxLayoutAlign="center">
+        <div fxLayout="column" fxLayoutAlign="center">
+          <div>
+            <h3><strong>Productos</strong></h3>
+            <div style="white-space: pre-wrap;">
+              {{ product.key.str_name }}
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between start">
+            <div>
+              <h3><strong>Precio</strong></h3>
+              {{ product.key.int_price | currency: 'Q' }}
+            </div>
+            <div>
+              <h3><strong>Cantidad</strong></h3>
+              <div fxLayout="row" fxLayoutAlign=" center">
+                <button mat-button (click)="addItem(product.key)">
+                  <mat-icon>add</mat-icon>
+                </button>
+                {{ product.value }}
+                <button mat-button (click)="deleteItem(product.key)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div>
+              <h3><strong>Subtotal</strong></h3>
+              {{ product.key.int_price * product.value | currency: 'Q' }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
