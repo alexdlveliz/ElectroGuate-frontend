@@ -12,10 +12,8 @@ import { map } from 'rxjs/operators';
 export class CartComponent implements OnInit {
 
   displayedColumns: string[] = ['image', 'str_name', 'int_price', 'actions'];
-
   items$: Observable<Map<Product, number>>;
   listItems: Map<Product, number>;
-
   constructor(
     private cartService: CartService
   ) {

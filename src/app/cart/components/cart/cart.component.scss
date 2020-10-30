@@ -4,24 +4,31 @@
 
 .cart {
   padding: 2%;
+}
 
-  .cart-table {
-    width: 90%;
-    
-    th, td {
-      text-align: center;
-    }
+// PRODUCTS
 
-    td img {
-      width: 35%;
-      margin: 16px auto;
-    }
-
-    .td-size {
-      width: 35%;
-    }
+mat-horizontal-stepper {
+  .order {
+    width: 100%;
+    padding: 5px 0;
   }
 }
+
+mat-vertical-stepper {
+  .order {
+    width: 100%;
+    padding: 5px 0;
+  }
+}
+
+.order {
+  button {
+    margin: 1px 1px;
+  }
+}
+
+// FORMS
 
 .payment {
   padding: 1%;
@@ -30,5 +37,31 @@
     mat-form-field {
       width: 100%;
     }
+  }
+}
+
+.shipping {
+  padding: 1%;
+
+  form {
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}
+
+// STEPPERS
+
+mat-vertical-stepper {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  mat-horizontal-stepper {
+    display: none;
+  }
+  
+  mat-vertical-stepper {
+    display: block;
   }
 }
