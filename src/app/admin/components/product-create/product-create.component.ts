@@ -16,6 +16,7 @@ import { Brand } from '@core/models/brand.model';
 export class ProductCreateComponent implements OnInit {
 
   contadorForm = 0;
+  contadorImages = 0;
   form: FormGroup;
   categories: Category[] = [];
   brands: Brand[] = [];
@@ -38,6 +39,7 @@ export class ProductCreateComponent implements OnInit {
 
   OnImageChanged(event): void {
     this.cover = event.target.files[0];
+    console.log(this.cover);
   }
   /**
    * Método para crear el formulario, con todos los elementos input deseados.
@@ -68,7 +70,10 @@ export class ProductCreateComponent implements OnInit {
       int_price: new FormControl('', Validators.required),
       brand: new FormControl('', Validators.required),
       category: new FormControl('', Validators.required),
-      str_image_link: new FormControl(''),
+      image: new FormControl(''),
+      images: new FormArray([
+        new FormControl(''),
+      ])
     });
 
     this.contadorForm += 1;
@@ -95,14 +100,19 @@ export class ProductCreateComponent implements OnInit {
       for (const newProduct of newProducts) {
         newProduct.brand = newProduct.brand.id;
         newProduct.category = newProduct.category.id;
-        console.log(newProduct);
+        newProduct.images[this.contadorImages] = {
+          id: this.contadorImages,
+          str_image_link: this.cover
+        };
+        const key = 'image';
+        delete newProduct[key];
       }
       products.products = newProducts;
       console.log(products);
-      // this.productService.createProduct(products)
-      // .subscribe(() => {
-      //   this.router.navigate(['admin/products']);
-      // });
+      this.productService.createProduct(products)
+      .subscribe(() => {
+        this.router.navigate(['admin/products']);
+      });
     }
   }
 
