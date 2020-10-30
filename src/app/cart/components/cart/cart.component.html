@@ -1,30 +1,106 @@
 <mat-horizontal-stepper>
   <mat-step>
     <ng-template matStepLabel>Revise su orden</ng-template>
+    <!-- Tabla de productos -->
     <div class="cart" *ngIf="(items$ | async) as products" fxLayout="column" fxLayoutAlign="start center">
       <p *ngIf="products.size === 0">No hay productos en el carrito</p>
-      <div class="order" *ngFor="let product of products | keyvalue">
-        {{ product.key.str_name }}
-        
-        {{ product.key.int_price | currency: 'Q' }}
-
-        {{ product.value }}
-
-        {{ product.key.int_price * product.value | currency: 'Q' }}
-
-        <button mat-raised-button (click)="addItem(product.key)">
-          <mat-icon>add</mat-icon>
-        </button>
-
-        <button mat-raised-button (click)="deleteItem(product.key)">
-          <mat-icon>remove</mat-icon>
-        </button>
+      <div class="order" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div fxFlex="60">
+          <h2>Productos</h2>
+        </div>
+        <div fxFlex="10">
+          <h2>Precio</h2>
+        </div>
+        <div fxFlex="20">
+          <h2>Cantidad</h2>
+        </div>
+        <div fxFlex="10">
+          <h2>Subtotal</h2>
+        </div>
       </div>
+      <div class="order" *ngFor="let product of products | keyvalue" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div style="white-space: pre-wrap;" fxFlex="60">
+          {{ product.key.str_name }}
+        </div>
+        <div fxFlex="10">
+          {{ product.key.int_price | currency: 'Q' }}
+        </div>
+        <div fxLayout="row" fxLayoutAlign=" center" fxFlex="20">
+          <button mat-button (click)="addItem(product.key)">
+            <mat-icon>add</mat-icon>
+          </button>
+          {{ product.value }}
+          <button mat-button (click)="deleteItem(product.key)">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <div fxFlex="10">
+          {{ product.key.int_price * product.value | currency: 'Q' }}
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end">
+      <button mat-fab matStepperNext color="primary">
+        <mat-icon>
+          navigate_next
+        </mat-icon>
+      </button>
     </div>
   </mat-step>
 
   <mat-step>
     <ng-template matStepLabel>Información de envío</ng-template>
+    <!-- Información de envío -->
+    <div class="shipping" fxFlex="50" fxLayout="column">
+      <h1>Información de envío</h1>
+      <form action="#">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput>
+          <mat-hint>Nombre completo</mat-hint>
+        </mat-form-field>
+
+        <div fxLayout="row" fxLayoutAlign="space-between start">
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección 1</mat-label>
+              <input matInput>
+              <mat-hint>Dirección 1</mat-hint>
+            </mat-form-field>
+          </div>
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección 2</mat-label>
+              <input matInput>
+              <mat-hint>Dirección 2</mat-hint>
+            </mat-form-field>
+          </div>
+          <!-- div necesario para posicionar bien las dos direcciones-->
+          <div fxFlex="33"></div>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Código postal</mat-label>
+          <input matInput placeholder="****">
+        </mat-form-field>
+      </form>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <button mat-fab matStepperPrevious color="primary">
+        <mat-icon>
+          navigate_before
+        </mat-icon>
+      </button>
+      <button mat-fab matStepperNext color="primary">
+        <mat-icon>
+          navigate_next
+        </mat-icon>
+      </button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Información de pago</ng-template>
+    <!-- Formulario de pago -->
     <div class="payment" fxFlex="50" fxLayout="column">
       <h1>Formulario de pago</h1>
       <form action="#">
@@ -33,7 +109,7 @@
           <input matInput placeholder="**** **** **** ****">
           <mat-hint>Los 16 números del frente</mat-hint>
         </mat-form-field>
-  
+
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <div>
             <mat-form-field appearance="outline">
@@ -50,13 +126,156 @@
             </mat-form-field>
           </div>
           <div>
-            <button mat-flat-button color="primary">Procesar Pago</button>
+            <button mat-flat-button color="accent">Procesar Pago</button>
           </div>
         </div>
       </form>
     </div>
+    <div fxLayout="row" fxLayoutAlign="start">
+      <button mat-fab matStepperPrevious color="primary">
+        <mat-icon>
+          navigate_before
+        </mat-icon>
+      </button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+<mat-vertical-stepper>
+  <mat-step>
+    <ng-template matStepLabel>Revise su orden</ng-template>
+    <!-- Tabla de productos -->
+    <div class="cart" *ngIf="(items$ | async) as products" fxLayout="column" fxLayoutAlign="start center">
+      <p *ngIf="products.size === 0">No hay productos en el carrito</p>
+      <div class="order" *ngFor="let product of products | keyvalue" fxLayout="row" fxLayoutAlign="center">
+        <div fxLayout="column" fxLayoutAlign="center">
+          <div>
+            <h3><strong>Productos</strong></h3>
+            <div style="white-space: pre-wrap;">
+              {{ product.key.str_name }}
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between start">
+            <div>
+              <h3><strong>Precio</strong></h3>
+              {{ product.key.int_price | currency: 'Q' }}
+            </div>
+            <div>
+              <h3><strong>Cantidad</strong></h3>
+              <div fxLayout="row" fxLayoutAlign=" center">
+                <button mat-button (click)="addItem(product.key)">
+                  <mat-icon>add</mat-icon>
+                </button>
+                {{ product.value }}
+                <button mat-button (click)="deleteItem(product.key)">
+                  <mat-icon>remove</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div>
+              <h3><strong>Subtotal</strong></h3>
+              {{ product.key.int_price * product.value | currency: 'Q' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end">
+      <button mat-fab matStepperNext color="primary">
+        <mat-icon>
+          navigate_next
+        </mat-icon>
+      </button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Información de envío</ng-template>
+    <!-- Información de envío -->
+    <div class="shipping" fxFlex="fill" fxLayout="column">
+      <h1>Información de envío</h1>
+      <form action="#">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput>
+          <mat-hint>Nombre completo</mat-hint>
+        </mat-form-field>
+
+        <div fxLayout="column" fxLayoutAlign="start space-between">
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección 1</mat-label>
+              <input matInput>
+              <mat-hint>Dirección 1</mat-hint>
+            </mat-form-field>
+          </div>
+          <div fxFlex="33">
+            <mat-form-field appearance="outline">
+              <mat-label>Dirección 2</mat-label>
+              <input matInput>
+              <mat-hint>Dirección 2</mat-hint>
+            </mat-form-field>
+          </div>
+          <!-- div necesario para posicionar bien las dos direcciones-->
+          <div fxFlex="33"></div>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Código postal</mat-label>
+          <input matInput placeholder="****">
+        </mat-form-field>
+      </form>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <button mat-fab matStepperPrevious color="primary">
+        <mat-icon>
+          navigate_before
+        </mat-icon>
+      </button>
+      <button mat-fab matStepperNext color="primary">
+        <mat-icon>
+          navigate_next
+        </mat-icon>
+      </button>
+    </div>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Información de pago</ng-template>
+    <!-- Formulario de pago -->
+    <div class="payment" fxFlex="fill" fxLayout="column">
+      <h1>Formulario de pago</h1>
+      <form action="#">
+        <mat-form-field appearance="outline">
+          <mat-label>Número de tarjeta</mat-label>
+          <input matInput placeholder="**** **** **** ****">
+          <mat-hint>Los 16 números del frente</mat-hint>
+        </mat-form-field>
+
+        <div fxLayout="column" fxLayoutAlign="center space-between">
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha de expiración</mat-label>
+              <input matInput placeholder="MM/AA">
+              <mat-hint>Ejemplo: 01/21</mat-hint>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>CVV</mat-label>
+              <input matInput placeholder="***">
+              <mat-hint>Los 3 números del dorso</mat-hint>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-flat-button color="accent">Procesar Pago</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start">
+      <button mat-fab matStepperPrevious color="primary">
+        <mat-icon>
+          navigate_before
+        </mat-icon>
+      </button>
+    </div>
   </mat-step>
-</mat-horizontal-stepper>
+</mat-vertical-stepper>
