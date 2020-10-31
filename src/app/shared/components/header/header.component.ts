@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
+  isActive = false;
   total$: Observable<number>;
   constructor(
     private userService: UserService,
