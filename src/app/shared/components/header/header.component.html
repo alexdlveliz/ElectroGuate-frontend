@@ -7,51 +7,35 @@
     </div>
   </div>
 </section>
-
 <section id="menu" class="text-center">
-  <div class="container">
-    <div class="row">
-      <div class="item">
-        <a routerLink="/products" routerLinkActive="active">Productos</a>
+      <div class="menu_movil">
+        <div class="imgBox">
+          <img src="assets/img/logo.jpg" alt="">
+          <h2>ElectroGuate</h2>
+        </div>
+        <a class="btn-menu" (click)="isActive = !isActive"><i class="fas fa-bars"></i></a>
       </div>
-      <div class="item">
-        <a routerLink="/contact" routerLinkActive="active">Contacto</a>
-      </div>
-      <div class="item">
-        <a routerLink="/about-us" routerLinkActive="active">Nosotros</a>
-      </div>
-      <div class="item">
-        <a routerLink="/"><img src="/assets/img/logo.jpg" alt=""></a>
-      </div>
-      <div class="item">
-        <a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null">Iniciar sesión</a>
-      </div>
-      <div class="item">
-        <a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null">Cerrar Sesión</a>
-      </div>
-      <div class="item">
-        <a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'">Administración</a>
-      </div>
+      <nav [ngClass]="isActive ? 'active' : 'inactive'">
+        <ul>
+          <li><a routerLink="/products" routerLinkActive="active">Productos</a></li>
+          <li><a routerLink="/contact" routerLinkActive="active">Contacto</a></li>
+          <li><a routerLink="/about-us" routerLinkActive="active">Nosotros</a></li>
+          <a class="img-home" routerLink="/"><img src="/assets/img/logo.jpg" alt=""></a>
+          <li class="submenu">
+            <a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null">Iniciar sesión<i
+                class="fas fa-caret-down"></i></a>
+            <ul class="children">
+              <li><a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null">Cerrar
+                  Sesión</a></li>
+              <li><a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'">Administración</a></li>
+            </ul>
+          </li>
+          <li><a href="#">item #6</a></li>
+          <li><a href="#">item #6</a></li>
+        </ul>
+      </nav>
       <button routerLink="/cart" [matBadge]="total$ | async" class="floating-btn">
         <mat-icon>add_shopping_cart</mat-icon>
       </button>
-    </div>
-  </div>
 </section>
 
-
-<!--<mat-toolbar color="primary">
-  <div class="flex-container" fxLayout="row" fxLayoutAlign="space-around center">
-    <nav class="inside-nav" fxLayout="row" fxLayoutAlign="start center">
-      <a routerLink="/home" routerLinkActive="active">Inicio</a>
-      <a routerLink="/contact" routerLinkActive="active">Contacto</a>
-      <a routerLink="/about-us" routerLinkActive="active">Nosotros</a>
-      <a routerLink="/products" routerLinkActive="active">Productos</a>
-    </nav>
-    <nav class="inside-nav" fxLayout="row" fxLayoutAlign="end center">
-      <a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null">Iniciar sesión</a>
-      <a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null">Cerrar Sesión</a>
-      <a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'">Administración</a>
-    </nav>
-  </div>
-</mat-toolbar>-->
