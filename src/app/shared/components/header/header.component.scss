@@ -120,13 +120,13 @@
     line-height: 24px;
   }
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 870px) {
   #Logo {
     display: none;
   }
   #menu {
     .menu_movil {
-      max-width: 700px;
+      max-width: 870px;
       width: 100%;
       height: 80px;
       top: 114.8;
@@ -213,8 +213,6 @@
           font-size: 20px;
           border-bottom: solid 1px #24fb7b;
           text-align: left;
-          backgroun-color: red;
-
           img {
             padding: 0 0 5px 20px;
           }
