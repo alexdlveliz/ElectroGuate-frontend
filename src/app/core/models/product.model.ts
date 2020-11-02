@@ -1,3 +1,5 @@
+import { Image } from './image.model';
+
 export interface Product {
   id: number;
   str_name: string;
@@ -7,5 +9,5 @@ export interface Product {
   int_price: number;
   brand: number;
   category: number;
-  str_image_link: string;
+  images: Image[];
 }
