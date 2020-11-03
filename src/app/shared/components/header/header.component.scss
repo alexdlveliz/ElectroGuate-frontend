@@ -77,6 +77,12 @@
           z-index: 1000;
         }
       }
+      li:nth-child(1):hover {
+        background: rgba(0, 0, 0, 0);
+        a {
+          color: #24fb7b;
+        }
+      }
       li:hover {
         background: rgba(0, 0, 0, 0.5);
         a {
