@@ -21,6 +21,7 @@ export class ProductCreateComponent implements OnInit {
   categories: Category[] = [];
   brands: Brand[] = [];
   cover: File;
+  formData = new FormData();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -95,6 +96,8 @@ export class ProductCreateComponent implements OnInit {
   createProduct(event: Event): void {
     if (this.form.valid) {
       event.preventDefault();
+      const imageProduct = new FormData();
+      imageProduct.append('file', this.cover);
       const products = Object.assign({}, this.form.value);
       const newProducts = products.products;
       for (const newProduct of newProducts) {
@@ -102,7 +105,7 @@ export class ProductCreateComponent implements OnInit {
         newProduct.category = newProduct.category.id;
         newProduct.images[this.contadorImages] = {
           id: this.contadorImages,
-          str_image_link: this.cover
+          str_image_link: imageProduct
         };
         const key = 'image';
         delete newProduct[key];

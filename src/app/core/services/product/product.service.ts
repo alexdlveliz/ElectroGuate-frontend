@@ -48,7 +48,11 @@ export class ProductService {
    * Método para crear un producto
    */
   createProduct(newProduct: Product): Observable<any> {
-    return this.http.post(`${environment.url_api}/products/products/`, newProduct);
+    return this.http.post(`${environment.url_api}/products/products/`, newProduct, {
+      headers: {
+        'Content-Type': undefined
+      }
+    });
   }
 
   /**
