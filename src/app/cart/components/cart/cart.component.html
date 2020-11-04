@@ -4,7 +4,7 @@
     <!-- Tabla de productos -->
     <div class="cart" *ngIf="(items$ | async) as products" fxLayout="column" fxLayoutAlign="start center">
       <p *ngIf="products.size === 0">No hay productos en el carrito</p>
-      <div class="order" fxLayout="row" fxLayoutAlign="space-evenly center">
+      <div *ngIf="products.size !== 0" class="order" fxLayout="row" fxLayoutAlign="space-evenly center">
         <div fxFlex="60">
           <h2>Productos</h2>
         </div>
