@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Product } from '@core/models/product.model';
 import { CartService } from '@core/services/cart/cart.service';
@@ -14,13 +15,26 @@ export class CartComponent implements OnInit {
   displayedColumns: string[] = ['image', 'str_name', 'int_price', 'actions'];
   items$: Observable<Map<Product, number>>;
   listItems: Map<Product, number>;
+  form: FormGroup;
+
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private formBuilder: FormBuilder
   ) {
     this.setItems();
   }
 
   ngOnInit(): void {
+    this.buildForm();
+  }
+
+  private buildForm(): void {
+    this.form = this.formBuilder.group({
+      str_name: ['', [Validators.required]],
+      str_address_1: ['', [Validators.required]],
+      str_address_2: ['', [Validators.required]],
+      postal_code: ['', [Validators.required]]
+    });
   }
 
   setItems(): void {

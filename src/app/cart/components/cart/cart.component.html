@@ -53,10 +53,10 @@
     <!-- Información de envío -->
     <div class="shipping" fxFlex="50" fxLayout="column">
       <h1>Información de envío</h1>
-      <form action="#">
+      <form [formGroup]="form">
         <mat-form-field appearance="outline">
           <mat-label>Nombre</mat-label>
-          <input matInput>
+          <input matInput formControlName="str_name">
           <mat-hint>Nombre completo</mat-hint>
         </mat-form-field>
 
@@ -64,14 +64,14 @@
           <div fxFlex="33">
             <mat-form-field appearance="outline">
               <mat-label>Dirección 1</mat-label>
-              <input matInput>
+              <input matInput formControlName="str_address_1">
               <mat-hint>Dirección 1</mat-hint>
             </mat-form-field>
           </div>
           <div fxFlex="33">
             <mat-form-field appearance="outline">
               <mat-label>Dirección 2</mat-label>
-              <input matInput>
+              <input matInput formControlName="str_address_2">
               <mat-hint>Dirección 2</mat-hint>
             </mat-form-field>
           </div>
@@ -81,7 +81,7 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Código postal</mat-label>
-          <input matInput placeholder="****">
+          <input matInput placeholder="****" formControlName="postal_code">
         </mat-form-field>
       </form>
     </div>
