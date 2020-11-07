@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '@core/services/category/category.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Observable, Subscriber } from 'rxjs';
 @Component({
   selector: 'app-category-create',
   templateUrl: './category-create.component.html',
@@ -11,6 +12,7 @@ export class CategoryCreateComponent implements OnInit {
 
   form: FormGroup;
   id: number;
+  image: Observable<string>;
   constructor(
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
@@ -31,6 +33,30 @@ export class CategoryCreateComponent implements OnInit {
     });
   }
 
+  onChange(event: Event): void {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.convertToBase64(file);
+  }
+
+  convertToBase64(file: File): void {
+    this.image = new Observable<any>((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
+    });
+  }
+
+  readFile(file: File, subscriber: Subscriber<any>): void {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      subscriber.next(fileReader.result);
+      subscriber.complete();
+    };
+    fileReader.onerror = (error) => {
+      subscriber.error(error);
+      subscriber.complete();
+    };
+  }
+
   /**
    * Este método se encarga de llamar a dos diferentes métodos,
    * dependiendo de lo que se esté haciendo.
@@ -41,7 +67,6 @@ export class CategoryCreateComponent implements OnInit {
   saveCategory(event: Event): void {
     if (this.form.valid) {
       event.preventDefault();
-      console.log(this.form.value);
       /**
        * Condición para verificar si la categoría se está
        * creando o se está editando.
@@ -49,7 +74,12 @@ export class CategoryCreateComponent implements OnInit {
        * se está creando, de lo contrario, se está editando
        */
       if (this.id === undefined) {
-        this.categoryService.createCategory(this.form.value)
+        const newCategory = Object.assign({}, this.form.value);
+        this.image.subscribe(data => {
+          newCategory.str_image_path = data;
+        });
+        console.log(newCategory);
+        this.categoryService.createCategory(newCategory)
         .subscribe(() => {
           this.router.navigate(['/admin/categories']);
         });
