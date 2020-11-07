@@ -1,37 +1,44 @@
 <section id="catalogo">
-  <div id="sidebar">
-    <mat-form-field fxFlex.md="50">
-      <mat-label>Buscar productos</mat-label>
-      <input matInput type="text" [(ngModel)]="value">
-      <button mat-button *ngIf="value" matSuffix mat-icon-button (click)="value=''">
-        <mat-icon>close</mat-icon>
-      </button>
-      <button mat-button mat-icon-button matSuffix>
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-form-field>
-    <div id="filtros">
-      <h3><strong>Filtros por marca</strong></h3>
-      <mat-selection-list>
-        <mat-list-option *ngFor="let brand of brands">
-        {{ brand.str_name }}
-        </mat-list-option>
-      </mat-selection-list>
+  <nav id="menu">
+    <mat-accordion>
+      <!-- Menú para las marcas -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>Filtros por marca</strong>
+          </mat-panel-title>
+          <mat-panel-description>
+            Descubre nuestras marcas!
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-selection-list>
+          <mat-list-option *ngFor="let brand of brands">
+            {{ brand.str_name }}
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-expansion-panel>
 
-      <h3><strong>Filtros por categoría</strong></h3>
-      <mat-selection-list>
-        <mat-list-option *ngFor="let category of categories">
+      <!-- Menú para las categorías -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>Filtros por categoría</strong>
+          </mat-panel-title>
+          <mat-panel-description>
+            Descubre nuestras variedades!
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-selection-list>
+          <mat-list-option *ngFor="let category of categories">
             {{ category.str_name }}
-        </mat-list-option>
-      </mat-selection-list>
-    </div>
-  </div>
-
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </nav>
   <main id="productos" fxLayoutAlign="center start">
-    <app-product 
-      *ngFor="let product of products"
-      [product]="product"
-    >
+    <!-- <app-product *ngFor="let product of products" [product]="product"> -->
+    <app-product *ngFor="let product of products" [product]="product">
     </app-product>
   </main>
 </section>

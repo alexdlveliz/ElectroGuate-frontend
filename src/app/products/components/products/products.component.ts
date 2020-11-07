@@ -16,64 +16,7 @@ export class ProductsComponent implements OnInit {
   value = '';
   brands: Brand[] = [];
   categories: Category[] = [];
-  products: Product[] = [
-    {
-      id: 1,
-      str_name: "algo",
-      str_description: "descripción",
-      str_product_code: "a2",
-      int_amount: 1,
-      int_price: 20,
-      brand: 1,
-      category: 1,
-      str_image_link: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    }
-    ,
-    {
-      id: 1,
-      str_name: "algo",
-      str_description: "descripción",
-      str_product_code: "a2",
-      int_amount: 1,
-      int_price: 20,
-      brand: 1,
-      category: 1,
-      str_image_link: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    },
-    {
-      id: 1,
-      str_name: "algo",
-      str_description: "descripción",
-      str_product_code: "a2",
-      int_amount: 1,
-      int_price: 20,
-      brand: 1,
-      category: 1,
-      str_image_link: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    },
-    {
-      id: 1,
-      str_name: "algo",
-      str_description: "descripción",
-      str_product_code: "a2",
-      int_amount: 1,
-      int_price: 20,
-      brand: 1,
-      category: 1,
-      str_image_link: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    },
-    {
-      id: 1,
-      str_name: "algo",
-      str_description: "descripción",
-      str_product_code: "a2",
-      int_amount: 1,
-      int_price: 20,
-      brand: 1,
-      category: 1,
-      str_image_link: "https://material.angular.io/assets/img/examples/shiba2.jpg"
-    }
-  ];
+  products: Product[] = [];
 
   constructor(
     private productService: ProductService,
