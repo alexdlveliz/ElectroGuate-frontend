@@ -26,7 +26,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchAllProducts();
+    // this.fetchAllProducts();
   }
 
   async fetchAllProducts(): Promise<void> {
