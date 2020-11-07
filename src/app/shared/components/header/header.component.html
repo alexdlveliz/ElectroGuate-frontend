@@ -17,21 +17,14 @@
       </div>
       <nav [ngClass]="isActive ? 'active' : 'inactive'">
         <ul>
+          <li><a href=""></a></li>
           <li><a routerLink="/products" routerLinkActive="active">Productos</a></li>
           <li><a routerLink="/contact" routerLinkActive="active">Contacto</a></li>
-          <li><a routerLink="/about-us" routerLinkActive="active">Nosotros</a></li>
           <a class="img-home" routerLink="/"><img src="/assets/img/logo.jpg" alt=""></a>
-          <li class="submenu">
-            <a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null">Iniciar sesión<i
-                class="fas fa-caret-down"></i></a>
-            <ul class="children">
-              <li><a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null">Cerrar
-                  Sesión</a></li>
-              <li><a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'">Administración</a></li>
-            </ul>
-          </li>
-          <li><a href="#">item #6</a></li>
-          <li><a href="#">item #6</a></li>
+          <li><a routerLink="/about-us" routerLinkActive="active">Nosotros</a></li>
+          <li><a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null">Iniciar sesión</a></li>
+          <li><a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null">Cerrar Sesión</a></li>
+          <li><a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'">Administración</a></li>
         </ul>
       </nav>
       <button routerLink="/cart" [matBadge]="total$ | async" class="floating-btn">
