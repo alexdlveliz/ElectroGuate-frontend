@@ -27,7 +27,9 @@ import { CoreModule } from '@core/core.module';
     HttpClientModule,
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    interceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

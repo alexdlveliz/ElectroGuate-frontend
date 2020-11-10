@@ -13,7 +13,7 @@
           <mat-label>Descripción</mat-label>
           <textarea formControlName="str_description" matInput></textarea>
         </mat-form-field>
-        <input type="file" (change)="onChange($event)">
+        <input type="file" (change)="onChange($event)" formArrayName="url_image" accept="image/jpg,image/jpeg,image/png">
         <mat-card-actions>
           <button mat-raised-button type="submit" color="primary">Guardar</button>
           <button mat-raised-button type="button" color="warn">Cancelar</button>

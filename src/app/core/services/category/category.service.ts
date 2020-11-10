@@ -53,6 +53,8 @@ export class CategoryService {
    * Recibe un único parámetro, la categoría como tal a crear.
    */
   createCategory(newCategory: Category): Observable<any> {
+    console.log('*****************************');
+    console.log(newCategory);
     return this.http.post(`${environment.url_api}/products/category/`, newCategory);
   }
 

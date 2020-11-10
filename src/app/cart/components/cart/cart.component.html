@@ -51,37 +51,55 @@
   <mat-step>
     <ng-template matStepLabel>Información de envío</ng-template>
     <!-- Información de envío -->
-    <div class="shipping" fxFlex="50" fxLayout="column">
+    <div class="shipping" fxLayout="column" fxLayoutAlign="start center">
       <h1>Información de envío</h1>
       <form [formGroup]="form">
         <mat-form-field appearance="outline">
           <mat-label>Nombre</mat-label>
           <input matInput formControlName="str_name">
-          <mat-hint>Nombre completo</mat-hint>
+          <mat-error *ngIf="strName.touched && strName.hasError('required')" >Este campo es requerido</mat-error>
         </mat-form-field>
 
-        <div fxLayout="row" fxLayoutAlign="space-between start">
-          <div fxFlex="33">
-            <mat-form-field appearance="outline">
-              <mat-label>Dirección 1</mat-label>
-              <input matInput formControlName="str_address_1">
-              <mat-hint>Dirección 1</mat-hint>
-            </mat-form-field>
-          </div>
-          <div fxFlex="33">
-            <mat-form-field appearance="outline">
-              <mat-label>Dirección 2</mat-label>
-              <input matInput formControlName="str_address_2">
-              <mat-hint>Dirección 2</mat-hint>
-            </mat-form-field>
-          </div>
-          <!-- div necesario para posicionar bien las dos direcciones-->
-          <div fxFlex="33"></div>
-        </div>
+        <mat-form-field appearance="fill">
+          <mat-label>Departamento</mat-label>
+          <mat-select formControlName="department">
+            <mat-option>Seleccione una opción</mat-option>
+            <mat-option *ngFor="let department of departmentsMap | keyvalue" [value]="department.value">
+              {{ department.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="department.touched && department.hasError('required')" >Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Dirección 1</mat-label>
+          <input matInput formControlName="str_address_1">
+          <mat-error *ngIf="strAddress1.touched && strAddress1.hasError('required')" >Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Dirección 2</mat-label>
+          <input matInput formControlName="str_address_2">
+          <mat-error *ngIf="strAddress2.touched && strAddress2.hasError('required')" >Este campo es requerido</mat-error>
+        </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Código postal</mat-label>
           <input matInput placeholder="****" formControlName="postal_code">
+          <mat-error *ngIf="postalCode.touched && postalCode.hasError('required')" >Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Número de teléfono</mat-label>
+          <input matInput formControlName="phone_number">
+          <mat-error *ngIf="phoneNumber.touched && phoneNumber.hasError('required')" >Este campo es requerido</mat-error>
+        </mat-form-field>
+
+        <h4>Instrucciones de entrega</h4>
+        <mat-form-field>
+          <mat-label>Detalles de la entrega</mat-label>
+          <textarea matInput formControlName="str_description" placeholder="Proporcione detalles del edificio, casa, colonia, o un punto de referencia"></textarea>
+          <mat-error *ngIf="strDescription.touched && strDescription.hasError('required')" >Este campo es requerido</mat-error>
         </mat-form-field>
       </form>
     </div>

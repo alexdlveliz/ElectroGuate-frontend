@@ -29,7 +29,7 @@ export class CategoryCreateComponent implements OnInit {
     this.form = this.formBuilder.group({
       str_name: ['', [Validators.required]],
       str_description: ['', Validators.required],
-      str_image_path: ['']
+      url_image: ['']
     });
   }
 
@@ -39,8 +39,11 @@ export class CategoryCreateComponent implements OnInit {
   }
 
   convertToBase64(file: File): void {
-    this.image = new Observable<any>((subscriber: Subscriber<any>) => {
+    const observable = new Observable<any>((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
+    });
+    observable.subscribe((data) => {
+      this.image = data;
     });
   }
 
@@ -75,10 +78,7 @@ export class CategoryCreateComponent implements OnInit {
        */
       if (this.id === undefined) {
         const newCategory = Object.assign({}, this.form.value);
-        this.image.subscribe(data => {
-          newCategory.str_image_path = data;
-        });
-        console.log(newCategory);
+        newCategory.url_image = this.image;
         this.categoryService.createCategory(newCategory)
         .subscribe(() => {
           this.router.navigate(['/admin/categories']);
