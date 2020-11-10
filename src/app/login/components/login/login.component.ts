@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '@core/services/user/user.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -101,9 +101,40 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**
+   * getters para el formulario de la creación de usuarios
+   */
+  get strName(): AbstractControl {
+    return this.formSignin.get('str_name');
+  }
+
+  get strSurname(): AbstractControl {
+    return this.formSignin.get('str_surname');
+  }
+
+  get strEmail(): AbstractControl {
+    return this.formSignin.get('str_email');
+  }
+  get strPhoneNumer(): AbstractControl {
+    return this.formSignin.get('str_phone_number');
+  }
+  get password(): AbstractControl {
+    return this.formSignin.get('password');
+  }
+
+  get passwordConfirmation(): AbstractControl {
+    return this.formSignin.get('password_confirmation');
+  }
+
   /*
     Funciones para las notificaciones, una de error y una de éxito
   */
+  get username(): AbstractControl {
+    return this.formLogin.get('username');
+  }
+  get passwordLogin(): AbstractControl {
+    return this.formLogin.get('password');
+  }
 
   private notificationErrorToast(message: string, title: string): void {
     this.toastr.error(message, title, {

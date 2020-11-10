@@ -7,9 +7,11 @@
           <mat-label>Nombre</mat-label>
           <input type="text" matInput formControlName="str_name">
         </mat-form-field>
+        <mat-error *ngIf="strName.touched && strName.hasError('required')">Este campo es obligatorio</mat-error>
         <mat-form-field>
           <mat-label>Descripción</mat-label>
           <textarea formControlName="str_description" matInput></textarea>
+          <mat-error *ngIf="strDescription.touched && strDescription.hasError('required')">Este campo es obligatorio</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Categoría</mat-label>
@@ -17,7 +19,9 @@
             <mat-option>Seleccione una opción</mat-option>
             <mat-option *ngFor="let category of categories" [value]="category">{{ category.str_name }}</mat-option>
           </mat-select>
+          <mat-error *ngIf="category.touched && category.hasError('required')">Este campo es obligatorio</mat-error>
         </mat-form-field>
+        <input type="file" (change)="onChange($event)" formControlName="url_image" accept="image/jpg, image/jpeg, image/png">
         <mat-card-actions>
           <button mat-raised-button type="submit" color="primary">Crear Marca</button>
           <button mat-raised-button color="warn">Cancelar</button>

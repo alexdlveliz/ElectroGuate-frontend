@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { BrandService } from '@core/services/brand/brand.service';
 import { CategoryService } from '@core/services/category/category.service';
 import { Category } from '@core/models/category.model';
+import { Observable, Subscriber } from 'rxjs';
 @Component({
   selector: 'app-brand-create',
   templateUrl: './brand-create.component.html',
@@ -15,6 +16,7 @@ export class BrandCreateComponent implements OnInit {
   form: FormGroup;
   categories: Category[] = [];
   id: number;
+  image: Observable<string>;
 
   constructor(
     private brandService: BrandService,
@@ -37,8 +39,36 @@ export class BrandCreateComponent implements OnInit {
     this.form = this.formBuilder.group({
       str_name: ['', Validators.required],
       str_description: ['', Validators.required],
-      category: ['', Validators.required]
+      category: ['', Validators.required],
+      url_image: ['', [Validators.required]]
     });
+  }
+
+  onChange(event: Event): void {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.convertToBase64(file);
+  }
+
+  convertToBase64(file: File): void {
+    const observable = new Observable<any>((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
+    });
+    observable.subscribe((data) => {
+      this.image = data;
+    });
+  }
+
+  readFile(file: File, subscriber: Subscriber<any>): void {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      subscriber.next(fileReader.result);
+      subscriber.complete();
+    };
+    fileReader.onerror = (error) => {
+      subscriber.error(error);
+      subscriber.complete();
+    };
   }
 
   /**
@@ -64,6 +94,7 @@ export class BrandCreateComponent implements OnInit {
       if (this.id === undefined) {
         const copia = Object.assign({}, this.form.value);
         copia.category = this.form.controls.category.value.id;
+        copia.url_image = this.image;
         this.brandService.createBrand(copia)
         .subscribe(() => {
           this.router.navigate(['/admin/brands']);
@@ -101,5 +132,24 @@ export class BrandCreateComponent implements OnInit {
         });
       }
     });
+  }
+
+  /**
+   * getters para los valores del formulario
+   */
+  get strName(): AbstractControl {
+    return this.form.get('str_name');
+  }
+
+  get strDescription(): AbstractControl {
+    return this.form.get('str_description');
+  }
+
+  get category(): AbstractControl {
+    return this.form.get('category');
+  }
+
+  get urlImage(): AbstractControl {
+    return this.form.get('url_image');
   }
 }

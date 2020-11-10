@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '@core/services/category/category.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Observable, Subscriber } from 'rxjs';
 @Component({
   selector: 'app-category-create',
   templateUrl: './category-create.component.html',
@@ -11,6 +12,7 @@ export class CategoryCreateComponent implements OnInit {
 
   form: FormGroup;
   id: number;
+  image: Observable<string>;
   constructor(
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
@@ -27,8 +29,35 @@ export class CategoryCreateComponent implements OnInit {
     this.form = this.formBuilder.group({
       str_name: ['', [Validators.required]],
       str_description: ['', Validators.required],
-      str_image_path: ['']
+      url_image: ['']
     });
+  }
+
+  onChange(event: Event): void {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.convertToBase64(file);
+  }
+
+  convertToBase64(file: File): void {
+    const observable = new Observable<any>((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
+    });
+    observable.subscribe((data) => {
+      this.image = data;
+    });
+  }
+
+  readFile(file: File, subscriber: Subscriber<any>): void {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      subscriber.next(fileReader.result);
+      subscriber.complete();
+    };
+    fileReader.onerror = (error) => {
+      subscriber.error(error);
+      subscriber.complete();
+    };
   }
 
   /**
@@ -41,7 +70,6 @@ export class CategoryCreateComponent implements OnInit {
   saveCategory(event: Event): void {
     if (this.form.valid) {
       event.preventDefault();
-      console.log(this.form.value);
       /**
        * Condición para verificar si la categoría se está
        * creando o se está editando.
@@ -49,7 +77,9 @@ export class CategoryCreateComponent implements OnInit {
        * se está creando, de lo contrario, se está editando
        */
       if (this.id === undefined) {
-        this.categoryService.createCategory(this.form.value)
+        const newCategory = Object.assign({}, this.form.value);
+        newCategory.url_image = this.image;
+        this.categoryService.createCategory(newCategory)
         .subscribe(() => {
           this.router.navigate(['/admin/categories']);
         });

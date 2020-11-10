@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Category } from './../../models/category.model';
-import { environment } from './../../../../environments/environment.prod';
+import { environment } from './../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { map, retry } from 'rxjs/operators';
 
@@ -53,6 +53,8 @@ export class CategoryService {
    * Recibe un único parámetro, la categoría como tal a crear.
    */
   createCategory(newCategory: Category): Observable<any> {
+    console.log('*****************************');
+    console.log(newCategory);
     return this.http.post(`${environment.url_api}/products/category/`, newCategory);
   }
 

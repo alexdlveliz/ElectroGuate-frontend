@@ -42,10 +42,13 @@ mat-vertical-stepper {
 
 .shipping {
   padding: 1%;
-
+  
   form {
     mat-form-field {
       width: 100%;
+    }
+    textarea {
+      resize: none;
     }
   }
 }

@@ -7,6 +7,7 @@ import { CategoryService } from '@core/services/category/category.service';
 import { BrandService } from '@core/services/brand/brand.service';
 import { Category } from '@core/models/category.model';
 import { Brand } from '@core/models/brand.model';
+import { Observable, Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-product-create',
@@ -20,7 +21,8 @@ export class ProductCreateComponent implements OnInit {
   form: FormGroup;
   categories: Category[] = [];
   brands: Brand[] = [];
-  cover: File;
+  image: Observable<string>;
+  imageProduct: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,8 +40,30 @@ export class ProductCreateComponent implements OnInit {
   }
 
   OnImageChanged(event): void {
-    this.cover = event.target.files[0];
-    console.log(this.cover);
+    const file = (event.target as HTMLInputElement).files[0];
+    this.convertToBase64(file);
+  }
+
+  convertToBase64(file: File): void {
+    const observable = new Observable<any>((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
+    });
+    observable.subscribe((data) => {
+      this.image = data;
+    });
+  }
+
+  readFile(file: File, subscriber: Subscriber<any>): void {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      subscriber.next(fileReader.result);
+      subscriber.complete();
+    };
+    fileReader.onerror = (error) => {
+      subscriber.error(error);
+      subscriber.complete();
+    };
   }
   /**
    * Método para crear el formulario, con todos los elementos input deseados.
@@ -100,10 +124,11 @@ export class ProductCreateComponent implements OnInit {
       for (const newProduct of newProducts) {
         newProduct.brand = newProduct.brand.id;
         newProduct.category = newProduct.category.id;
-        newProduct.images[this.contadorImages] = {
-          id: this.contadorImages,
-          str_image_link: this.cover
-        };
+        newProduct.images = [
+          {
+            url_image: this.image
+          }
+        ];
         const key = 'image';
         delete newProduct[key];
       }
