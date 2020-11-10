@@ -1,0 +1,28 @@
+<mat-card fxLayout="column">
+  <div class="main" fxLayout="row" fxLayoutAlign="center center" *ngIf="product">
+    <img mat-card-image [src]="product.images[0].url_image" fxFlex="60">
+    <div class="main-content" fxFlex="40" fxLayout="column" fxLayoutAlign="start center">
+      <mat-card-header>
+        <mat-card-title> {{ product.str_name | uppercase }} </mat-card-title>
+        <mat-card-subtitle> Precio: {{ product.int_price | currency: 'Q. ' }} </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <span> Existencia: {{ product.int_amount }}</span>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent" (click)="addToCart()">
+          <mat-icon>add_shopping_cart</mat-icon>
+          Agregar al carrito
+        </button>
+      </mat-card-actions>
+    </div>
+  </div>
+  <div class="secondary" fxLayout="row" fxLayoutAlign="start start" *ngIf="product">
+    <mat-divider></mat-divider>
+    <div class="secondary-content" fxFlex="40">
+      <h3>Descripción</h3>
+      <span> {{ product.str_description }} </span>
+    </div>
+    <img mat-card-image [src]="product.images[0].url_image" fxFlex="60">
+  </div>
+</mat-card>
