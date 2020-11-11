@@ -6,6 +6,7 @@
   #productos {
     display: flex;
     width: 100%;
+    height: calc(100% + 80px);
     flex-wrap: wrap;
   }
 }
@@ -13,5 +14,6 @@
 @media screen and (max-width: 870px) {
   #catalogo {
     transform: translateY(80px);
+    padding-bottom: 80px;
   }
 }
