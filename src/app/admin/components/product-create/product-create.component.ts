@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, Subscriber } from 'rxjs';
 
 import { ProductService } from '@core/services/product/product.service';
 import { CategoryService } from '@core/services/category/category.service';
 import { BrandService } from '@core/services/brand/brand.service';
 import { Category } from '@core/models/category.model';
 import { Brand } from '@core/models/brand.model';
-import { Observable, Subscriber } from 'rxjs';
+import { Image } from '@core/models/image.model';
 
 @Component({
   selector: 'app-product-create',
@@ -21,7 +22,7 @@ export class ProductCreateComponent implements OnInit {
   form: FormGroup;
   categories: Category[] = [];
   brands: Brand[] = [];
-  image: Observable<string>;
+  image: Image[] = [];
   imageProduct: string;
 
   constructor(
@@ -79,6 +80,7 @@ export class ProductCreateComponent implements OnInit {
   /**
    * Método para obtener el estado actual del formulario
    */
+  // -> employees(): FormArray
   products(): FormArray {
     return this.form.get('products') as FormArray;
   }
@@ -86,6 +88,7 @@ export class ProductCreateComponent implements OnInit {
   /**
    * Método para agregar dinámicamente los nuevos inputs al formulario.
    */
+  // -> newEmployee(): FormGroup
   newProduct(): FormGroup {
     this.contadorForm += 1;
     return this.formBuilder.group({
@@ -101,6 +104,7 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
+  // -> addEmployee()
   addNewProduct(): void {
     this.products().push(this.newProduct());
   }
@@ -108,9 +112,32 @@ export class ProductCreateComponent implements OnInit {
   /**
    * Método para eliminar dinámicamente los inputs del formulario.
    */
+  // -> removeEmployee(empIndex: number)
   deleteProduct(index: number): void {
     this.products().removeAt(index);
     this.contadorForm -= 1;
+  }
+
+  // employeeSkills(empIndex: number): FormArray
+  productImages(productIndex: number): FormArray {
+    return this.products().at(productIndex).get('images') as FormArray;
+  }
+
+  // newSkill(): FormGroup
+  newImage(): FormGroup {
+    return this.formBuilder.group({
+      image: ''
+    });
+  }
+
+  // addEmployeeSkill(empIndex: number)
+  addProductImages(productIndex: number): void {
+    this.productImages(productIndex).push(this.newImage());
+  }
+
+  // removeEmployeeSkill(empIndex: number, skillIndex: number)
+  removeProductImages(productIndex: number, imageIndex: number): void {
+    this.productImages(productIndex).removeAt(imageIndex);
   }
 
   /**
@@ -121,24 +148,28 @@ export class ProductCreateComponent implements OnInit {
     if (this.form.valid) {
       event.preventDefault();
       const products = Object.assign({}, this.form.value);
-      const newProducts = products.products;
-      for (const newProduct of newProducts) {
-        newProduct.brand = newProduct.brand.id;
-        newProduct.category = newProduct.category.id;
-        newProduct.images = [
-          {
-            url_image: this.image
-          }
-        ];
-        const key = 'image';
-        delete newProduct[key];
-      }
-      products.products = newProducts;
+      console.log('**********************');
       console.log(products);
-      this.productService.createProduct(products)
-      .subscribe(() => {
-        this.router.navigate(['admin/products']);
-      });
+      console.log('----------------------');
+      const newProducts = products.products;
+      console.log(newProducts);
+      // for (const newProduct of newProducts) {
+      //   newProduct.brand = newProduct.brand.id;
+      //   newProduct.category = newProduct.category.id;
+      //   newProduct.images = [
+      //     {
+      //       url_image: this.image
+      //     }
+      //   ];
+      //   const key = 'image';
+      //   delete newProduct[key];
+      // }
+      // products.products = newProducts;
+      // console.log(products);
+      // this.productService.createProduct(products)
+      // .subscribe(() => {
+      //   this.router.navigate(['admin/products']);
+      // });
     }
   }
 
