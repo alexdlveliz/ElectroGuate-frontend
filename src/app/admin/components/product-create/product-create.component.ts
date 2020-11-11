@@ -30,10 +30,11 @@ export class ProductCreateComponent implements OnInit {
     private categoryService: CategoryService,
     private brandService: BrandService,
     private router: Router
-  ) { }
+  ) {
+    this.buildForm();
+  }
 
   ngOnInit(): void {
-    this.buildForm();
     this.addNewProduct();
     this.fetchAllCategories();
     this.fetchAllBrands();
@@ -78,15 +79,16 @@ export class ProductCreateComponent implements OnInit {
   /**
    * Método para obtener el estado actual del formulario
    */
-  get products(): FormArray {
+  products(): FormArray {
     return this.form.get('products') as FormArray;
   }
 
   /**
    * Método para agregar dinámicamente los nuevos inputs al formulario.
    */
-  addNewProduct(): void {
-    const product = this.formBuilder.group({
+  newProduct(): FormGroup {
+    this.contadorForm += 1;
+    return this.formBuilder.group({
       str_name: new FormControl('', Validators.required),
       str_description: new FormControl('', Validators.required),
       str_product_code: new FormControl('', Validators.required),
@@ -95,20 +97,19 @@ export class ProductCreateComponent implements OnInit {
       brand: new FormControl('', Validators.required),
       category: new FormControl('', Validators.required),
       image: new FormControl(''),
-      images: new FormArray([
-        new FormControl(''),
-      ])
+      images: new FormArray([])
     });
+  }
 
-    this.contadorForm += 1;
-    this.products.push(product);
+  addNewProduct(): void {
+    this.products().push(this.newProduct());
   }
 
   /**
    * Método para eliminar dinámicamente los inputs del formulario.
    */
   deleteProduct(index: number): void {
-    this.products.removeAt(index);
+    this.products().removeAt(index);
     this.contadorForm -= 1;
   }
 

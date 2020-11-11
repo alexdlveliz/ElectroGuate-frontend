@@ -5,7 +5,7 @@
         <mat-card-title>
           Nuevo producto
         </mat-card-title>
-        <mat-card-content *ngFor="let product of products.controls; let i = index;" formGroupName="{{ i }}">
+        <mat-card-content *ngFor="let product of products().controls; let i = index;" formGroupName="{{ i }}">
           <mat-form-field>
             <mat-label>Nombre</mat-label>
             <input type="text" matInput formControlName="str_name">
