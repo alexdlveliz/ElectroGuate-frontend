@@ -45,7 +45,7 @@
               <div *ngFor="let image of productImages(prodIndex).controls; let imageIndex = index">
                 <div [formGroupName]="imageIndex">
                   Image:
-                  <input formControlName="image" type="file" (change)="OnImageChanged($event)">
+                  <input formControlName="url_image" type="file" (change)="OnImageChanged($event)">
                   <button type="button" (click)="removeProductImages(prodIndex,imageIndex)">Remove</button>
                 </div>
               </div>

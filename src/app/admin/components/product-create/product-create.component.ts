@@ -23,7 +23,6 @@ export class ProductCreateComponent implements OnInit {
   categories: Category[] = [];
   brands: Brand[] = [];
   image: Image[] = [];
-  imageProduct: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,20 +40,32 @@ export class ProductCreateComponent implements OnInit {
     this.fetchAllBrands();
   }
 
+  /**
+   * Método para detectar cuando se agregue una imagen al input tipo file
+   */
   OnImageChanged(event): void {
     const file = (event.target as HTMLInputElement).files[0];
     this.convertToBase64(file);
   }
 
+  /**
+   * Método para agregar al array de imágenes, las imágenes
+   * convertidas a base64
+   */
   convertToBase64(file: File): void {
     const observable = new Observable<any>((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     });
     observable.subscribe((data) => {
-      this.image = data;
+      this.image.push({
+        url_image: data
+      });
     });
   }
 
+  /**
+   * Método para convertir el file a un texto base64
+   */
   readFile(file: File, subscriber: Subscriber<any>): void {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
@@ -80,7 +91,6 @@ export class ProductCreateComponent implements OnInit {
   /**
    * Método para obtener el estado actual del formulario
    */
-  // -> employees(): FormArray
   products(): FormArray {
     return this.form.get('products') as FormArray;
   }
@@ -88,7 +98,6 @@ export class ProductCreateComponent implements OnInit {
   /**
    * Método para agregar dinámicamente los nuevos inputs al formulario.
    */
-  // -> newEmployee(): FormGroup
   newProduct(): FormGroup {
     this.contadorForm += 1;
     return this.formBuilder.group({
@@ -104,40 +113,66 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
-  // -> addEmployee()
+  /**
+   * Método para agregar dinámicamente formularios para productos
+   */
   addNewProduct(): void {
-    this.products().push(this.newProduct());
+    if (this.contadorForm < 5) {
+      this.products().push(this.newProduct());
+    } else {
+      alert('No se pueden crear más de 5 productos a la vez');
+    }
   }
 
   /**
    * Método para eliminar dinámicamente los inputs del formulario.
    */
-  // -> removeEmployee(empIndex: number)
   deleteProduct(index: number): void {
     this.products().removeAt(index);
     this.contadorForm -= 1;
   }
 
-  // employeeSkills(empIndex: number): FormArray
+  /**
+   * Método para acceder al formArray images, dentro del formulario principal
+   */
   productImages(productIndex: number): FormArray {
     return this.products().at(productIndex).get('images') as FormArray;
   }
 
-  // newSkill(): FormGroup
+  /**
+   * Método para crear el formulario para las imágenes
+   */
   newImage(): FormGroup {
+    this.contadorImages += 1;
     return this.formBuilder.group({
-      image: ''
+      url_image: ''
     });
   }
 
-  // addEmployeeSkill(empIndex: number)
+  /**
+   * Método para agregar más campos de imágenes a los productos
+   */
   addProductImages(productIndex: number): void {
-    this.productImages(productIndex).push(this.newImage());
+    if (this.getImagesByProduct(productIndex) < 3) {
+      this.productImages(productIndex).push(this.newImage());
+    } else {
+      alert('Solamente son 3 imágenes por producto');
+    }
   }
 
-  // removeEmployeeSkill(empIndex: number, skillIndex: number)
+  /**
+   * Método para eliminar los campos de imágenes para los productos
+   */
   removeProductImages(productIndex: number, imageIndex: number): void {
+    this.contadorImages -= 1;
     this.productImages(productIndex).removeAt(imageIndex);
+  }
+
+  /**
+   * Método para saber cuántas imágenes tiene cada producto
+   */
+  getImagesByProduct(productIndex: number): number {
+    return this.productImages(productIndex).length;
   }
 
   /**
@@ -148,28 +183,20 @@ export class ProductCreateComponent implements OnInit {
     if (this.form.valid) {
       event.preventDefault();
       const products = Object.assign({}, this.form.value);
-      console.log('**********************');
-      console.log(products);
-      console.log('----------------------');
       const newProducts = products.products;
-      console.log(newProducts);
-      // for (const newProduct of newProducts) {
-      //   newProduct.brand = newProduct.brand.id;
-      //   newProduct.category = newProduct.category.id;
-      //   newProduct.images = [
-      //     {
-      //       url_image: this.image
-      //     }
-      //   ];
-      //   const key = 'image';
-      //   delete newProduct[key];
-      // }
-      // products.products = newProducts;
-      // console.log(products);
-      // this.productService.createProduct(products)
-      // .subscribe(() => {
-      //   this.router.navigate(['admin/products']);
-      // });
+      for (const newProduct of newProducts) {
+        newProduct.brand = newProduct.brand.id;
+        newProduct.category = newProduct.category.id;
+        newProduct.images = this.image;
+        const key = 'image';
+        delete newProduct[key];
+      }
+      products.products = newProducts;
+      console.log(products);
+      this.productService.createProduct(products)
+      .subscribe(() => {
+        this.router.navigate(['admin/products']);
+      });
     }
   }
 
