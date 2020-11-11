@@ -8,27 +8,14 @@
           <!-- <i class="fas fa-user"></i> -->
           <input formControlName="username" matInput type="text" placeholder="Usuario" />
         </div>
+        <mat-error *ngIf="username.touched && username.hasError('required')">Este campo es obligatorio</mat-error>
         <div class="input-field">
           <!-- <i class="fas fa-lock"></i> -->
           <mat-icon class="icon">vpn_key </mat-icon>
           <input formControlName="password" matInput type="password" placeholder="Contraseña" />
         </div>
-        <input type="submit" value="Login" class="btn solid"/>
-        <!-- <p class="social-text">Visita nuestras redes sociales</p>
-        <div class="social-media">
-          <a href="#" class="social-icon">
-            <mat-icon>facebook</mat-icon>
-          </a>
-          <a href="#" class="social-icon">
-            <mat-icon>twitter</mat-icon>
-          </a>
-          <a href="#" class="social-icon">
-            <mat-icon>youtube</mat-icon>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-        </div> -->
+        <mat-error *ngIf="passwordLogin.touched && passwordLogin.hasError('required')">Este campo es obligatorio</mat-error>
+        <input type="submit" value="Login" class="btn solid" [disabled]="formLogin.invalid"/>
       </form>
       <form action="#" class="sign-up-form" [formGroup]="formSignin" (ngSubmit)="signIn($event)">
         <h2 class="title">Regístrate</h2>
@@ -37,30 +24,36 @@
           <mat-icon class="icon">people</mat-icon>
           <input matInput formControlName="str_name" type="text" placeholder="Nombre" />
         </div>
+        <mat-error *ngIf="strName.touched && strName.hasError('required')">Este campo es obligatorio</mat-error>
         <div class="input-field">
           <!-- <i class="fas fa-user"></i> -->
           <mat-icon class="icon">people</mat-icon>
           <input matInput formControlName="str_surname" type="text" placeholder="Usuario" />
         </div>
+        <mat-error *ngIf="strSurname.touched && strSurname.hasError('required')">Este campo es obligatorio</mat-error>
         <div class="input-field">
           <!-- <i class="fas fa-envelope"></i> -->
           <mat-icon class="icon">email</mat-icon>
           <input matInput formControlName="str_email" type="email" placeholder="Correo electrónico" />
         </div>
+        <mat-error *ngIf="strEmail.touched && strEmail.hasError('required')">Este campo es obligatorio</mat-error>
         <div class="input-field">
           <mat-icon class="icon">contact_phone</mat-icon>
           <input matInput formControlName="str_phone_number" type="tel" placeholder="Número de teléfono" />
         </div>
+        <mat-error *ngIf="strPhoneNumer.touched && strPhoneNumer.hasError('required')">Este campo es obligatorio</mat-error>
         <div class="input-field">
           <!-- <i class="fas fa-lock"></i> -->
           <mat-icon class="icon">vpn_key </mat-icon>
           <input matInput formControlName="password" type="password" placeholder="Contraseña"/>
         </div>
+        <mat-error *ngIf="password.touched && password.hasError('required')">Este campo es obligatorio</mat-error>
         <div class="input-field">
           <!-- <i class="fas fa-lock"></i> -->
           <mat-icon class="icon">vpn_key </mat-icon>
           <input matInput formControlName="password_confirmation" type="password" placeholder="Confirmar contraseña"/>
         </div>
+        <mat-error *ngIf="passwordConfirmation.touched && passwordConfirmation.hasError('required')">Este campo es obligatorio</mat-error>
         <input type="submit" class="btn" value="Sign up" />
         <!-- <p class="social-text">Visita nuestras redes sociales</p>
         <div class="social-media">
