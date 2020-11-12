@@ -1,6 +1,5 @@
 <mat-card class="card">
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-    alt="Photo of a Shiba Inu">
+  <img mat-card-image [src]="product.images[0].url_image">
   <div id="info" fxLayout="column">
     <mat-card-header fxLayout="column" fxLayoutAlign="start center">
       <mat-card-title>{{ product.str_name }}</mat-card-title>
@@ -11,6 +10,11 @@
         <mat-icon>add_shopping_cart</mat-icon>
         Agregar al carrito
       </button>
+      <button mat-raised-button color="primary" [routerLink]="['/products', product.id]">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        Ver detalle
+      </button>
+      
     </mat-card-actions>
   </div>
 </mat-card>

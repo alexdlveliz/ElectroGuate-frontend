@@ -8,10 +8,11 @@ import { MaterialModule } from '@material/material.module';
 import { ProductService } from '@core/services/product/product.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProductComponent } from './components/product/product.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 
 @NgModule({
-  declarations: [ProductsComponent, ProductComponent],
+  declarations: [ProductsComponent, ProductComponent, ProductDetailComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,
