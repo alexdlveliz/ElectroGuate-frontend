@@ -17,6 +17,7 @@ import { Image } from '@core/models/image.model';
 })
 export class ProductCreateComponent implements OnInit {
 
+  imagesProduct = new Map();
   contadorForm = 0;
   contadorImages = 0;
   form: FormGroup;
@@ -60,6 +61,7 @@ export class ProductCreateComponent implements OnInit {
       this.image.push({
         url_image: data
       });
+      this.imagesProduct.set(this.contadorForm, this.image);
     });
   }
 
@@ -114,10 +116,39 @@ export class ProductCreateComponent implements OnInit {
   }
 
   /**
+   * Método para tomar los datos que están en el formulario, trabajar con los datos,
+   * y por último llamar al servicio requerido e insertar los datos en la API.
+   */
+  createProduct(event: Event): void {
+    if (this.form.valid) {
+      event.preventDefault();
+      const products = Object.assign({}, this.form.value);
+      const newProducts = products.products;
+      let contador = 1;
+      for (const newProduct of newProducts) {
+        newProduct.brand = newProduct.brand.id;
+        newProduct.category = newProduct.category.id;
+        console.log(this.imagesProduct);
+        newProduct.images = this.imagesProduct.get(contador);
+        const key = 'image';
+        delete newProduct[key];
+        contador += 1;
+      }
+      products.products = newProducts;
+      console.log(products);
+      this.productService.createProduct(products)
+      .subscribe(() => {
+        this.router.navigate(['admin/products']);
+      });
+    }
+  }
+
+  /**
    * Método para agregar dinámicamente formularios para productos
    */
   addNewProduct(): void {
     if (this.contadorForm < 5) {
+      this.image = [];
       this.products().push(this.newProduct());
     } else {
       alert('No se pueden crear más de 5 productos a la vez');
@@ -173,31 +204,6 @@ export class ProductCreateComponent implements OnInit {
    */
   getImagesByProduct(productIndex: number): number {
     return this.productImages(productIndex).length;
-  }
-
-  /**
-   * Método para tomar los datos que están en el formulario, trabajar con los datos,
-   * y por último llamar al servicio requerido e insertar los datos en la API.
-   */
-  createProduct(event: Event): void {
-    if (this.form.valid) {
-      event.preventDefault();
-      const products = Object.assign({}, this.form.value);
-      const newProducts = products.products;
-      for (const newProduct of newProducts) {
-        newProduct.brand = newProduct.brand.id;
-        newProduct.category = newProduct.category.id;
-        newProduct.images = this.image;
-        const key = 'image';
-        delete newProduct[key];
-      }
-      products.products = newProducts;
-      console.log(products);
-      this.productService.createProduct(products)
-      .subscribe(() => {
-        this.router.navigate(['admin/products']);
-      });
-    }
   }
 
   /**
