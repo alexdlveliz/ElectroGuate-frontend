@@ -1,3 +1,3 @@
 export interface Image {
-  str_image_link: string;
+  url_image: string;
 }

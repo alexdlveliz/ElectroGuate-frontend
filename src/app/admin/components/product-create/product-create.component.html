@@ -5,45 +5,56 @@
         <mat-card-title>
           Nuevo producto
         </mat-card-title>
-        <mat-card-content *ngFor="let product of products.controls; let i = index;" formGroupName="{{ i }}">
-          <mat-form-field>
-            <mat-label>Nombre</mat-label>
-            <input type="text" matInput formControlName="str_name">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Precio</mat-label>
-            <input type="number" matInput formControlName="int_price">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Código del producto</mat-label>
-            <input type="text" matInput formControlName="str_product_code">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Cantidad</mat-label>
-            <input type="number" matInput formControlName="int_amount">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Descripción</mat-label>
-            <textarea matInput formControlName="str_description"></textarea>
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Categoría</mat-label>
-            <mat-select formControlName="category">
-              <mat-option>Seleccione una opción</mat-option>
-              <mat-option *ngFor="let category of categories" [value]="category"> {{ category.str_name }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Marca</mat-label>
-            <mat-select formControlName="brand">
-              <mat-option>Seleccione una opción</mat-option>
-              <mat-option *ngFor="let brand of brands" [value]="brand"> {{ brand.str_name }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <input formControlName="image" type="file" (change)="OnImageChanged($event)">
-          <mat-card-actions>
-            <button mat-raised-button color="warn" (click)="deleteProduct(i)">Eliminar producto</button>
-          </mat-card-actions>
+        <mat-card-content *ngFor="let product of products().controls; let prodIndex = index;" >
+          <div [formGroupName]="prodIndex">
+            <mat-form-field>
+              <mat-label>Nombre</mat-label>
+              <input type="text" matInput formControlName="str_name">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Precio</mat-label>
+              <input type="number" matInput formControlName="int_price">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Código del producto</mat-label>
+              <input type="text" matInput formControlName="str_product_code">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Cantidad</mat-label>
+              <input type="number" matInput formControlName="int_amount">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Descripción</mat-label>
+              <textarea matInput formControlName="str_description"></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Categoría</mat-label>
+              <mat-select formControlName="category">
+                <mat-option>Seleccione una opción</mat-option>
+                <mat-option *ngFor="let category of categories" [value]="category"> {{ category.str_name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Marca</mat-label>
+              <mat-select formControlName="brand">
+                <mat-option>Seleccione una opción</mat-option>
+                <mat-option *ngFor="let brand of brands" [value]="brand"> {{ brand.str_name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div formArrayName="images">
+              <div *ngFor="let image of productImages(prodIndex).controls; let imageIndex = index">
+                <div [formGroupName]="imageIndex">
+                  Image:
+                  <input formControlName="url_image" type="file" (change)="OnImageChanged($event)">
+                  <button type="button" (click)="removeProductImages(prodIndex,imageIndex)">Remove</button>
+                </div>
+              </div>
+              <button type="button" (click)="addProductImages(prodIndex)">Add image</button>
+            </div>
+            <mat-card-actions>
+              <button mat-raised-button color="warn" (click)="deleteProduct(prodIndex)">Eliminar producto</button>
+            </mat-card-actions>
+          </div>
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button type="button" color="primary" [disabled]="contadorForm > 7" (click)="addNewProduct()">Añadir producto</button>

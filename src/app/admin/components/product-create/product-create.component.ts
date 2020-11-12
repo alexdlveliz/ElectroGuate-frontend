@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, Subscriber } from 'rxjs';
 
 import { ProductService } from '@core/services/product/product.service';
 import { CategoryService } from '@core/services/category/category.service';
 import { BrandService } from '@core/services/brand/brand.service';
 import { Category } from '@core/models/category.model';
 import { Brand } from '@core/models/brand.model';
-import { Observable, Subscriber } from 'rxjs';
+import { Image } from '@core/models/image.model';
 
 @Component({
   selector: 'app-product-create',
@@ -16,13 +17,13 @@ import { Observable, Subscriber } from 'rxjs';
 })
 export class ProductCreateComponent implements OnInit {
 
+  imagesProduct = new Map();
   contadorForm = 0;
   contadorImages = 0;
   form: FormGroup;
   categories: Category[] = [];
   brands: Brand[] = [];
-  image: Observable<string>;
-  imageProduct: string;
+  image: Image[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,29 +31,43 @@ export class ProductCreateComponent implements OnInit {
     private categoryService: CategoryService,
     private brandService: BrandService,
     private router: Router
-  ) { }
+  ) {
+    this.buildForm();
+  }
 
   ngOnInit(): void {
-    this.buildForm();
     this.addNewProduct();
     this.fetchAllCategories();
     this.fetchAllBrands();
   }
 
+  /**
+   * Método para detectar cuando se agregue una imagen al input tipo file
+   */
   OnImageChanged(event): void {
     const file = (event.target as HTMLInputElement).files[0];
     this.convertToBase64(file);
   }
 
+  /**
+   * Método para agregar al array de imágenes, las imágenes
+   * convertidas a base64
+   */
   convertToBase64(file: File): void {
     const observable = new Observable<any>((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     });
     observable.subscribe((data) => {
-      this.image = data;
+      this.image.push({
+        url_image: data
+      });
+      this.imagesProduct.set(this.contadorForm, this.image);
     });
   }
 
+  /**
+   * Método para convertir el file a un texto base64
+   */
   readFile(file: File, subscriber: Subscriber<any>): void {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
@@ -78,15 +93,16 @@ export class ProductCreateComponent implements OnInit {
   /**
    * Método para obtener el estado actual del formulario
    */
-  get products(): FormArray {
+  products(): FormArray {
     return this.form.get('products') as FormArray;
   }
 
   /**
    * Método para agregar dinámicamente los nuevos inputs al formulario.
    */
-  addNewProduct(): void {
-    const product = this.formBuilder.group({
+  newProduct(): FormGroup {
+    this.contadorForm += 1;
+    return this.formBuilder.group({
       str_name: new FormControl('', Validators.required),
       str_description: new FormControl('', Validators.required),
       str_product_code: new FormControl('', Validators.required),
@@ -95,21 +111,8 @@ export class ProductCreateComponent implements OnInit {
       brand: new FormControl('', Validators.required),
       category: new FormControl('', Validators.required),
       image: new FormControl(''),
-      images: new FormArray([
-        new FormControl(''),
-      ])
+      images: new FormArray([])
     });
-
-    this.contadorForm += 1;
-    this.products.push(product);
-  }
-
-  /**
-   * Método para eliminar dinámicamente los inputs del formulario.
-   */
-  deleteProduct(index: number): void {
-    this.products.removeAt(index);
-    this.contadorForm -= 1;
   }
 
   /**
@@ -121,16 +124,15 @@ export class ProductCreateComponent implements OnInit {
       event.preventDefault();
       const products = Object.assign({}, this.form.value);
       const newProducts = products.products;
+      let contador = 1;
       for (const newProduct of newProducts) {
         newProduct.brand = newProduct.brand.id;
         newProduct.category = newProduct.category.id;
-        newProduct.images = [
-          {
-            url_image: this.image
-          }
-        ];
+        console.log(this.imagesProduct);
+        newProduct.images = this.imagesProduct.get(contador);
         const key = 'image';
         delete newProduct[key];
+        contador += 1;
       }
       products.products = newProducts;
       console.log(products);
@@ -139,6 +141,69 @@ export class ProductCreateComponent implements OnInit {
         this.router.navigate(['admin/products']);
       });
     }
+  }
+
+  /**
+   * Método para agregar dinámicamente formularios para productos
+   */
+  addNewProduct(): void {
+    if (this.contadorForm < 5) {
+      this.image = [];
+      this.products().push(this.newProduct());
+    } else {
+      alert('No se pueden crear más de 5 productos a la vez');
+    }
+  }
+
+  /**
+   * Método para eliminar dinámicamente los inputs del formulario.
+   */
+  deleteProduct(index: number): void {
+    this.products().removeAt(index);
+    this.contadorForm -= 1;
+  }
+
+  /**
+   * Método para acceder al formArray images, dentro del formulario principal
+   */
+  productImages(productIndex: number): FormArray {
+    return this.products().at(productIndex).get('images') as FormArray;
+  }
+
+  /**
+   * Método para crear el formulario para las imágenes
+   */
+  newImage(): FormGroup {
+    this.contadorImages += 1;
+    return this.formBuilder.group({
+      url_image: ''
+    });
+  }
+
+  /**
+   * Método para agregar más campos de imágenes a los productos
+   */
+  addProductImages(productIndex: number): void {
+    if (this.getImagesByProduct(productIndex) < 3) {
+      this.productImages(productIndex).push(this.newImage());
+    } else {
+      alert('Solamente son 3 imágenes por producto');
+    }
+  }
+
+  /**
+   * Método para eliminar los campos de imágenes para los productos
+   */
+  removeProductImages(productIndex: number, imageIndex: number): void {
+    this.contadorImages -= 1;
+    this.productImages(productIndex).removeAt(imageIndex);
+  }
+
+  /**
+   * Método para saber cuántas imágenes tiene cada producto
+   */
+  getImagesByProduct(productIndex: number): number {
+    return this.productImages(productIndex).length;
   }
 
   /**
