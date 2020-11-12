@@ -24,17 +24,22 @@
       .txtBox {
         width: 600px;
         height: 400px;
+        margin-top: 75px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         h1 {
-          color: var(--colors);
+          color: #24fb7b;
           font-size: 35px;
-          font-family: var(--fontt2);
+          font-family: "Kumar One Outline", cursive;
+          font-weight: bolder;
         }
         p {
-          color: var(--fontcnosotros);
+          font-size: 25px;
+          line-height: 23px;
+          font-family: "ABeeZee", sans-serif;
+          font-weight: lighter;
           text-align: justify;
         }
       }
@@ -61,6 +66,7 @@
   #nosotros .container .row .txtBox {
     width: 270px;
     height: 210px;
+    padding-top: 80px;
   }
   #nosotros .container .row .txtBox h1 {
     font-size: 20px;
