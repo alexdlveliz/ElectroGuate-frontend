@@ -50,4 +50,13 @@ export class AuthService {
     }
     return null;
   }
+
+  getUserEmail(): string {
+    if (this.getLocalStorage()) {
+      this.values = this.getValues();
+      this.token = this.values[1][1];
+      return this.token;
+    }
+    return null;
+  }
 }

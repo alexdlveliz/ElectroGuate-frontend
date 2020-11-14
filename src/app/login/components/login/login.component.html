@@ -41,6 +41,14 @@
           <mat-icon class="icon">contact_phone</mat-icon>
           <input matInput formControlName="str_phone_number" type="tel" placeholder="Número de teléfono" />
         </div>
+        <div class="input-field">
+          <mat-icon class="icon">place</mat-icon>
+          <input matInput formControlName="str_principal_address" type="tel" placeholder="Dirección Principal" />
+        </div>
+        <div class="input-field">
+          <mat-icon class="icon">place</mat-icon>
+          <input matInput formControlName="str_secundary_address" type="tel" placeholder="Dirección secundaria" />
+        </div>
         <mat-error *ngIf="strPhoneNumer.touched && strPhoneNumer.hasError('required')">Este campo es obligatorio</mat-error>
         <div class="input-field">
           <!-- <i class="fas fa-lock"></i> -->

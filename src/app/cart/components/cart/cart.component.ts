@@ -1,17 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Product } from '@core/models/product.model';
 import { CartService } from '@core/services/cart/cart.service';
+import { AuthService } from '@core/services/auth/auth.service';
 import { map } from 'rxjs/operators';
 
+declare var paypal;
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-
+  @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
+  producto = {
+    descripcion: 'producto en venta',
+    precio: 1.99,
+    image: 'imagen del producto'
+  };
   displayedColumns: string[] = ['image', 'str_name', 'int_price', 'actions'];
   contador = 0;
   departmentsMap = new Map();
@@ -21,10 +28,12 @@ export class CartComponent implements OnInit {
   items$: Observable<Map<Product, number>>;
   listItems: Map<Product, number>;
   form: FormGroup;
+  formPayment: FormGroup;
 
   constructor(
     private cartService: CartService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) {
     this.setItems();
     this.setDepartmentMap();
@@ -32,6 +41,30 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    paypal
+    .Buttons({
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [
+            {
+              description: this.producto.descripcion,
+              amount: {
+                currency_code: 'USD',
+                value: this.producto.precio
+              }
+            }
+          ]
+        });
+      },
+      onApprove: async (data, actions) => {
+        const order = await actions.order.capture();
+        console.log(order);
+      },
+      onError: err => {
+        console.log(err);
+      }
+    })
+    .render(this.paypalElement.nativeElement);
   }
 
   private setDepartmentMap(): void {
@@ -45,11 +78,18 @@ export class CartComponent implements OnInit {
     this.form = this.formBuilder.group({
       str_name: ['', [Validators.required]],
       department: ['', [Validators.required]],
-      str_address_1: ['', [Validators.required]],
-      str_address_2: ['', [Validators.required]],
+      str_principal_address: ['', [Validators.required]],
+      str_secundary_address: ['', [Validators.required]],
       postal_code: ['', [Validators.required]],
       phone_number: ['', [Validators.required]],
       str_description: ['', [Validators.required]]
+    });
+  }
+
+  private buildFormPayment(): void {
+    this.formPayment = this.formBuilder.group({
+      str_card_number: ['', [Validators.required]],
+      card_date: ['', [Validators.required]],
     });
   }
 
@@ -101,12 +141,12 @@ export class CartComponent implements OnInit {
     return this.form.get('department');
   }
 
-  get strAddress1(): AbstractControl {
-    return this.form.get('str_address_1');
+  get strPrincipalAddress(): AbstractControl {
+    return this.form.get('str_principal_address');
   }
 
-  get strAddress2(): AbstractControl {
-    return this.form.get('str_address_2');
+  get strSecundaryAddress(): AbstractControl {
+    return this.form.get('str_secundary_address');
   }
 
   get postalCode(): AbstractControl {
