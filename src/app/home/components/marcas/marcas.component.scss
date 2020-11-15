@@ -13,10 +13,10 @@
   height: 100%;
 }
 #album .container h2 {
-  font-size: 25px;
-  margin: 0;
-  font-family: var(--fontt2);
-  color: var(--fontc);
+  font-size: 40px;
+  margin: 15px 0;
+  font-family: "Kumar One Outline", cursive;
+  font-weight: bolder;
 }
 #album .container .row {
   width: 100%;
@@ -83,6 +83,9 @@
     padding-bottom: 50px;
     margin: 0;
   }
+  #album .container h2 {
+    font-size: 27px;
+  }
   #album .container .row .pic {
     height: 45px;
     width: 45px;
@@ -96,6 +99,9 @@
     height: 40px;
     width: 40px;
     margin: 5px;
+  }
+  #album .container h2 {
+    font-size: 20px;
   }
 }
 
