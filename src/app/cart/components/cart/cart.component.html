@@ -73,20 +73,20 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Dirección 1</mat-label>
-          <input matInput formControlName="str_address_1">
-          <mat-error *ngIf="strAddress1.touched && strAddress1.hasError('required')" >Este campo es requerido</mat-error>
+          <input matInput formControlName="str_principal_address">
+          <mat-error *ngIf="strPrincipalAddress.touched && strPrincipalAddress.hasError('required')" >Este campo es requerido</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Dirección 2</mat-label>
-          <input matInput formControlName="str_address_2">
-          <mat-error *ngIf="strAddress2.touched && strAddress2.hasError('required')" >Este campo es requerido</mat-error>
+          <input matInput formControlName="str_secundary_address">
+          <mat-error *ngIf="strSecundaryAddress.touched && strSecundaryAddress.hasError('required')" >Este campo es requerido</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Código postal</mat-label>
-          <input matInput placeholder="****" formControlName="postal_code">
-          <mat-error *ngIf="postalCode.touched && postalCode.hasError('required')" >Este campo es requerido</mat-error>
+          <input matInput placeholder="****" formControlName="zip_code">
+          <mat-error *ngIf="zipCode.touched && zipCode.hasError('required')" >Este campo es requerido</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -98,8 +98,8 @@
         <h4>Instrucciones de entrega</h4>
         <mat-form-field>
           <mat-label>Detalles de la entrega</mat-label>
-          <textarea matInput formControlName="str_description" placeholder="Proporcione detalles del edificio, casa, colonia, o un punto de referencia"></textarea>
-          <mat-error *ngIf="strDescription.touched && strDescription.hasError('required')" >Este campo es requerido</mat-error>
+          <textarea rows="6" matInput formControlName="details" placeholder="Proporcione detalles del edificio, casa, colonia, o un punto de referencia"></textarea>
+          <mat-error *ngIf="details.touched && details.hasError('required')" >Este campo es requerido</mat-error>
         </mat-form-field>
       </form>
     </div>
@@ -119,7 +119,9 @@
   <mat-step>
     <ng-template matStepLabel>Información de pago</ng-template>
     <!-- Formulario de pago -->
-    <div class="payment" fxFlex="50" fxLayout="column">
+    <div #paypal>
+    </div>
+    <!-- <div class="payment" fxFlex="50" fxLayout="column">
       <h1>Formulario de pago</h1>
       <form action="#">
         <mat-form-field appearance="outline">
@@ -148,7 +150,7 @@
           </div>
         </div>
       </form>
-    </div>
+    </div> -->
     <div fxLayout="row" fxLayoutAlign="start">
       <button mat-fab matStepperPrevious color="primary">
         <mat-icon>

@@ -8,6 +8,7 @@ export class AuthService {
   values = [];
   role: string;
   token: string;
+  id: number;
   constructor() { }
 
   setLocalStorage(usuario): void {
@@ -47,6 +48,15 @@ export class AuthService {
       this.values = this.getValues();
       this.token = this.values[0][1];
       return this.token;
+    }
+    return null;
+  }
+
+  getUserId(): number {
+    if (this.getLocalStorage()) {
+      this.values = this.getValues();
+      this.id = this.values[1][1];
+      return this.id;
     }
     return null;
   }

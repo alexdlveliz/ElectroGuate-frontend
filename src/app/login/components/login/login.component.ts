@@ -96,6 +96,8 @@ export class LoginComponent implements OnInit {
       str_surname: ['', [Validators.required]],
       str_email: ['', [Validators.required, Validators.email]],
       str_phone_number: ['', [Validators.required]],
+      str_principal_address: [''],
+      str_secundary_address: [''],
       password: ['', [Validators.required]],
       password_confirmation: ['', [Validators.required]]
     });
