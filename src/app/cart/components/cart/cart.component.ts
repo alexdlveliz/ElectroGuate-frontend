@@ -6,9 +6,11 @@ import { Router } from '@angular/router';
 
 import { Product } from '@core/models/product.model';
 import { Order } from '@core/models/order.model';
+import { OrderDetail } from '@core/models/order-detail.model';
 import { CartService } from '@core/services/cart/cart.service';
 import { AuthService } from '@core/services/auth/auth.service';
 import { OrderService } from '@core/services/order/order.service';
+import { OrderDetailService } from '@core/services/orderDetail/order-detail.service';
 
 declare var paypal;
 @Component({
@@ -26,6 +28,9 @@ export class CartComponent implements OnInit {
   totalBuying = 0;
   order: Order;
   orderDetails;
+  orderId;
+  orderDetail: OrderDetail;
+
   displayedColumns: string[] = ['image', 'str_name', 'int_price', 'actions'];
   contador = 0;
   departmentsMap = new Map();
@@ -42,6 +47,7 @@ export class CartComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private orderService: OrderService,
+    private orderDetailService: OrderDetailService,
     private router: Router
   ) {
     this.setItems();
@@ -82,8 +88,7 @@ export class CartComponent implements OnInit {
     .render(this.paypalElement.nativeElement);
   }
 
-  private createOrder(orderId): void {
-    console.log(orderId);
+  async createOrder(orderId) {
     for (const [key, value] of this.listItems.entries()) {
       this.totalBuying += key.int_price * value;
     }
@@ -95,9 +100,19 @@ export class CartComponent implements OnInit {
       paypal_order_id: orderId,
       total: this.totalBuying
     };
-    this.orderService.createOrder(this.order).subscribe(
-      
-    );
+    this.orderId = await this.orderService.createOrder(this.order).toPromise();
+    this.orderId = this.orderId.id;
+    for (const [key, value] of this.listItems.entries()) {
+      this.orderDetail = {
+        amount: value,
+        order: this.orderId,
+        price: key.int_price,
+        product: key.id
+      };
+      console.log(this.orderDetail);
+      this.orderDetailService.createOrderDetails(this.orderDetail)
+      .subscribe(response => console.log(response));
+    }
   }
 
   private setDepartmentMap(): void {
