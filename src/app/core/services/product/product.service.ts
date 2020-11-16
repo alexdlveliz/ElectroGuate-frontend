@@ -21,7 +21,7 @@ export class ProductService {
    * Si todo sale bien, se retornará un array de Productos
    */
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${environment.url_api}/products/products/`)
+    return this.http.get<Product[]>(`${environment.url_api}/products/products?page=1`)
       .pipe(
         retry(2),
         catchError(this.handleError),

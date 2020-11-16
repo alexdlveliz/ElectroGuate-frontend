@@ -23,7 +23,7 @@ export class UserService {
    * tomando solamente la parte de los 'results'
    */
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.url_api}/users/users/`)
+    return this.http.get<User[]>(`${environment.url_api}/users/list`)
     .pipe(
       retry(2),
       map((response: any) => response.results as User[])

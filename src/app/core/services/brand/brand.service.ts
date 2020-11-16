@@ -19,7 +19,7 @@ export class BrandService {
    * Método para obtener todas las marcas
    */
   getBrands(): Observable<Brand[]> {
-    return this.http.get<Brand[]>(`${environment.url_api}/products/brand/`)
+    return this.http.get<Brand[]>(`${environment.url_api}/products/brand?page=1`)
     .pipe(
       retry(2),
       map((response: any) => response.results as Brand[])

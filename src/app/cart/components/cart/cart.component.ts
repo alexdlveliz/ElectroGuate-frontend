@@ -11,6 +11,10 @@ import { CartService } from '@core/services/cart/cart.service';
 import { AuthService } from '@core/services/auth/auth.service';
 import { OrderService } from '@core/services/order/order.service';
 import { OrderDetailService } from '@core/services/orderDetail/order-detail.service';
+import { PaymentsService } from '@core/services/payment/payment.service';
+import { Payment } from '@core/models/payment.model';
+import { User } from '@core/models/user.model';
+import { UserService } from '@core/services/user/user.service';
 
 declare var paypal;
 @Component({
@@ -30,6 +34,10 @@ export class CartComponent implements OnInit {
   orderDetails;
   orderId;
   orderDetail: OrderDetail;
+  payment: Payment;
+  user: User;
+  userId;
+  paypalPayerId;
 
   displayedColumns: string[] = ['image', 'str_name', 'int_price', 'actions'];
   contador = 0;
@@ -48,7 +56,9 @@ export class CartComponent implements OnInit {
     private authService: AuthService,
     private orderService: OrderService,
     private orderDetailService: OrderDetailService,
-    private router: Router
+    private router: Router,
+    private paymentService: PaymentsService,
+    private userService: UserService
   ) {
     this.setItems();
     this.setDepartmentMap();
@@ -78,6 +88,7 @@ export class CartComponent implements OnInit {
       onApprove: (data, actions) => {
         actions.order.capture().then((details) => {
           const orderId = details.id;
+          this.paypalPayerId = data.payerID;
           this.createOrder(orderId);
         });
       },
@@ -88,17 +99,15 @@ export class CartComponent implements OnInit {
     .render(this.paypalElement.nativeElement);
   }
 
-  async createOrder(orderId) {
-    for (const [key, value] of this.listItems.entries()) {
-      this.totalBuying += key.int_price * value;
-    }
+  async createOrder(orderId): Promise<any> {
     const formCopy = Object.assign({}, this.form.value);
+    this.userId = this.authService.getUserId(),
     this.order = {
       zip_code: formCopy.zip_code,
       details: formCopy.details,
-      user: this.authService.getUserId(),
+      user: this.userId,
       paypal_order_id: orderId,
-      total: this.totalBuying
+      total: 0
     };
     this.orderId = await this.orderService.createOrder(this.order).toPromise();
     this.orderId = this.orderId.id;
@@ -109,10 +118,20 @@ export class CartComponent implements OnInit {
         price: key.int_price,
         product: key.id
       };
-      console.log(this.orderDetail);
-      this.orderDetailService.createOrderDetails(this.orderDetail)
-      .subscribe(response => console.log(response));
+      this.orderDetailService.createOrderDetails(this.orderDetail).toPromise();
     }
+    this.user = await this.userService.getOneUser(this.userId).toPromise();
+    this.payment = {
+      order: this.orderId,
+      user: this.userId,
+      str_name: this.user.str_name,
+      str_card_number: this.paypalPayerId,
+    };
+    this.paymentService.createPayment(this.payment)
+    .subscribe(() => {
+      alert('Compra realizada correctamente');
+      this.router.navigate(['/']);
+    });
   }
 
   private setDepartmentMap(): void {
