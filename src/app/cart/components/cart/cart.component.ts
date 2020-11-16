@@ -1,10 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
 import { Product } from '@core/models/product.model';
+import { Order } from '@core/models/order.model';
 import { CartService } from '@core/services/cart/cart.service';
 import { AuthService } from '@core/services/auth/auth.service';
-import { map } from 'rxjs/operators';
+import { OrderService } from '@core/services/order/order.service';
 
 declare var paypal;
 @Component({
@@ -19,6 +23,9 @@ export class CartComponent implements OnInit {
     precio: 1.99,
     image: 'imagen del producto'
   };
+  totalBuying = 0;
+  order: Order;
+  orderDetails;
   displayedColumns: string[] = ['image', 'str_name', 'int_price', 'actions'];
   contador = 0;
   departmentsMap = new Map();
@@ -33,7 +40,9 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private orderService: OrderService,
+    private router: Router
   ) {
     this.setItems();
     this.setDepartmentMap();
@@ -41,6 +50,10 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.payPal();
+  }
+
+  private payPal(): void {
     paypal
     .Buttons({
       createOrder: (data, actions) => {
@@ -50,21 +63,41 @@ export class CartComponent implements OnInit {
               description: this.producto.descripcion,
               amount: {
                 currency_code: 'USD',
-                value: this.producto.precio
+                value: '1'
               }
             }
           ]
         });
       },
-      onApprove: async (data, actions) => {
-        const order = await actions.order.capture();
-        console.log(order);
+      onApprove: (data, actions) => {
+        actions.order.capture().then((details) => {
+          const orderId = details.id;
+          this.createOrder(orderId);
+        });
       },
       onError: err => {
         console.log(err);
       }
     })
     .render(this.paypalElement.nativeElement);
+  }
+
+  private createOrder(orderId): void {
+    console.log(orderId);
+    for (const [key, value] of this.listItems.entries()) {
+      this.totalBuying += key.int_price * value;
+    }
+    const formCopy = Object.assign({}, this.form.value);
+    this.order = {
+      zip_code: formCopy.zip_code,
+      details: formCopy.details,
+      user: this.authService.getUserId(),
+      paypal_order_id: orderId,
+      total: this.totalBuying
+    };
+    this.orderService.createOrder(this.order).subscribe(
+      
+    );
   }
 
   private setDepartmentMap(): void {
@@ -80,16 +113,9 @@ export class CartComponent implements OnInit {
       department: ['', [Validators.required]],
       str_principal_address: ['', [Validators.required]],
       str_secundary_address: ['', [Validators.required]],
-      postal_code: ['', [Validators.required]],
+      zip_code: ['', [Validators.required]],
       phone_number: ['', [Validators.required]],
-      str_description: ['', [Validators.required]]
-    });
-  }
-
-  private buildFormPayment(): void {
-    this.formPayment = this.formBuilder.group({
-      str_card_number: ['', [Validators.required]],
-      card_date: ['', [Validators.required]],
+      details: ['', [Validators.required]]
     });
   }
 
@@ -149,16 +175,16 @@ export class CartComponent implements OnInit {
     return this.form.get('str_secundary_address');
   }
 
-  get postalCode(): AbstractControl {
-    return this.form.get('postal_code');
+  get zipCode(): AbstractControl {
+    return this.form.get('zip_code');
   }
 
   get phoneNumber(): AbstractControl {
     return this.form.get('phone_number');
   }
 
-  get strDescription(): AbstractControl {
-    return this.form.get('str_description');
+  get details(): AbstractControl {
+    return this.form.get('details');
   }
 
 }

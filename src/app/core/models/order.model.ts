@@ -1,11 +1,13 @@
 import { User } from './user.model';
 
 export interface Order {
-  is_delted: boolean;
-  deleted_at: string;
-  created_at: string;
-  modified_at: string;
-  str_deposit_number: string;
+  is_deleted?: boolean;
+  deleted_at?: string;
+  created_at?: string;
+  modified_at?: string;
+  paypal_order_id: string;
   total: number;
-  user: User;
+  zip_code: string;
+  user: number;
+  details?: string;
 }
