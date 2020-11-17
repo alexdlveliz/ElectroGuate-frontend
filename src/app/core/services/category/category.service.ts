@@ -55,7 +55,7 @@ export class CategoryService {
   createCategory(newCategory: Category): Observable<any> {
     console.log('*****************************');
     console.log(newCategory);
-    return this.http.post(`${environment.url_api}/products/category/`, newCategory);
+    return this.http.post(`${environment.url_api}/products/category`, newCategory);
   }
 
   /**

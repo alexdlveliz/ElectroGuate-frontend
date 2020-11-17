@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Order } from '@core/models/order.model';
+import { PurchaseService } from '@core/services/purchase/purchase.service';
+import { AuthService } from '@core/services/auth/auth.service';
 
 @Component({
   selector: 'app-order',
@@ -7,25 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderComponent implements OnInit {
 
-  orders = [
-    {
-      "id": 1,
-      "is_deleted": false,
-      "deleted_at": null,
-      "created_at": "2020-11-17T00:14:09Z",
-      "modified_at": "2020-11-17T00:14:09Z",
-      "paypal_order_id": "1231235",
-      "total": "100.00",
-      "zip_code": "123",
-      "details": "12313.",
-      "user": 1
-    }
-  ]
+  userId;
+  orders: Order[] = [];
   displayedColumns: string[] = ['id', 'created_at', 'total', 'actions'];
 
-  constructor() { }
+  constructor(
+    private purchaseService: PurchaseService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.getUserId();
+    this.purchaseService.getOrderByUserId(this.userId)
+    .subscribe(orders => {
+      this.orders = orders;
+    });
+  }
+
+  getUserId(): void {
+    this.userId = this.authService.getUserId();
   }
 
 }

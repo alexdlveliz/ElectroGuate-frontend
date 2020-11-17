@@ -1,1 +1,15 @@
-<p>order works</p>
+<p>Detalle de la compra</p>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div *ngFor="let orderDetail of orderDetails" fxLayout="column" fxLayoutAlign="center center" class="details">
+    <p>Cantidad: {{ orderDetail.amount }}</p>
+    <p>Precio: {{ orderDetail.price | currency: 'Q'}}</p>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <figure>
+        <img [src]="orderDetail.product.images[0].url_image" alt="imagen del producto" class="image-product">
+      </figure>
+      <p>Nombre: {{ orderDetail.product.str_name }}</p>
+      <p>Descripción: {{ orderDetail.product.str_description }}</p>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+</div>
