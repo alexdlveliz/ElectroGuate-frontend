@@ -38,7 +38,7 @@ export class PopularesComponent implements OnInit {
   async fetchAllProducts() : Promise<void> {
     await this.fetchAllBrands();
     await this.fetchAllCategories();
-    await this.productService.getAllProducts()
+    await this.productService.getAllProducts('1')
     .subscribe(products => {
       this.products = products;
       console.log(this.products);
