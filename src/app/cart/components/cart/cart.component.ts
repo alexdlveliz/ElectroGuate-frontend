@@ -15,6 +15,7 @@ import { PaymentsService } from '@core/services/payment/payment.service';
 import { Payment } from '@core/models/payment.model';
 import { User } from '@core/models/user.model';
 import { UserService } from '@core/services/user/user.service';
+import { LoaderService } from '@core/services/loader/loader.service';
 
 declare var paypal;
 @Component({
@@ -59,7 +60,8 @@ export class CartComponent implements OnInit {
     private orderDetailService: OrderDetailService,
     private router: Router,
     private paymentService: PaymentsService,
-    private userService: UserService
+    private userService: UserService,
+    public loaderService: LoaderService
   ) {
     this.setItems();
   }

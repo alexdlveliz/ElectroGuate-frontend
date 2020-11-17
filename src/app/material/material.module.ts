@@ -16,6 +16,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -35,7 +36,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatExpansionModule,
     MatBadgeModule,
     MatStepperModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressBarModule
   ],
   exports: [
     MatToolbarModule,
@@ -53,7 +55,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatExpansionModule,
     MatBadgeModule,
     MatStepperModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressBarModule
   ]
 })
 export class MaterialModule { }

@@ -1,3 +1,6 @@
+<div *ngIf="loaderService.isLoading | async " class="loader-container">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
 <mat-horizontal-stepper>
   <mat-step>
     <ng-template matStepLabel>Revise su orden</ng-template>

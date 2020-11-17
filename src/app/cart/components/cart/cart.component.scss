@@ -2,7 +2,11 @@
   pointer-events: none !important;
 }
 
-
+.loader-container {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}
 .paypal-styles {
   margin-top: 30px;
   margin-bottom: 30px;
