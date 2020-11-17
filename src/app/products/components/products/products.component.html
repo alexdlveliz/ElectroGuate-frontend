@@ -11,8 +11,8 @@
             Descubre nuestras marcas!
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <mat-selection-list>
-          <mat-list-option *ngFor="let brand of brands">
+        <mat-selection-list #marcas (selectionChange)="onGroupsChange(marcas.selectedOptions.selected)">
+          <mat-list-option *ngFor="let brand of brands" [value]="brand">
             {{ brand.str_name }}
           </mat-list-option>
         </mat-selection-list>
@@ -28,8 +28,9 @@
             Descubre nuestras variedades!
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <mat-selection-list>
-          <mat-list-option *ngFor="let category of categories">
+        <!-- <mat-list-option>Todas</mat-list-option> -->
+        <mat-selection-list #categorias (selectionChange)="onCategoriesChange(categorias.selectedOptions.selected)">
+          <mat-list-option *ngFor="let category of categories" [value]="category">
             {{ category.str_name }}
           </mat-list-option>
         </mat-selection-list>
