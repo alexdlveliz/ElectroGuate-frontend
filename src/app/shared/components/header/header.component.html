@@ -1,0 +1,36 @@
+<section id="Logo" class="text-center">
+  <div class="container">
+    <div class="row">
+      <div class="logo-card">
+        <img src="/assets/img/logo3.jpg" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+<section id="menu" class="text-center">
+      <div class="menu_movil">
+        <div class="imgBox">
+          <img src="assets/img/logo.jpg" alt="">
+          <h2>ElectroGuate</h2>
+        </div>
+        <a class="btn-menu" (click)="isActive = !isActive"><i class="fas fa-bars"></i></a>
+      </div>
+      <nav [ngClass]="isActive ? 'active' : 'inactive'">
+        <ul>
+          <li><a href=""></a></li>
+          <li><a href=""></a></li>
+          <li><a routerLink="/products" routerLinkActive="active" (click)="isActive = !isActive">Productos</a></li>
+          <li><a routerLink="/contact" routerLinkActive="active" (click)="isActive = !isActive">Contacto</a></li>
+          <a class="img-home" routerLink="/" (click)="isActive = !isActive"><img src="/assets/img/logo.jpg" alt=""></a>
+          <li><a routerLink="/about-us" routerLinkActive="active" (click)="isActive = !isActive">Nosotros</a></li>
+          <li><a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null" (click)="isActive = !isActive">Iniciar sesión</a></li>
+          <li><a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null" (click)="isActive = !isActive">Cerrar Sesión</a></li>
+          <li><a routerLink="/purchase" routerLinkActive="active" *ngIf="userExists() != null" (click)="isActive = !isActive">Perfil</a></li>
+          <li><a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'" (click)="isActive = !isActive">Administración</a></li>
+        </ul>
+      </nav>
+      <button routerLink="/cart" [matBadge]="total$ | async" class="floating-btn">
+        <mat-icon>add_shopping_cart</mat-icon>
+      </button>
+</section>
+

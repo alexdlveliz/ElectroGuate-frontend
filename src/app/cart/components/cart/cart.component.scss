@@ -1,0 +1,87 @@
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none !important;
+}
+
+.loader-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.8;
+  z-index: 99;
+}
+.paypal-styles {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.cart-view {
+  height: auto;
+}
+
+.cart {
+  padding: 2%;
+}
+
+// PRODUCTS
+
+mat-horizontal-stepper {
+  .order {
+    width: 100%;
+    padding: 5px 0;
+  }
+}
+
+mat-vertical-stepper {
+  .order {
+    width: 100%;
+    padding: 5px 0;
+  }
+}
+
+.order {
+  button {
+    margin: 1px 1px;
+  }
+}
+
+// FORMS
+
+.payment {
+  padding: 1%;
+
+  form {
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}
+
+.shipping {
+  padding: 1%;
+  
+  form {
+    mat-form-field {
+      width: 100%;
+    }
+    textarea {
+      resize: none;
+    }
+  }
+}
+
+// STEPPERS
+
+mat-vertical-stepper {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  mat-horizontal-stepper {
+    display: none;
+  }
+  
+  mat-vertical-stepper {
+    display: block;
+  }
+}

@@ -1,0 +1,160 @@
+.contact {
+  width: 80%;
+  margin: 0 auto;
+
+  .title {
+    margin-top: 1.9rem;
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    h3 {
+      width: 100%;
+      margin-top: 25px;
+      color: #24fb7b;
+      text-transform: uppercase;
+      font-size: 34px;
+      font-family: "Kumar One Outline", cursive;
+      font-weight: bolder;
+      text-align: center;
+    }
+  }
+
+  .container {
+    width: 100%;
+    height: 70%;
+
+    .message {
+      width: 60%;
+      height: 100%;
+
+      form {
+        margin: 1.5rem;
+
+        .form-title {
+          width: 100%;
+          font-family: "Big Shoulders Stencil Text", cursive;
+          font-size: 30px;
+          font-weight: bolder;
+          letter-spacing: 1px;
+        }
+
+        mat-form-field {
+          width: 100%;
+        }
+
+        mat-card-title,
+        mat-form-field {
+          margin: 0.7rem 0;
+        }
+      }
+    }
+
+    .map {
+      width: 40%;
+      height: 100%;
+
+      .location {
+        width: 100%;
+        height: 70%;
+        border: 1px solid yelow;
+
+        .google-maps {
+          width: 100%;
+          height: 100%;
+
+          iframe {
+            width: 90%;
+            height: 300px;
+            margin: 1.5rem;
+            border-radius: 1.5rem;
+          }
+        }
+      }
+
+      .map-information {
+        width: 100%;
+        height: 30%;
+        margin-bottom: 1.5rem;
+
+        .google-maps {
+          width: 90%;
+          height: 90%;
+        }
+
+        .aligned-with-icon {
+          position: relative;
+          top: -5px;
+          margin-left: 5px;
+        }
+
+        .phone {
+          font-size: 1.3rem;
+          margin-bottom: 2.5rem;
+        }
+
+        .fa {
+          width: 2.5rem;
+          padding: 1.2rem;
+          font-size: 2.5rem;
+          text-align: center;
+          text-decoration: none;
+          margin: 0.5rem;
+          color: white;
+          border-radius: 50%;
+        }
+
+        .fa-facebook {
+          background-color: #3b5998;
+        }
+
+        .fa-instagram {
+          background-color: #8a3ab9;
+        }
+
+        .fa-whatsapp {
+          background-color: #4fce5d;
+        }
+      }
+    }
+  }
+}
+
+/**
+* Breakpoint md -> según la documentación de fxLayout
+**/
+@media (max-width: 870px) {
+  .contact {
+    transform: translateY(80px);
+    padding-bottom: 80px;
+    .title {
+      h3 {
+        font-size: 25px;
+        margin-top: 15px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+@media (max-width: 959px) {
+  .contact {
+    .container {
+      width: 100%;
+      .message,
+      .map {
+        width: 100%;
+      }
+      .map {
+        .map-information {
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .contact {
+    max-width: 1200px;
+  }
+}

@@ -1,0 +1,193 @@
+.container {
+  width: 100%;
+  height: auto;
+  margin: 80px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    color: #24fb7b;
+    font-size: 40px;
+    font-family: "Kumar One Outline", cursive;
+    font-weight: bolder;
+  }
+  .row {
+    width: 100%;
+    height: auto;
+    padding: 35px 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .textBox {
+      width: 550px;
+      height: 550px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      h1 {
+        text-align: center;
+      }
+      p {
+        margin: 0;
+        padding: 0;
+        text-align: justify;
+        font-size: 25px;
+        line-height: 30px;
+        font-family: "ABeeZee", sans-serif;
+        font-weight: lighter;
+      }
+    }
+    .imgBox {
+      width: 550px;
+      height: 550px;
+      padding: 25px;
+      background-color: #eefef5;
+      border-radius: 270px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .misionBox,
+    .visionBox,
+    .valoresBox {
+      width: 350px;
+      height: 200px;
+      margin: 10px;
+      background-color: black;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 12px 25px;
+      p {
+        color: white;
+        text-align: justify;
+        font-size: 20px;
+        font-family: "ABeeZee", sans-serif;
+        font-weight: lighter;
+      }
+      ul {
+        color: white;
+        text-align: justify;
+        font-size: 20px;
+        font-family: "ABeeZee", sans-serif;
+        font-weight: lighter;
+      }
+      h2 {
+        font-family: "Big Shoulders Stencil Text", cursive;
+        font-size: 30px;
+        font-weight: bolder;
+        letter-spacing: 1px;
+        color: #24fb7b;
+      }
+    }
+  }
+  .rowC {
+    width: 100%;
+    margin: 50px 0;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    h1 {
+      margin-bottom: 50px;
+    }
+    .caracteristicasBox {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-wrap: wrap;
+      .caracteristicaBox {
+        width: 300px;
+        height: 400px;
+        margin: 10px;
+        background-color: #bdfdd7;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        h2 {
+          margin-top: 15px;
+          font-family: "Big Shoulders Stencil Text", cursive;
+          font-size: 30px;
+          font-weight: bolder;
+          color: black;
+          letter-spacing: 1px;
+        }
+        p {
+          color: black;
+          text-align: justify;
+          font-family: "ABeeZee", sans-serif;
+          font-weight: lighter;
+        }
+        .iconoBox {
+          width: 120px;
+          height: 120px;
+          padding: 15px;
+          background-color: #eefef5;
+          border-radius: 70px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .container {
+    margin: 0;
+    padding-top: 150px;
+    padding-bottom: 80px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .container {
+    .row {
+      .textBox {
+        width: 400px;
+        height: 400px;
+        padding: 10px;
+      }
+      .imgBox {
+        width: 400px;
+        height: 400px;
+        padding: 15px;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 400px) {
+  .container {
+    .row {
+      .textBox {
+        width: 300px;
+        height: 300px;
+        padding: 10px;
+      }
+      .imgBox {
+        width: 300px;
+        height: 300px;
+        padding: 15px;
+      }
+    }
+  }
+}

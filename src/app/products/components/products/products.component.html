@@ -1,0 +1,44 @@
+<section id="catalogo">
+  <nav id="menu">
+    <mat-accordion>
+      <!-- Menú para las marcas -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>Filtros por marca</strong>
+          </mat-panel-title>
+          <mat-panel-description>
+            Descubre nuestras marcas!
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-selection-list #marcas (selectionChange)="onGroupsChange(marcas.selectedOptions.selected)">
+          <mat-list-option *ngFor="let brand of brands" [value]="brand">
+            {{ brand.str_name }}
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-expansion-panel>
+
+      <!-- Menú para las categorías -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>Filtros por categoría</strong>
+          </mat-panel-title>
+          <mat-panel-description>
+            Descubre nuestras variedades!
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <!-- <mat-list-option>Todas</mat-list-option> -->
+        <mat-selection-list #categorias (selectionChange)="onCategoriesChange(categorias.selectedOptions.selected)">
+          <mat-list-option *ngFor="let category of categories" [value]="category">
+            {{ category.str_name }}
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </nav>
+  <main id="productos" fxLayoutAlign="center start">
+    <app-product *ngFor="let product of products" [product]="product">
+    </app-product>
+  </main>
+</section>

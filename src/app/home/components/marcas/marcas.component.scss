@@ -1,0 +1,113 @@
+.wave {
+  max-height: 100px;
+}
+.text-center {
+  text-align: center;
+}
+#album {
+  margin: 65px 0;
+  height: auto;
+}
+#album .container {
+  min-width: 100%;
+  height: 100%;
+}
+#album .container h2 {
+  font-size: 40px;
+  margin: 15px 0;
+  font-family: "Kumar One Outline", cursive;
+  font-weight: bolder;
+}
+#album .container .row {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+#album .container .row .pic {
+  margin: 0 35px;
+  height: 75px;
+  width: 75px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  transition: 0.3s all;
+}
+#album .container .row .pic:nth-child(12) {
+  background-image: url(/assets/img/marca2.png);
+}
+#album .container .row .pic:nth-child(1) {
+  background-image: url(/assets/img/marca3.png);
+}
+#album .container .row .pic:nth-child(2) {
+  background-image: url(/assets/img/marca4.png);
+}
+#album .container .row .pic:nth-child(3) {
+  background-image: url(/assets/img/marca5.png);
+}
+#album .container .row .pic:nth-child(4) {
+  background-image: url(/assets/img/marca2.png);
+}
+#album .container .row .pic:nth-child(5) {
+  background-image: url(/assets/img/marca3.png);
+}
+#album .container .row .pic:nth-child(6) {
+  background-image: url(/assets/img/marca4.png);
+}
+#album .container .row .pic:nth-child(7) {
+  background-image: url(/assets/img/marca5.png);
+}
+#album .container .row .pic:nth-child(8) {
+  background-image: url(/assets/img/marca2.png);
+}
+#album .container .row .pic:nth-child(9) {
+  background-image: url(/assets/img/marca3.png);
+}
+#album .container .row .pic:nth-child(10) {
+  background-image: url(/assets/img/marca4.png);
+}
+#album .container .row .pic:nth-child(11) {
+  background-image: url(/assets/img/marca5.png);
+}
+#album .container .row .pic:nth-child(13) {
+  background-image: url(/assets/img/marca2.png);
+}
+
+@media only screen and (max-width: 700px) {
+  #album {
+    background-color: #24ff72;
+    padding-bottom: 50px;
+    margin: 0;
+  }
+  #album .container h2 {
+    font-size: 27px;
+  }
+  #album .container .row .pic {
+    height: 45px;
+    width: 45px;
+  }
+  .wave {
+    max-height: 70px;
+  }
+}
+@media only screen and (max-width: 550px) {
+  #album .container .row .pic {
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+  }
+  #album .container h2 {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  #album {
+    margin-top: 0;
+    padding-top: 20px;
+  }
+}

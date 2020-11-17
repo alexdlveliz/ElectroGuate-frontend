@@ -1,0 +1,20 @@
+<mat-card class="card" fxLayout="column" fxLayoutAlign="space-between" fxLayoutAlign.xs="">
+  <img mat-card-image [src]="product.images[0].url_image">
+  <div id="info" fxLayout="column">
+    <mat-card-header fxLayout="column" fxLayoutAlign="start center">
+      <mat-card-title>{{ product.str_name }}</mat-card-title>
+      <strong>Q. {{ product.int_price }}</strong>
+    </mat-card-header>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button color="accent" (click)="addToCart()">
+        <mat-icon>add_shopping_cart</mat-icon>
+        Agregar al carrito
+      </button>
+      <button mat-raised-button color="primary" [routerLink]="['/products', product.id]">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        Ver detalle
+      </button>
+      
+    </mat-card-actions>
+  </div>
+</mat-card>

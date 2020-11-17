@@ -1,0 +1,36 @@
+mat-card {
+  margin: 15px;
+  .main {
+    img {
+      margin: 15px;
+    }
+    mat-card-title {
+      margin-bottom: 25px;
+    }
+  }
+  .secondary {
+    margin-top: 25px;
+    .secondary-content {
+      margin-top: 25px;
+    }
+    img {
+      margin: 25px;
+    }
+  }
+}
+@media (max-width: 870px) {
+  .container {
+    margin: 0;
+    top: 80px;
+  }
+}
+@media (max-width: 400px) {
+  img {
+    width: 65%;
+  }
+  mat-card-actions {
+    button {
+      font-size: 10px;
+    }
+  }
+}

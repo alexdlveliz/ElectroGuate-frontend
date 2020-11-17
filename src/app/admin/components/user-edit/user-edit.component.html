@@ -1,0 +1,60 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center center">
+  <form [formGroup]="form" (ngSubmit)="saveUser($event)">
+    <mat-card fxLayout="column">
+      <mat-card-title>
+        Usuario
+      </mat-card-title>
+      <mat-card-content>
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput formControlName="str_name">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Usuario</mat-label>
+          <input type="text" matInput formControlName="str_surname">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input type="text" matInput formControlName="str_email">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Rol</mat-label>
+          <mat-select formControlName="str_role">
+            <mat-option>Seleccione una opción</mat-option>
+            <mat-option *ngFor="let role of roles" [value]="role" >
+              {{ role.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Teléfono</mat-label>
+          <input type="text" matInput formControlName="str_phone_number">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Activo</mat-label>
+          <input type="text" matInput formControlName="is_active">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Fecha de creación</mat-label>
+          <input type="text" matInput formControlName="created_at">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Fecha de modificación</mat-label>
+          <input type="text" matInput formControlName="modified_at">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Borrado</mat-label>
+          <input type="text" matInput formControlName="is_deleted">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Fecha de borrado</mat-label>
+          <input type="text" matInput formControlName="deleted_at">
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button type="button" color="warn">Cancelar</button>
+        <button mat-raised-button type="submit" color="primary">Guardar</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

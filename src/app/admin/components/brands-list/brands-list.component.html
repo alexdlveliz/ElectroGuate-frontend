@@ -1,0 +1,29 @@
+<button mat-raised-button routerLink="create" color="primary" class="actions-button">Crear Marca</button>
+<table mat-table [dataSource]="brands" class="mat-elevation-z8 brands-table">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id. </th>
+    <td mat-cell *matCellDef="let brand"> {{brand.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="str_name">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let brand"> {{brand.str_name }} </td>
+  </ng-container>
+  <ng-container matColumnDef="str_description">
+    <th mat-header-cell *matHeaderCellDef> Descripción </th>
+    <td mat-cell *matCellDef="let brand"> {{brand.str_description }} </td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let brand">
+      <button mat-button [routerLink]="['edit', brand.id]">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-button color="warn" (click)="deleteBrand(brand.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
