@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 import { Product } from './../../models/product.model';
 import { environment } from './../../../../environments/environment';
@@ -20,13 +20,22 @@ export class ProductService {
    * Si no funciona, se capturará el error,
    * Si todo sale bien, se retornará un array de Productos
    */
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${environment.url_api}/products/products?page=1`)
-      .pipe(
-        retry(2),
-        catchError(this.handleError),
-        map((response: any) => response.results as Product[])
-      );
+  getAllProducts(pageId: string, brandId?: string, categoryId?: string): Observable<Product[]> {
+    // const params = new HttpParams().set('brand', brand);
+    let params = new HttpParams().set('page', pageId);
+    if (brandId) {
+      params = new HttpParams().set('page', pageId).set('brand', brandId);
+    }
+    if (categoryId) {
+      params = new HttpParams().set('page', pageId).set('brand', brandId).set('category', categoryId);
+    }
+    console.log(`${environment.url_api}/products/products${params}`);
+    return this.http.get<Product[]>(`${environment.url_api}/products/products`, { params })
+    .pipe(
+      retry(2),
+      catchError(this.handleError),
+      map((response: any) => response.results as Product[])
+    );
   }
 
   /**

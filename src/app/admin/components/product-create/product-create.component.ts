@@ -9,6 +9,7 @@ import { BrandService } from '@core/services/brand/brand.service';
 import { Category } from '@core/models/category.model';
 import { Brand } from '@core/models/brand.model';
 import { Image } from '@core/models/image.model';
+import { LoaderService } from '@core/services/loader/loader.service';
 
 @Component({
   selector: 'app-product-create',
@@ -30,7 +31,8 @@ export class ProductCreateComponent implements OnInit {
     private productService: ProductService,
     private categoryService: CategoryService,
     private brandService: BrandService,
-    private router: Router
+    private router: Router,
+    public loaderService: LoaderService
   ) {
     this.buildForm();
   }
@@ -176,7 +178,7 @@ export class ProductCreateComponent implements OnInit {
   newImage(): FormGroup {
     this.contadorImages += 1;
     return this.formBuilder.group({
-      url_image: ''
+      url_image: ['', Validators.required]
     });
   }
 
