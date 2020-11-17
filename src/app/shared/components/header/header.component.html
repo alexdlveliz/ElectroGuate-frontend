@@ -25,6 +25,7 @@
           <li><a routerLink="/about-us" routerLinkActive="active" (click)="isActive = !isActive">Nosotros</a></li>
           <li><a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null" (click)="isActive = !isActive">Iniciar sesión</a></li>
           <li><a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null" (click)="isActive = !isActive">Cerrar Sesión</a></li>
+          <li><a routerLink="/purchase" routerLinkActive="active" *ngIf="userExists() != null" (click)="isActive = !isActive">Perfil</a></li>
           <li><a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'" (click)="isActive = !isActive">Administración</a></li>
         </ul>
       </nav>
