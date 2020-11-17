@@ -130,6 +130,7 @@ export class CartComponent implements OnInit {
     this.paymentService.createPayment(this.payment)
     .subscribe(() => {
       alert('Compra realizada correctamente');
+      this.cartService.clearCart();
       this.router.navigate(['/']);
     });
   }
