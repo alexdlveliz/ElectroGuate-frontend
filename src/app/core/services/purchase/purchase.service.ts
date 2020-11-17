@@ -26,7 +26,7 @@ export class PurchaseService {
 
   getDetailOrders(orderId: string): Observable<OrderDetail[]> {
     const params = new HttpParams().set('order', orderId);
-    return this.http.get(`${environment.url_api}/orders/details_orders/`, { params })
+    return this.http.get(`${environment.url_api}/orders/detail_orders/`, { params })
     .pipe(
       retry(2),
       map((response: any) => response.results as OrderDetail[])
