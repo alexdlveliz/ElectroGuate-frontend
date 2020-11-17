@@ -19,7 +19,7 @@ export class CategoryService {
    * Método para obtener todas las categorías creadas
    */
   getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${environment.url_api}/products/category/`)
+    return this.http.get<Category[]>(`${environment.url_api}/products/category?page=1`)
     .pipe(
       retry(2),
       map((response: any) => response.results as Category[])

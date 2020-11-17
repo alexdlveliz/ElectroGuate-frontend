@@ -6,7 +6,7 @@ export interface Order {
   created_at?: string;
   modified_at?: string;
   paypal_order_id: string;
-  total: number;
+  total?: number;
   zip_code: string;
   user: number;
   details?: string;

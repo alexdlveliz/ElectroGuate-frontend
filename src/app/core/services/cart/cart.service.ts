@@ -37,4 +37,9 @@ export class CartService {
     });
     this.cart.next(this.products);
   }
+
+  clearCart(): void {
+    this.products = [];
+    this.cart.next(this.products);
+  }
 }
