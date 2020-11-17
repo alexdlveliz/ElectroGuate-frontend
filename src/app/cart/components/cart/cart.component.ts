@@ -76,10 +76,10 @@ export class CartComponent implements OnInit {
         return actions.order.create({
           purchase_units: [
             {
-              description: this.producto.descripcion,
+              description: `En la compra de ${this.listItems.size} productos`,
               amount: {
                 currency_code: 'USD',
-                value: '1'
+                value: this.convertCurrency()
               }
             }
           ]
@@ -97,6 +97,17 @@ export class CartComponent implements OnInit {
       }
     })
     .render(this.paypalElement.nativeElement);
+  }
+
+  getTotalBuying(): number {
+    for (const [key, value] of this.listItems.entries()) {
+      this.totalBuying += key.int_price * value;
+    }
+    console.log(this.totalBuying);
+    return Number((this.totalBuying * 0.128564).toFixed(2));
+  }
+  private convertCurrency(): number {
+    return this.getTotalBuying();
   }
 
   async createOrder(orderId): Promise<any> {
