@@ -51,7 +51,7 @@ export class BrandService {
    * recibiendo un único parámetro, la marca en sí
    */
   createBrand(newBrand: Brand): Observable<any> {
-    return this.http.post(`${environment.url_api}/products/brand/`, newBrand);
+    return this.http.post(`${environment.url_api}/products/brand`, newBrand);
   }
 
   /**
