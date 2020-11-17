@@ -24,13 +24,17 @@ declare var paypal;
 })
 export class CartComponent implements OnInit {
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
-  producto = {
-    descripcion: 'producto en venta',
-    precio: 1.99,
-    image: 'imagen del producto'
-  };
+  /**
+   * Variable para guardar el total de la compra,
+   * que se utilizará en el método createOrder de paypal
+   */
   totalBuying = 0;
+  /**
+   * Variable para almacenar el objeto order,
+   * que es el que se le mandará al servicio de Order
+   */
   order: Order;
+
   orderDetails;
   orderId;
   orderDetail: OrderDetail;
@@ -38,13 +42,10 @@ export class CartComponent implements OnInit {
   user: User;
   userId;
   paypalPayerId;
+  nextButton = false;
 
   displayedColumns: string[] = ['image', 'str_name', 'int_price', 'actions'];
   contador = 0;
-  departmentsMap = new Map();
-  departaments = [
-    'GUATEMALA', 'EL PROGRESO', 'SACATEPEQUEZ', 'CHIMALTENANGO', 'ESCUINTLA', 'SANTA ROSA', 'SOLOLA', 'TOTONICAPAN', 'QUETZALTENANGO', 'SUCHITEPEQUEZ', 'RETALHULEU', 'SAN MARCOS', 'HUEHUETENANGO', 'QUICHE', 'BAJA VERAPAZ', 'ALTA VERAPAZ', 'PETEN', 'IZABAL', 'ZACAPA', 'CHIQUIMULA', 'JALAPA', 'JUTIAPA'
-  ];
   items$: Observable<Map<Product, number>>;
   listItems: Map<Product, number>;
   form: FormGroup;
@@ -61,14 +62,27 @@ export class CartComponent implements OnInit {
     private userService: UserService
   ) {
     this.setItems();
-    this.setDepartmentMap();
   }
 
   ngOnInit(): void {
     this.buildForm();
     this.payPal();
+    this.getUser();
   }
 
+  async getUser(): Promise<void> {
+    this.userId = this.authService.getUserId();
+    this.user =  await this.userService.getOneUser(this.userId).toPromise();
+  }
+
+  putShippingInfo(): void {
+    this.form.patchValue({
+      str_name: this.user.str_name,
+      str_principal_address: this.user.str_principal_address,
+      str_secundary_address: this.user.str_secundary_address,
+      phone_number: this.user.str_phone_number
+    });
+  }
   private payPal(): void {
     paypal
     .Buttons({
@@ -112,7 +126,7 @@ export class CartComponent implements OnInit {
 
   async createOrder(orderId): Promise<any> {
     const formCopy = Object.assign({}, this.form.value);
-    this.userId = this.authService.getUserId(),
+    // this.userId = this.authService.getUserId(),
     this.order = {
       zip_code: formCopy.zip_code,
       details: formCopy.details,
@@ -131,7 +145,7 @@ export class CartComponent implements OnInit {
       };
       this.orderDetailService.createOrderDetails(this.orderDetail).toPromise();
     }
-    this.user = await this.userService.getOneUser(this.userId).toPromise();
+    // this.user = await this.userService.getOneUser(this.userId).toPromise();
     this.payment = {
       order: this.orderId,
       user: this.userId,
@@ -146,17 +160,9 @@ export class CartComponent implements OnInit {
     });
   }
 
-  private setDepartmentMap(): void {
-    for (const department of this.departaments) {
-      this.departmentsMap.set(this.contador, department);
-      this.contador += 1;
-    }
-  }
-
   private buildForm(): void {
     this.form = this.formBuilder.group({
       str_name: ['', [Validators.required]],
-      department: ['', [Validators.required]],
       str_principal_address: ['', [Validators.required]],
       str_secundary_address: ['', [Validators.required]],
       zip_code: ['', [Validators.required]],
@@ -176,6 +182,7 @@ export class CartComponent implements OnInit {
           }
           this.listItems.set(product, count);
         });
+        this.toggleNextButton();
         return this.listItems;
       })
     );
@@ -186,9 +193,11 @@ export class CartComponent implements OnInit {
     this.listItems.set(product, value + 1);
     this.cartService.addCart(product);
     this.setItems();
+    this.toggleNextButton();
   }
 
   deleteItem(product: Product): void {
+    this.toggleNextButton();
     const value = this.listItems.get(product);
     this.listItems.set(product, value - 1);
     if (value - 1 === 0) {
@@ -199,12 +208,26 @@ export class CartComponent implements OnInit {
     }
   }
 
+  /**
+   * Método para eliminar por completo un producto de la compra
+   */
   deleteProduct(product: Product): void {
     if (confirm('¿Seguro que desea eliminarlo?')) {
       this.cartService.deleteFromCart(product);
     }
   }
 
+  /**
+   * Método para pasar al siguiente 'step' del flujo de la compra
+   */
+  toggleNextButton(): void {
+    this.listItems.size === 0 ? this.nextButton = false : this.nextButton = true;
+    console.log(this.nextButton);
+  }
+
+  /**
+   * Métodos getters para los valores del formulario
+   */
   get strName(): AbstractControl {
     return this.form.get('str_name');
   }
