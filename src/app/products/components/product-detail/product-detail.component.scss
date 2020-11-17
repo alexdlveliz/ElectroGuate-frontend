@@ -18,3 +18,19 @@ mat-card {
     }
   }
 }
+@media (max-width: 870px) {
+  .container {
+    margin: 0;
+    top: 80px;
+  }
+}
+@media (max-width: 400px) {
+  img {
+    width: 65%;
+  }
+  mat-card-actions {
+    button {
+      font-size: 10px;
+    }
+  }
+}

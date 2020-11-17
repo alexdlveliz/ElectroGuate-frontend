@@ -123,15 +123,21 @@
 /**
 * Breakpoint md -> según la documentación de fxLayout
 **/
-@media (max-width: 959px) {
+@media (max-width: 870px) {
   .contact {
+    transform: translateY(80px);
+    padding-bottom: 80px;
     .title {
-      height: 15%;
-      margin-top: 1.5rem;
       h3 {
-        font-size: 2.3rem;
+        font-size: 25px;
+        margin-top: 15px;
+        text-transform: uppercase;
       }
     }
+  }
+}
+@media (max-width: 959px) {
+  .contact {
     .container {
       width: 100%;
       .message,

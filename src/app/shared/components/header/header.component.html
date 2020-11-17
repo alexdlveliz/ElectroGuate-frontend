@@ -19,13 +19,14 @@
         <ul>
           <li><a href=""></a></li>
           <li><a href=""></a></li>
-          <li><a routerLink="/products" routerLinkActive="active">Productos</a></li>
-          <li><a routerLink="/contact" routerLinkActive="active">Contacto</a></li>
-          <a class="img-home" routerLink="/"><img src="/assets/img/logo.jpg" alt=""></a>
-          <li><a routerLink="/about-us" routerLinkActive="active">Nosotros</a></li>
-          <li><a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null">Iniciar sesión</a></li>
-          <li><a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null">Cerrar Sesión</a></li>
-          <li><a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'">Administración</a></li>
+          <li><a routerLink="/products" routerLinkActive="active" (click)="isActive = !isActive">Productos</a></li>
+          <li><a routerLink="/contact" routerLinkActive="active" (click)="isActive = !isActive">Contacto</a></li>
+          <a class="img-home" routerLink="/" (click)="isActive = !isActive"><img src="/assets/img/logo.jpg" alt=""></a>
+          <li><a routerLink="/about-us" routerLinkActive="active" (click)="isActive = !isActive">Nosotros</a></li>
+          <li><a routerLink="/login" routerLinkActive="active" *ngIf="userExists() === null" (click)="isActive = !isActive">Iniciar sesión</a></li>
+          <li><a routerLink="/login" routerLinkActive="active" (click)="logOut()" *ngIf="userExists() != null" (click)="isActive = !isActive">Cerrar Sesión</a></li>
+          <li><a routerLink="/purchase" routerLinkActive="active" *ngIf="userExists() != null" (click)="isActive = !isActive">Perfil</a></li>
+          <li><a routerLink="/admin" routerLinkActive="active" *ngIf="userRole() === 'admin'" (click)="isActive = !isActive">Administración</a></li>
         </ul>
       </nav>
       <button routerLink="/cart" [matBadge]="total$ | async" class="floating-btn">
