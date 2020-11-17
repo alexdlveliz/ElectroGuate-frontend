@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthInterceptor } from './auth.interceptor';
-import { LoaderInterceptorService } from './loader.interceptor.service';
+import { LoaderInterceptor } from './loader.interceptor';
 
 export const interceptorProviders = [
   {
@@ -11,7 +11,7 @@ export const interceptorProviders = [
   },
   {
     provide: HTTP_INTERCEPTORS,
-    useClass: LoaderInterceptorService,
+    useClass: LoaderInterceptor,
     multi: true
   }
 ];

@@ -7,7 +7,7 @@ import { LoaderService } from '../core/services/loader/loader.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoaderInterceptorService implements HttpInterceptor {
+export class LoaderInterceptor implements HttpInterceptor {
 
   constructor(
     public loaderService: LoaderService
