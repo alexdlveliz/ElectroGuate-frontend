@@ -136,6 +136,8 @@
     </div>
 </section> -->
 <section id="popular">
+    <h1>Productos Populares</h1>
+    <div class="row">
     <div id="products" *ngFor="let product of products; let i = index">
         <div *ngIf="i < 4">
             <mat-card class="card">
@@ -159,4 +161,55 @@
             </mat-card>
         </div>
     </div>
+    </div>
+    <div class="rowB">
+    <div id="productsB" *ngFor="let product of products; let i = index">
+        <div *ngIf="i < 4">
+            <mat-card class="cardB">
+                <img mat-card-image [src]="product.images[0].url_image">
+                <div id="info">
+                    <mat-card-header>
+                        <mat-card-title>{{ product.str_name }}</mat-card-title>
+                        <strong>Q. {{ product.int_price }}</strong>
+                    </mat-card-header>
+                    <mat-card-actions>
+                        <button mat-raised-button color="accent" (click)="addToCart()">
+                            <mat-icon>add_shopping_cart</mat-icon>
+                            Agregar al carrito
+                        </button>
+                        <button mat-raised-button color="primary" [routerLink]="['/products', product.id]">
+                            <mat-icon>keyboard_arrow_right</mat-icon>
+                            Ver detalle
+                        </button>
+                    </mat-card-actions>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    </div>
+        <div class="row">
+            <div id="products" *ngFor="let product of products; let i = index">
+                <div *ngIf="i < 4">
+                    <mat-card class="card">
+                        <img mat-card-image [src]="product.images[0].url_image">
+                        <div id="info">
+                            <mat-card-header>
+                                <mat-card-title>{{ product.str_name }}</mat-card-title>
+                                <strong>Q. {{ product.int_price }}</strong>
+                            </mat-card-header>
+                            <mat-card-actions>
+                                <button mat-raised-button color="accent" (click)="addToCart()">
+                                    <mat-icon>add_shopping_cart</mat-icon>
+                                    Agregar al carrito
+                                </button>
+                                <button mat-raised-button color="primary" [routerLink]="['/products', product.id]">
+                                    <mat-icon>keyboard_arrow_right</mat-icon>
+                                    Ver detalle
+                                </button>
+                            </mat-card-actions>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
 </section>
